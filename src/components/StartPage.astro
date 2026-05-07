@@ -1,0 +1,587 @@
+---
+import SeoHead from "./SeoHead.astro";
+import type { en } from "../i18n/en";
+import type { nl } from "../i18n/nl";
+import { design } from "../config/design";
+import "../styles/global.css";
+
+type Copy = typeof en | typeof nl;
+
+interface Props {
+  copy: Copy;
+}
+
+const { copy } = Astro.props;
+const start = copy.start;
+const seo = copy.seo.start;
+
+const pageStyle = `
+  --color-white: ${design.colors.white};
+  --color-black: ${design.colors.black};
+  --color-light-grey: ${design.colors.lightGrey};
+  --color-dark-grey: ${design.colors.darkGrey};
+  --color-light-accent: ${design.colors.lightAccent};
+  --color-dark-accent: ${design.colors.darkAccent};
+`;
+
+const shellStyle = "max-width: 720px;";
+const buttonStyle = `border-radius: ${design.buttonRadius}px; min-height: ${design.buttonHeight}px;`;
+
+const shellClass = "mx-auto w-full px-[30px] md:px-[55px]";
+const articleClass = "mx-auto max-w-[720px]";
+const h1Class = design.typography.h1;
+const h2Class = design.typography.h2;
+const h3Class = design.typography.h3;
+const h5Class = design.typography.h5;
+const h6Class = design.typography.h6;
+const pClass = design.typography.p;
+const fClass = design.typography.f;
+
+const primaryButtonClass = `${h6Class} inline-flex items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`;
+const secondaryButtonClass = `${h6Class} inline-flex items-center justify-center bg-[var(--color-light-grey)] px-[30px] text-center text-[var(--color-dark-accent)]`;
+const tableWrapClass = "mt-[20px] border-y border-[var(--color-dark-grey)]";
+const visualRowClass = "grid gap-[14px] border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0 md:grid-cols-[90px_minmax(0,1fr)] md:items-center md:gap-x-[30px]";
+const mapSymbolRowClass = "grid grid-cols-[90px_90px_minmax(0,1fr)] gap-[14px] border-b border-[var(--color-dark-grey)] py-[20px] md:items-center";
+const symbolSlotClass = "flex aspect-square w-full max-w-[90px] items-center justify-center text-center text-[13px] leading-[150%]";
+const compassRowClass = "grid gap-[14px] border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0 md:grid-cols-[minmax(0,200px)_minmax(0,1fr)] md:items-center md:gap-x-[30px]";
+const compassImageClass = "flex w-full max-w-[200px] items-center justify-center text-center text-[13px] leading-[150%]";
+const mapSymbolsToggleRowClass = "flex justify-center border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0";
+const mapSymbolsToggleClass = `${pClass} inline-flex cursor-pointer flex-col items-center gap-[8px] bg-transparent text-center text-[var(--color-dark-accent)]`;
+const mapSymbolsToggleIconClass = "h-0 w-0 border-x-[7px] border-t-[8px] border-x-transparent border-t-[var(--color-dark-accent)] transition-transform";
+
+const homeHref = copy.locale === "nl" ? "/nl/" : "/";
+const alternateHref = copy.locale === "nl" ? "/start" : "/nl/start";
+const basicsHref = copy.locale === "nl" ? "#kaartbasis" : "#map-basics";
+const basicsId = copy.locale === "nl" ? "kaartbasis" : "map-basics";
+const mapSymbolsExtraId = `map-symbols-extra-${copy.locale}`;
+
+const paragraphParts = (paragraph: string) => paragraph.split("\n");
+const inlineStrongParts = (text: string) => text.split("##");
+
+const courseSymbolAssets = {
+  startTriangle: "/images/start/course_start.svg",
+  controlCircle: "/images/start/course_control.svg",
+  doubleCircle: "/images/start/course_finish.svg",
+} as const;
+const courseSymbolsImage = "/images/start/course.svg";
+const contourLinesImage = "/images/start/contourLines.svg";
+const routeExampleMobileImage = "/images/start/route_exampleMobile.svg";
+const routeExampleDesktopImage = "/images/start/route_exampleDesktop.svg";
+
+const mapColorValues = {
+  openLand: "#f9d84a",
+  openForest: "#ffffff",
+  denseForest: "#57b14c",
+  water: "#8fd3ff",
+  scatteredTrees: "#f9d84a",
+  cultivatedLand: "#c6a178",
+  forbiddenArea: "#b782b8",
+} as const;
+
+const mapColorImageAssets = {
+  openLand: "/images/start/colors_openLand.svg",
+  openForest: "/images/start/colors_openForest.svg",
+  denseForest: "/images/start/colors_denseForest.svg",
+  water: "/images/start/colors_water.svg",
+  scatteredTrees: "/images/start/colors_openGroundWithBushes.svg",
+  cultivatedLand: "/images/start/colors_cultivatedLand.svg",
+  forbiddenArea: "/images/start/colors_forbiddenArea.svg",
+} as const;
+
+const mapSymbolImageAssets = {
+  road: {
+    illustration: "/images/start/illustration_road.svg",
+    symbol: "/images/start/symbol_road.svg",
+  },
+  dirtRoad: {
+    illustration: "/images/start/illustration_dirtRoad.svg",
+    symbol: "/images/start/symbol_dirtRoad.svg",
+  },
+  pavedArea: {
+    illustration: "/images/start/illustration_pavedArea.svg",
+    symbol: "/images/start/symbol_pavedArea.svg",
+  },
+  path: {
+    illustration: "/images/start/illustration_path.svg",
+    symbol: "/images/start/symbol_path.svg",
+  },
+  railway: {
+    illustration: "/images/start/illustration_railway.svg",
+    symbol: "/images/start/symbol_railway.svg",
+  },
+  stream: {
+    illustration: "/images/start/illustration_stream.svg",
+    symbol: "/images/start/symbol_stream.svg",
+  },
+  wall: {
+    illustration: "/images/start/illustration_wall.svg",
+    symbol: "/images/start/symbol_wall.svg",
+  },
+  powerline: {
+    illustration: "/images/start/illustration_powerLine.svg",
+    symbol: "/images/start/symbol_powerLine.svg",
+  },
+  passableFence: {
+    illustration: "/images/start/illustration_passableFence.svg",
+    symbol: "/images/start/symbol_passableFence.svg",
+  },
+  smallTower: {
+    illustration: "/images/start/illustration_smallTower.svg",
+    symbol: "/images/start/symbol_smallTower.svg",
+  },
+  cliff: {
+    illustration: "/images/start/illustration_cliff.svg",
+    symbol: "/images/start/symbol_cliff.svg",
+  },
+  building: {
+    illustration: "/images/start/illustration_building.svg",
+    symbol: "/images/start/symbol_building.svg",
+  },
+  ruin: {
+    illustration: "/images/start/illustration_ruin.svg",
+    symbol: "/images/start/symbol_ruin.svg",
+  },
+  uncrossableWater: {
+    illustration: "/images/start/illustration_unpassableWater.svg",
+    symbol: "/images/start/symbol_unpassableWater.svg",
+  },
+  marsh: {
+    illustration: "/images/start/illustration_marsh.svg",
+    symbol: "/images/start/symbol_marsh.svg",
+  },
+  knoll: {
+    illustration: "/images/start/illustration_knoll.svg",
+    symbol: "/images/start/symbol_knoll.svg",
+  },
+  pitDepression: {
+    illustration: "/images/start/illustration_pit.svg",
+    symbol: "/images/start/symbol_pit.svg",
+  },
+  boulder: {
+    illustration: "/images/start/illustration_boulder.svg",
+    symbol: "/images/start/symbol_boulder.svg",
+  },
+  boulderField: {
+    illustration: "/images/start/illustration_boulderField.svg",
+    symbol: "/images/start/symbol_boulderField.svg",
+  },
+  manMadeFeatures: {
+    illustration: "/images/start/illustration_manMadeFeatures.svg",
+    symbol: "/images/start/symbol_manMadeFeatures.svg",
+  },
+  contourLines: {
+    illustration: "/images/start/illustration_contourLines.svg",
+    symbol: "/images/start/symbol_contourLines.svg",
+  },
+} as const;
+---
+
+<html lang={copy.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <SeoHead title={seo.title} description={seo.description} locale={copy.locale} page="start" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Manrope:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[var(--color-white)] text-[var(--color-black)]" style={pageStyle}>
+    <header class="absolute left-0 top-0 z-10 w-full py-[16px]">
+      <nav class="flex items-center justify-end gap-[20px] px-[30px] md:px-[55px]" aria-label="Primary">
+        <div class="flex items-center gap-[6px]" aria-label="Language">
+          <a
+            class={`${pClass} rounded-full px-[12px] py-[6px] ${
+              copy.locale === "en"
+                ? "bg-[var(--color-dark-accent)] text-[var(--color-white)]"
+                : "bg-[var(--color-light-grey)]"
+            }`}
+            href={copy.locale === "en" ? "/start" : alternateHref}
+            aria-current={copy.locale === "en" ? "page" : undefined}
+          >
+            {copy.nav.languageSwitch.en}
+          </a>
+          <a
+            class={`${pClass} rounded-full px-[12px] py-[6px] ${
+              copy.locale === "nl"
+                ? "bg-[var(--color-dark-accent)] text-[var(--color-white)]"
+                : "bg-[var(--color-light-grey)]"
+            }`}
+            href={copy.locale === "nl" ? "/nl/start" : alternateHref}
+            aria-current={copy.locale === "nl" ? "page" : undefined}
+          >
+            {copy.nav.languageSwitch.nl}
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="py-[60px]">
+        <div class={shellClass} style={shellStyle}>
+          <article class={articleClass}>
+            <h1 class={h1Class}>{start.intro.title}</h1>
+            {
+              start.intro.subtitle && (
+                <p class={`${h5Class} mt-[12px]`}>
+                  {inlineStrongParts(start.intro.subtitle).map((part, index) =>
+                    index % 2 === 1 ? <strong>{part}</strong> : part,
+                  )}
+                </p>
+              )
+            }
+            <div class="mt-[30px] space-y-[16px]">
+              {
+                start.intro.paragraphs.map((paragraph) => (
+                  <p class={pClass}>
+                    {paragraphParts(paragraph).map((line, index) => (
+                      <>
+                        {index > 0 && <br />}
+                        {line}
+                      </>
+                    ))}
+                  </p>
+                ))
+              }
+            </div>
+            <div class="mt-[30px] flex flex-col gap-[12px] sm:flex-row">
+              <a class={primaryButtonClass} style={buttonStyle} href={homeHref}>
+                {start.intro.primaryButton}
+              </a>
+              <a class={secondaryButtonClass} style={buttonStyle} href={basicsHref}>
+                {start.intro.secondaryButton}
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id={basicsId} class="bg-[var(--color-light-grey)] py-[60px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class={articleClass}>
+            <h2 class={h2Class}>{start.mapBasics.title}</h2>
+            <div class="mt-[20px] space-y-[16px]">
+              {start.mapBasics.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-[60px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class={`${articleClass} space-y-[60px]`}>
+            <section>
+              <h3 class={h3Class}>{start.courseSymbols.title}</h3>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.courseSymbols.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+                <ul class="space-y-[6px]">
+                  {start.courseSymbols.bullets.map((bullet) => (
+                    <li class={`${pClass} flex gap-[14px]`}>
+                      <span class="mt-[10px] h-[6px] w-[6px] shrink-0 rounded-full bg-[var(--color-dark-accent)]"></span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class={tableWrapClass}>
+                {
+                  start.courseSymbols.rows.map((row) => (
+                    <div class={visualRowClass}>
+                      <div>
+                        <div class={symbolSlotClass}>
+                          <img
+                            class="h-full w-full object-contain"
+                            src={courseSymbolAssets[row.key]}
+                            alt={row.visualLabel}
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      <div class="space-y-[6px]">
+                        <p class={pClass}><strong>{row.description}</strong></p>
+                        <p class={pClass}>{row.info}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+              <img
+                class="mt-[30px] w-full"
+                src={courseSymbolsImage}
+                alt={start.courseSymbols.imageLabel}
+                loading="lazy"
+              />
+            </section>
+
+            <section>
+              <h3 class={h3Class}>{start.mapColors.title}</h3>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.mapColors.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+              <div class={tableWrapClass}>
+                {
+                  start.mapColors.rows.map((row) => {
+                    const colorAsset = mapColorImageAssets[row.key as keyof typeof mapColorImageAssets];
+
+                    return (
+                      <div class={visualRowClass}>
+                        <div>
+                          <div
+                            class={symbolSlotClass}
+                            style={colorAsset ? undefined : `background-color: ${mapColorValues[row.key]};`}
+                            aria-label={row.visualLabel}
+                          >
+                            {colorAsset ? (
+                              <img
+                                class="h-full w-full object-contain"
+                                src={colorAsset}
+                                alt={row.visualLabel}
+                                loading="lazy"
+                              />
+                            ) : (
+                              row.key === "scatteredTrees" && (
+                                <span class="block h-full w-full bg-[radial-gradient(circle_at_25%_35%,#57b14c_0_7%,transparent_8%),radial-gradient(circle_at_72%_62%,#57b14c_0_7%,transparent_8%)]" />
+                              )
+                            )}
+                          </div>
+                        </div>
+                        <div class="space-y-[6px]">
+                          <p class={pClass}><strong>{row.description}</strong></p>
+                          <p class={pClass}>{row.explanation}</p>
+                        </div>
+                      </div>
+                    );
+                  })
+                }
+              </div>
+            </section>
+
+            <section>
+              <h3 class={h3Class}>{start.mapSymbols.title}</h3>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.mapSymbols.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+              <div class={tableWrapClass}>
+                {
+                  start.mapSymbols.visibleRows.map((row) => {
+                    const imageAsset = mapSymbolImageAssets[row.key as keyof typeof mapSymbolImageAssets];
+                    const symbolAsset = imageAsset && "symbol" in imageAsset ? imageAsset.symbol : undefined;
+
+                    return (
+                      <div class={mapSymbolRowClass}>
+                        <div class={symbolSlotClass}>
+                          {imageAsset?.illustration ? (
+                            <img
+                              class="h-full w-full object-contain"
+                              src={imageAsset.illustration}
+                              alt={row.illustrationLabel}
+                              loading="lazy"
+                            />
+                          ) : (
+                            row.illustrationLabel
+                          )}
+                        </div>
+                        <div class={symbolSlotClass}>
+                          {symbolAsset ? (
+                            <img
+                              class="h-full w-full object-contain"
+                              src={symbolAsset}
+                              alt={row.symbolLabel}
+                              loading="lazy"
+                            />
+                          ) : (
+                            row.symbolLabel
+                          )}
+                        </div>
+                        <p class={`${pClass} col-span-3 md:col-span-1`}>{row.description}</p>
+                      </div>
+                    );
+                  })
+                }
+                <div id={mapSymbolsExtraId} hidden>
+                  {
+                    start.mapSymbols.hiddenRows.map((row) => {
+                      const imageAsset = mapSymbolImageAssets[row.key as keyof typeof mapSymbolImageAssets];
+                      const symbolAsset = imageAsset && "symbol" in imageAsset ? imageAsset.symbol : undefined;
+
+                      return (
+                        <div class={mapSymbolRowClass}>
+                          <div class={symbolSlotClass}>
+                            {imageAsset?.illustration ? (
+                              <img
+                                class="h-full w-full object-contain"
+                                src={imageAsset.illustration}
+                                alt={row.illustrationLabel}
+                                loading="lazy"
+                              />
+                            ) : (
+                              row.illustrationLabel
+                            )}
+                          </div>
+                          <div class={symbolSlotClass}>
+                            {symbolAsset ? (
+                              <img
+                                class="h-full w-full object-contain"
+                                src={symbolAsset}
+                                alt={row.symbolLabel}
+                                loading="lazy"
+                              />
+                            ) : (
+                              row.symbolLabel
+                            )}
+                          </div>
+                          <p class={`${pClass} col-span-3 md:col-span-1`}>{row.description}</p>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+                <div class={mapSymbolsToggleRowClass}>
+                  <button
+                    class={mapSymbolsToggleClass}
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls={mapSymbolsExtraId}
+                    data-map-symbols-toggle
+                    data-more-label={start.mapSymbols.toggleMoreLabel}
+                    data-less-label={start.mapSymbols.toggleLessLabel}
+                  >
+                    <span data-map-symbols-toggle-label>{start.mapSymbols.toggleMoreLabel}</span>
+                    <span class={mapSymbolsToggleIconClass} aria-hidden="true" data-map-symbols-toggle-icon></span>
+                  </button>
+                </div>
+              </div>
+              <p class={`${fClass} mt-[12px] text-[var(--color-black)] opacity-60`}>
+                {start.mapSymbols.attribution}
+              </p>
+            </section>
+
+            <section>
+              <h2 class={h2Class}>{start.contour.title}</h2>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.contour.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.contour.closingParagraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+              <img
+                class="mt-[30px] w-full"
+                src={contourLinesImage}
+                alt={start.contour.imageLabel}
+                loading="lazy"
+              />
+            </section>
+
+            <section>
+              <h2 class={h2Class}>{start.compass.title}</h2>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.compass.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+              <div class={tableWrapClass}>
+                {
+                  start.compass.rows.map((row) => (
+                    <div class={compassRowClass}>
+                      <div>
+                        <div class={`${compassImageClass} bg-[var(--color-light-grey)]`}>
+                          <img
+                            class="w-full object-contain"
+                            src={row.imageSrc}
+                            alt={row.title}
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      <div class="space-y-[6px]">
+                        <p class={pClass}><strong>{row.title}</strong></p>
+                        <p class={pClass}>{row.body}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.compass.closingParagraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+            </section>
+
+            <section>
+              <h2 class={h2Class}>{start.routeChoice.title}</h2>
+              <div class="mt-[20px] space-y-[16px]">
+                {start.routeChoice.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              </div>
+              <img
+                class="mt-[30px] w-full md:hidden"
+                src={routeExampleMobileImage}
+                alt={start.routeChoice.imageLabel}
+                loading="lazy"
+              />
+              <img
+                class="mt-[30px] hidden w-full md:block"
+                src={routeExampleDesktopImage}
+                alt={start.routeChoice.imageLabel}
+                loading="lazy"
+              />
+            </section>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[var(--color-light-accent)] py-[60px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class={`${articleClass} text-center`}>
+            <h2 class={h2Class}>{start.tryIt.title}</h2>
+            <div class="mt-[20px] space-y-[16px]">
+              {start.tryIt.paragraphs.map((paragraph) => <p class={h5Class}>{paragraph}</p>)}
+            </div>
+            <a class={`${primaryButtonClass} mt-[30px]`} style={buttonStyle} href={homeHref}>
+              {start.tryIt.button}
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-[var(--color-light-accent)] py-[30px]">
+      <p class={`${fClass} px-[30px] text-center md:px-[55px]`}>
+        <span>
+          {copy.footer.line1Prefix}{" "}
+          <a class="text-[var(--color-dark-accent)] no-underline" href="https://www.coenclaassen.com">
+            {copy.footer.line1Name}
+          </a>
+        </span>
+        <br />
+        <span>{copy.footer.line2}</span>
+      </p>
+    </footer>
+    <script>
+      document.querySelectorAll("[data-map-symbols-toggle]").forEach((button) => {
+        const panelId = button.getAttribute("aria-controls");
+        const panel = panelId ? document.getElementById(panelId) : null;
+        const label = button.querySelector("[data-map-symbols-toggle-label]");
+        const moreLabel = button.getAttribute("data-more-label") || "";
+        const lessLabel = button.getAttribute("data-less-label") || "";
+
+        button.addEventListener("click", () => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          const nextExpanded = !expanded;
+
+          button.setAttribute("aria-expanded", String(nextExpanded));
+          if (panel) {
+            panel.hidden = !nextExpanded;
+          }
+          if (label) {
+            label.textContent = nextExpanded ? lessLabel : moreLabel;
+          }
+        });
+      });
+    </script>
+    <style>
+      [data-map-symbols-toggle][aria-expanded="true"] [data-map-symbols-toggle-icon] {
+        transform: rotate(180deg);
+      }
+    </style>
+  </body>
+</html>

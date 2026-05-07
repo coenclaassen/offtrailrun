@@ -1,0 +1,507 @@
+---
+import { Heart, Leaf, Route, ShieldCheck } from "@lucide/astro";
+import SeoHead from "./SeoHead.astro";
+import type { en } from "../i18n/en";
+import type { nl } from "../i18n/nl";
+import { design } from "../config/design";
+import "../styles/global.css";
+
+type Copy = typeof en | typeof nl;
+
+interface Props {
+  copy: Copy;
+}
+
+const { copy } = Astro.props;
+const seo = copy.seo.home;
+
+const pageStyle = `
+  --color-white: ${design.colors.white};
+  --color-black: ${design.colors.black};
+  --color-light-grey: ${design.colors.lightGrey};
+  --color-dark-grey: ${design.colors.darkGrey};
+  --color-light-accent: ${design.colors.lightAccent};
+  --color-dark-accent: ${design.colors.darkAccent};
+`;
+
+const shellStyle = `max-width: ${design.layout.maxPageWidth}px;`;
+const radiusStyle = `border-radius: ${design.cornerRadius}px;`;
+const buttonStyle = `border-radius: ${design.buttonRadius}px; min-height: ${design.buttonHeight}px;`;
+const featureStyle = `${radiusStyle} min-height: ${design.featureHeight}px;`;
+const stepStyle = `${radiusStyle} min-height: ${design.stepHeight}px;`;
+const eventStyle = radiusStyle;
+
+const shellClass = "mx-auto w-full px-[30px] md:px-[55px]";
+const h1Class = design.typography.h1;
+const h2Class = design.typography.h2;
+const h3Class = design.typography.h3;
+const h4Class = design.typography.h4;
+const h5Class = design.typography.h5;
+const h6Class = design.typography.h6;
+const pClass = design.typography.p;
+const fClass = design.typography.f;
+const downChevronClass = "h-0 w-0 border-x-[7px] border-t-[8px] border-x-transparent border-t-[var(--color-dark-accent)]";
+
+const featureIcons = {
+  leaf: Leaf,
+  route: Route,
+  heart: Heart,
+} as const;
+
+const stepImages = ["/images/step1.webp", "/images/step2.webp", "/images/step3.webp"] as const;
+
+const splitTimeLine = (line: string) => {
+  const [time, ...labelParts] = line.split(" ");
+  return {
+    time,
+    label: labelParts.join(" "),
+  };
+};
+---
+
+<html lang={copy.locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <SeoHead title={seo.title} description={seo.description} locale={copy.locale} page="home" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Manrope:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[var(--color-white)] text-[var(--color-black)]" style={pageStyle}>
+    <header class="absolute left-0 top-0 z-10 w-full py-[16px]">
+      <nav class="flex items-center justify-end gap-[20px] px-[30px] md:px-[55px]" aria-label="Primary">
+          <div class="flex items-center gap-[6px]" aria-label="Language">
+            <a
+              class={`${pClass} rounded-full px-[12px] py-[6px] ${
+                copy.locale === "en"
+                  ? "bg-[var(--color-dark-accent)] text-[var(--color-white)]"
+                  : "bg-[var(--color-light-grey)]"
+              }`}
+              href="/"
+              aria-current={copy.locale === "en" ? "page" : undefined}
+            >
+              {copy.nav.languageSwitch.en}
+            </a>
+            <a
+              class={`${pClass} rounded-full px-[12px] py-[6px] ${
+                copy.locale === "nl"
+                  ? "bg-[var(--color-dark-accent)] text-[var(--color-white)]"
+                  : "bg-[var(--color-light-grey)]"
+              }`}
+              href="/nl/"
+              aria-current={copy.locale === "nl" ? "page" : undefined}
+            >
+              {copy.nav.languageSwitch.nl}
+            </a>
+          </div>
+        </nav>
+    </header>
+
+    <main>
+      <section
+        class="hero-background bg-cover py-[60px] md:min-h-[800px] md:py-[120px]"
+      >
+        <div class={shellClass} style={shellStyle}>
+          <div class="text-center text-[var(--color-white)] md:pt-[200px] md:text-left">
+            <h1 class={h1Class}>{copy.hero.title}</h1>
+            <div class="mt-[20px] space-y-[6px]">
+              {copy.hero.subtitle.map((line) => <p class={h5Class}>{line}</p>)}
+            </div>
+            <p class={`${h5Class} mt-[30px]`}>{copy.hero.body}</p>
+            <div class="mt-[30px] flex flex-col justify-center gap-[12px] sm:flex-row md:justify-start">
+              <a
+                class={`${h6Class} inline-flex items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`}
+                style={buttonStyle}
+                href="#signup"
+              >
+                {copy.hero.button}
+              </a>
+              <a
+                class={`${h6Class} inline-flex items-center justify-center bg-[var(--color-light-grey)] px-[30px] text-center text-[var(--color-dark-accent)]`}
+                style={buttonStyle}
+                href="#features"
+              >
+                {copy.hero.buttonSecondary}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="bg-[var(--color-light-grey)] py-[60px] md:py-[120px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class="text-center">
+            <h2 class={h2Class}>{copy.features.title}</h2>
+            <div class="mt-[20px] space-y-[6px]">
+              {copy.features.subtitle.map((line) => <p class={h5Class}>{line}</p>)}
+            </div>
+          </div>
+          <div class="mt-[30px] grid gap-[20px] md:grid-cols-3">
+            {
+              copy.features.items.map((item) => {
+                const Icon = featureIcons[item.icon];
+
+                return (
+                  <article
+                    class="flex items-center gap-[20px] bg-[var(--color-white)] p-[20px]"
+                    style={featureStyle}
+                  >
+                    <Icon
+                      class="h-[30px] w-[30px] shrink-0 text-[var(--color-dark-accent)]"
+                      size={30}
+                      stroke-width={2}
+                      aria-hidden="true"
+                    />
+                    <p class={h6Class}>{item.text}</p>
+                  </article>
+                );
+              })
+            }
+          </div>
+        </div>
+      </section>
+
+      <section id="steps" class="py-[60px] md:py-[120px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class="text-center">
+            <h2 class={h2Class}>{copy.steps.howItWorks.title}</h2>
+            <p class={`${h4Class} mt-[20px]`}>{copy.steps.howItWorks.subtitle}</p>
+          </div>
+          <div class="mt-[30px] grid gap-[20px] md:grid-cols-3">
+            {
+              copy.steps.items.map((item, index) => (
+                <article class="flex flex-col overflow-hidden bg-[var(--color-light-accent)]" style={stepStyle}>
+                  <img
+                    class="aspect-square w-full object-cover"
+                    src={stepImages[index]}
+                    alt={item.imageAlt}
+                    loading="lazy"
+                  />
+                  <div class="flex flex-col p-[30px]">
+                    <p class={`${h6Class} text-[var(--color-dark-accent)]`}>{item.label}</p>
+                    <h3 class={`${h3Class} mt-[20px]`}>{item.title}</h3>
+                    <p class={`${pClass} mt-[20px]`}>{item.body}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="py-[60px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class="mb-[30px] grid gap-[20px] md:mb-[60px] md:grid-cols-2">
+            <div
+              class="order-1 flex flex-col justify-center text-center md:order-2"
+            >
+              <h2 class={h2Class}>{copy.social.title}</h2>
+              <div class="mt-[20px]">
+                <div class="space-y-[12px]">
+                  {copy.social.lines.map((line) => <p class={h5Class}>{line}</p>)}
+                </div>
+                <a
+                  class={`${pClass} mt-[20px] inline-flex flex-col items-center gap-[8px] font-bold text-[var(--color-dark-accent)]`}
+                  href="#events"
+                >
+                  <span>{copy.social.link}</span>
+                  <span class={downChevronClass} aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
+            <img
+              class="order-2 aspect-video w-full object-cover md:order-1"
+              style={radiusStyle}
+              src={copy.social.images[0].image}
+              alt={copy.social.images[0].imageAlt}
+              loading="lazy"
+            />
+            <img
+              class="order-3 aspect-video w-full object-cover"
+              style={radiusStyle}
+              src={copy.social.images[1].image}
+              alt={copy.social.images[1].imageAlt}
+              loading="lazy"
+            />
+            <img
+              class="order-4 aspect-video w-full object-cover"
+              style={radiusStyle}
+              src={copy.social.images[2].image}
+              alt={copy.social.images[2].imageAlt}
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="events" class="bg-[var(--color-light-grey)] py-[60px] md:py-[120px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class="text-center">
+            <h2 class={h2Class}>{copy.events.title}</h2>
+            <p class={`${h5Class} mt-[12px]`}>{copy.events.subtitle}</p>
+          </div>
+          <div class="mt-[30px] grid gap-[20px] md:grid-cols-2">
+            {
+              copy.events.items.map((item) => {
+                const warmup = splitTimeLine(item.warmup);
+                const start = splitTimeLine(item.start);
+
+                return (
+                <article
+                  class="flex flex-col bg-[var(--color-white)] p-[30px] md:p-[40px]"
+                  style={eventStyle}
+                >
+                  <div class="text-[var(--color-dark-accent)]">
+                    <p class={`${h2Class} font-normal`}>{item.date.weekday}</p>
+                    <p class={`${h2Class} font-normal`}>
+                      {item.date.day} {item.date.month}
+                    </p>
+                  </div>
+
+                  <h3 class={`${h2Class} mt-[50px]`}>{item.title}</h3>
+
+                  <div class="mt-[30px] grid gap-[30px] md:grid-cols-[minmax(0,1.5fr)_minmax(170px,0.8fr)]">
+                    <ul class="space-y-[16px]">
+                      {item.bullets.map((bullet) => (
+                        <li class={`${pClass} flex gap-[14px]`}>
+                          <span class="mt-[10px] h-[6px] w-[6px] shrink-0 rounded-full bg-[var(--color-dark-accent)]" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div>
+                      <p class={pClass}>
+                        <span class="font-bold">{warmup.time}</span> {warmup.label}
+                      </p>
+                      <p class={pClass}>
+                        <span class="font-bold">{start.time}</span> {start.label}
+                      </p>
+                      <p class={`${pClass} mt-[30px] flex items-center gap-[8px]`}>
+                        <ShieldCheck
+                          class="h-[18px] w-[18px] shrink-0"
+                          size={18}
+                          stroke-width={2}
+                          aria-hidden="true"
+                        />
+                        <span>{item.note}</span>
+                      </p>
+                    </div>
+                  </div>
+                </article>
+                );
+              })
+            }
+          </div>
+          <div class="mt-[40px] flex justify-center">
+            <a
+              class={`${h6Class} inline-flex items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`}
+              style={buttonStyle}
+              href="#signup"
+            >
+              {copy.events.button}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="py-[60px] md:py-[120px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class="text-center">
+            <h2 class={h2Class}>{copy.faq.title}</h2>
+            <p class={`${h5Class} mt-[6px]`}>{copy.faq.subtitle}</p>
+          </div>
+          <div class="mx-auto mt-[30px] grid max-w-[650px] gap-[12px]">
+            {
+              copy.faq.items.map((item) => (
+                <details class="group bg-[var(--color-light-grey)] p-[20px]" style={radiusStyle}>
+                  <summary class={`${h6Class} flex cursor-pointer list-none items-center justify-between gap-[20px]`}>
+                    <span>{item.question}</span>
+                    <span class="text-[28px] leading-none text-[var(--color-dark-accent)] group-open:rotate-45">+</span>
+                  </summary>
+                  <p class={`${pClass} mt-[20px]`}>{item.answer}</p>
+                  {"link" in item && item.link && (
+                    <a class={`${pClass} mt-[12px] inline-block font-bold text-[var(--color-dark-accent)]`} href={item.link.href}>
+                      {item.link.label}
+                    </a>
+                  )}
+                </details>
+              ))
+            }
+          </div>
+          <p class={`${pClass} mt-[30px] text-center`}>
+            <span class="block">{copy.faq.contactIntro}</span>
+            <a class="text-[var(--color-dark-accent)]" href={`mailto:${copy.faq.contactEmail}`}>
+              {copy.faq.contactEmail}
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <section id="signup" class="bg-[var(--color-light-accent)] py-[60px] md:py-[120px]">
+        <div class={shellClass} style={shellStyle}>
+          <div class="pt-[20px] text-center">
+            <h2 class={h2Class}>
+              <span class="md:hidden">
+                {copy.signup.titleMobileLines.map((line, index) => (
+                  <>
+                    {index > 0 && <br />}
+                    {line}
+                  </>
+                ))}
+              </span>
+              <span class="hidden md:inline">{copy.signup.title}</span>
+            </h2>
+            <p class={`${h5Class} mt-[20px]`}>{copy.signup.subtitle}</p>
+            <p class={`${h5Class}`}>{copy.signup.note}</p>
+          </div>
+          <form
+            class="mx-auto mt-[30px] max-w-[650px] bg-[var(--color-white)] p-[30px]"
+            style={radiusStyle}
+            id="signup-form"
+            name="signup"
+            method="post"
+            action="/.netlify/functions/signup"
+            data-success-message={copy.signup.success}
+            data-error-message={copy.signup.error}
+            data-loading-text={copy.signup.loading}
+          >
+            <label class={`${h6Class} block`} for="firstName">{copy.signup.firstNameLabel}</label>
+            <input
+              class={`${pClass} mt-[6px] h-[60px] w-full border border-[var(--color-dark-grey)] px-[20px]`}
+              style={radiusStyle}
+              id="firstName"
+              name="firstName"
+              type="text"
+              placeholder={copy.signup.firstNamePlaceholder}
+              required
+            />
+            <label class={`${h6Class} mt-[20px] block`} for="email">{copy.signup.emailLabel}</label>
+            <input
+              class={`${pClass} mt-[6px] h-[60px] w-full border border-[var(--color-dark-grey)] px-[20px]`}
+              style={radiusStyle}
+              id="email"
+              name="email"
+              type="email"
+              placeholder={copy.signup.emailPlaceholder}
+              required
+            />
+            <label class={`${pClass} mt-[36px] flex items-start gap-[12px]`} for="consent">
+              <input
+                class="mt-[4px] h-[18px] w-[18px] shrink-0 accent-[var(--color-dark-accent)]"
+                id="consent"
+                name="consent"
+                type="checkbox"
+                required
+              />
+              <span>{copy.signup.consentLabel}</span>
+            </label>
+            <button
+              class={`${h6Class} mt-[34px] inline-flex w-full items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`}
+              style={buttonStyle}
+              type="submit"
+            >
+              {copy.signup.button}
+            </button>
+            <p class={`${pClass} mt-[20px] hidden text-center`} data-signup-status role="status" aria-live="polite"></p>
+            <p class={`${pClass} mt-[20px] text-center`}>
+              {copy.signup.finePrint.map((line, index) => (
+                <>
+                  {index > 0 && <br class="hidden md:block" />}
+                  {index > 0 && " "}
+                  {line}
+                </>
+              ))}
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-[var(--color-light-accent)] py-[30px]">
+      <p class={`${fClass} px-[30px] text-center md:px-[55px]`}>
+        <span>
+          {copy.footer.line1Prefix}{" "}
+          <a class="text-[var(--color-dark-accent)] no-underline" href="https://www.coenclaassen.com">
+            {copy.footer.line1Name}
+          </a>
+        </span>
+        <br />
+        <span>{copy.footer.line2}</span>
+      </p>
+    </footer>
+    <script>
+      const signupForm = document.querySelector("[data-success-message]");
+
+      if (signupForm instanceof HTMLFormElement) {
+        const button = signupForm.querySelector("button[type='submit']");
+        const status = signupForm.querySelector("[data-signup-status]");
+        const defaultButtonText = button?.textContent?.trim() ?? "";
+
+        signupForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          if (!signupForm.reportValidity() || button instanceof HTMLButtonElement && button.disabled) {
+            return;
+          }
+
+          const formData = new FormData(signupForm);
+          const payload = {
+            firstName: String(formData.get("firstName") ?? "").trim(),
+            email: String(formData.get("email") ?? "").trim(),
+            consent: formData.get("consent") === "on",
+            source: "offtrailrun-landing-page",
+          };
+
+          if (button instanceof HTMLButtonElement) {
+            button.disabled = true;
+            button.textContent = signupForm.dataset.loadingText ?? defaultButtonText;
+          }
+
+          if (status instanceof HTMLElement) {
+            status.classList.add("hidden");
+            status.textContent = "";
+          }
+
+          try {
+            const response = await fetch(signupForm.action, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+              throw new Error("Signup failed");
+            }
+
+            signupForm.reset();
+
+            if (status instanceof HTMLElement) {
+              status.textContent = signupForm.dataset.successMessage ?? "";
+              status.classList.remove("hidden", "text-red-700");
+              status.classList.add("text-[var(--color-dark-accent)]");
+            }
+          } catch {
+            if (status instanceof HTMLElement) {
+              status.textContent = signupForm.dataset.errorMessage ?? "";
+              status.classList.remove("hidden", "text-[var(--color-dark-accent)]");
+              status.classList.add("text-red-700");
+            }
+          } finally {
+            if (button instanceof HTMLButtonElement) {
+              button.disabled = false;
+              button.textContent = defaultButtonText;
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

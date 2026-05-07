@@ -1,0 +1,30 @@
+export const design = {
+  layout: {
+    maxPageWidth: 1280,
+  },
+  colors: {
+    white: "#ffffff",
+    black: "#1d1d1f",
+    lightGrey: "#f5f5f7",
+    darkGrey: "#ececf0",
+    lightAccent: "#e5f4f2",
+    darkAccent: "#009379",
+  },
+  cornerRadius: 20,
+  buttonRadius: 999,
+  buttonHeight: 60,
+  featureHeight: 90,
+  stepHeight: 450,
+  gutterSmall: 20,
+  gutterLarge: 30,
+  typography: {
+    h1: "font-['Barlow_Condensed'] text-[67px] font-bold leading-[105%]",
+    h2: "font-['Barlow_Condensed'] text-[38px] font-bold leading-[130%]",
+    h3: "font-['Barlow_Condensed'] text-[21px] font-bold leading-[130%] md:text-[28px]",
+    h4: "font-['Barlow_Condensed'] text-[16px] font-normal leading-[150%] md:text-[21px]",
+    h5: "font-['Manrope'] text-[16px] font-normal leading-[150%] md:text-[21px]",
+    h6: "font-['Manrope'] text-[18px] font-bold leading-[150%]",
+    p: "font-['Manrope'] text-[16px] font-normal leading-[150%]",
+    f: "font-['Manrope'] text-[13px] font-normal leading-[150%]",
+  },
+} as const;

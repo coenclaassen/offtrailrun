@@ -1,0 +1,47 @@
+---
+type Locale = "en" | "nl";
+type Page = "home" | "start";
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  page: Page;
+}
+
+const { title, description, locale, page } = Astro.props;
+
+const siteUrl = "https://offtrailrun.com";
+const imageUrl = `${siteUrl}/images/og/og.webp`;
+
+const urls = {
+  home: {
+    en: `${siteUrl}/`,
+    nl: `${siteUrl}/nl/`,
+    xDefault: `${siteUrl}/`,
+  },
+  start: {
+    en: `${siteUrl}/start/`,
+    nl: `${siteUrl}/nl/start/`,
+    xDefault: `${siteUrl}/start/`,
+  },
+} as const;
+
+const canonicalUrl = urls[page][locale];
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="en" href={urls[page].en} />
+<link rel="alternate" hreflang="nl" href={urls[page].nl} />
+<link rel="alternate" hreflang="x-default" href={urls[page].xDefault} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
