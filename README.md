@@ -41,6 +41,8 @@ Built with:
 
 Code is MIT licensed. Use it if it’s helpful. Just don’t sue me if it breaks.
 
-Original content, writing, and illustrations created for this project are free to reuse for non-commercial projects with attribution to [offtrailrun.com](https://offtrailrun.com).
-
 Some map-symbol illustrations are from Svensk Orientering material. I received approval to use them on this site, but they are not covered by this license.
+
+All other original content, writing, and illustrations created for this project are free to reuse for non-commercial projects with attribution to [offtrailrun.com](https://offtrailrun.com).
+
+
