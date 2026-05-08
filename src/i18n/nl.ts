@@ -109,9 +109,9 @@
       {
         title: "Philips de Jongh, Eindhoven",
         date: {
-          weekday: "Zondag",
-          day: "01",
-          month: "Januari",
+          weekday: "Zaterdag",
+          day: "29",
+          month: "Februari",
           year: "2026",
         },
         bullets: [
@@ -127,8 +127,8 @@
         title: "Aarlese Heide, Eindhoven",
         date: {
           weekday: "Zondag",
-          day: "10",
-          month: "Januari",
+          day: "30",
+          month: "Februari",
           year: "2026",
         },
         bullets: [
