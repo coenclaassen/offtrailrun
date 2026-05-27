@@ -112,8 +112,8 @@ export const en = {
         title: "Philips de Jongh, Eindhoven",
         date: {
           weekday: "Saturday",
-          day: "29",
-          month: "February",
+          day: "Coming",
+          month: "soon",
           year: "2026",
         },
         bullets: [
@@ -128,9 +128,9 @@ export const en = {
       {
         title: "Aarlese Heide, Eindhoven",
         date: {
-          weekday: "Sunday",
-          day: "30",
-          month: "February",
+          weekday: "Saturday",
+          day: "Coming",
+          month: "soon",
           year: "2026",
         },
         bullets: [
