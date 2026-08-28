@@ -27,4 +27,26 @@ export const design = {
     p: "font-['Manrope'] text-[16px] font-normal leading-[150%]",
     f: "font-['Manrope'] text-[13px] font-normal leading-[150%]",
   },
+  homepageV2: {
+    colors: {
+      paper: "#f7f7f7",
+      charcoal: "#111111",
+      white: "#ffffff",
+      accent: "#111111",
+      rule: "#dedede",
+    },
+    buttonRadius: 2,
+    buttonHeight: 52,
+    typography: {
+      hero: "font-['DM_Sans'] text-[52px] font-semibold leading-[98%] md:text-[64px]",
+      statement: "font-['DM_Sans'] text-[32px] font-semibold leading-[112%] md:text-[40px]",
+      section: "font-['DM_Sans'] text-[32px] font-semibold leading-[112%] md:text-[40px]",
+      body: "font-['DM_Sans'] text-[16px] font-normal leading-[150%]",
+      bodyLarge: "font-['DM_Sans'] text-[16px] font-normal leading-[150%]",
+      button: "font-['DM_Sans'] text-[16px] font-semibold leading-[100%]",
+      utility: "font-['DM_Sans'] text-[14px] font-normal leading-[145%]",
+      eventDate: "font-['DM_Sans'] text-[16px] font-semibold leading-[150%]",
+      stepNumber: "font-['DM_Sans'] text-[16px] font-semibold leading-[150%]",
+    },
+  },
 } as const;

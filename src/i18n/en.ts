@@ -23,71 +23,74 @@ export const en = {
   },
 
   hero: {
-    title: "A different run starts here.",
-    subtitle: [
-      "Think while you move fast.",
-      "Navigate to checkpoints with a map while you run.",
-    ],
-    body: "Join an off-trail run in Eindhoven.",
-    button: "Join now",
-    buttonSecondary: "How it works",
+    title: "Run hard. Think fast.",
+    subtitle: ["A map. A forest. Infinite ways through."],
+    body: "",
+    button: "See events",
+    buttonSecondary: "The challenge",
   },
 
   features: {
-    title: "Run hard. Think fast.",
+    title: "Outrun the obvious.",
     subtitle: [
-      "Legs on fire. Brain switched on.",
-      "Going fast helps, but thinking fast matters too.",
+      "The controls are fixed. The way there isn’t.",
+      "Read the map. Choose your line. Get there fast.",
     ],
     items: [
       {
         icon: "leaf",
-        text: "Nature instead of asphalt.",
+        text: "Forest over asphalt.",
       },
       {
         icon: "route",
-        text: "One wrong turn changes the run.",
+        text: "Wrong turns happen.",
       },
       {
         icon: "heart",
-        text: "No run ever feels the same.",
+        text: "Every run is different.",
       },
     ],
   },
 
   steps: {
     howItWorks: {
-      title: "How it works",
-      subtitle: "Get a map. Find the controls. Choose your route.",
+      title: "What you’re in for.",
+      subtitle: "",
     },
     items: [
       {
-        label: "01",
+        label: "01 /",
         imageAlt: "Map held during an off-trail run",
-        title: "Get ready",
-        body: "You get your map just before you start. Your time starts and you're on your own.",
+        title: "Claim your map",
+        body: "Pick a date. We’ll print your map.",
+        paragraphs: ["Pick a date. We’ll print your map."],
       },
       {
-        label: "02",
+        label: "02 /",
         imageAlt: "Runner navigating through the forest",
-        title: "Navigate as you run",
-        body: "Find your way from control to control as fast as you can. You plan your route while you move.",
+        title: "Think. Run. Adapt.",
+        body: "Map in hand. Legs on fire. Navigate from control to control at speed.",
+        paragraphs: ["Map in hand. Legs on fire. Navigate from control to control at speed."],
       },
       {
-        label: "03",
+        label: "03 /",
         imageAlt: "Runner choosing a route through the forest",
-        title: "Choose the fastest way",
-        body: "Take the path or cut straight through the forest. You decide. Faster course time wins.",
+        title: "Leave the trail behind.",
+        body: "Trails, shortcuts, bushes, wrong turns. Fastest time wins. Catch your breath and see who found the best line.",
+        paragraphs: [
+          "Trails, shortcuts, bushes, wrong turns. Fastest time wins.",
+          "Catch your breath and see who found the best line.",
+        ],
       },
     ],
   },
 
   social: {
-    title: "Join our next run.",
-    lines: [
-      "We'll get you started.",
-    ],
-    link: "See next runs.",
+    title: "No route. Better stories.",
+    lines: ["Wrong turns, bold shortcuts, near misses. Share the stories afterwards."],
+    body: "Wrong turns, bold shortcuts, near misses.",
+    emphasis: "Share the stories afterwards.",
+    link: "",
     images: [
       {
         image: "/images/social1.webp",
@@ -105,97 +108,97 @@ export const en = {
   },
 
   events: {
-    title: "Ready to try it?",
-    subtitle: "Start in the park. Then hit the forest.",
-    items: [
-      {
-        title: "Philips de Jongh, Eindhoven",
-        date: {
-          weekday: "Saturday",
-          day: "Coming",
-          month: "soon",
-          year: "2026",
-        },
-        bullets: [
-          "Get a feel for map and compass",
-          "Run your first real off-trail course",
-          "Build up to the forest run",
-        ],
-        warmup: "13:00 Warm-up",
-        start: "13:30 Start",
-        note: "Bag drop available.",
-      },
-      {
-        title: "Aarlese Heide, Eindhoven",
-        date: {
-          weekday: "Saturday",
-          day: "Coming",
-          month: "soon",
-          year: "2026",
-        },
-        bullets: [
-          "More route choices",
-          "More challenge, more fun",
-          "Run hard, get a little lost, get hooked",
-        ],
-        warmup: "13:00 Warm-up",
-        start: "13:30 Start",
-        note: "Bag drop available.",
-      },
-    ],
-    button: "Join now",
+    title: "Events",
+    registrationClosed: "Registration closed",
+    mapsPrepared: "Maps are being prepared.",
+    startPrefix: "Start",
+    registrationClosesIn: "Registration closes in",
+    registrationClosesTomorrow: "Registration closes tomorrow",
+    registrationClosesToday: "Registration closes today",
+    button: "Register",
+    city: "Eindhoven",
+    locations: ["Oirschotse Heide", "Aarlesche Heide", "Oirschotse Heide", "Oostelbeersche Heide"],
   },
 
   faq: {
-    title: "Still unsure?",
-    subtitle: "Start here.",
+    title: "FAQ",
+    subtitle: "",
     items: [
       {
         question: "Who is this for?",
-        answer:
-          "Beginner to expert runners who want to try something new. You do not need orienteering experience or natural navigation talent. Curiosity is enough.",
+        paragraphs: [
+          "Runners who want something different.",
+          "You don’t need experience or natural navigation talent. Curiosity is enough.",
+        ],
       },
       {
-        question: "What if I've never done anything like this before?",
-        answer:
-          "Perfect. That is exactly who this is for. We keep the first run accessible and explain the basics before you start.",
+        question: "What if I’ve never done anything like this before?",
+        paragraphs: [
+          "Perfect.",
+          "We’ll cover the essentials before the start. Then you head into the forest with a map and figure things out.",
+        ],
       },
       {
         question: "Do I need to be fast or super fit?",
-        answer:
-          "No. Speed helps, but it is not only about speed. Navigation and route choice matter too. Both events have different route options and shortcuts, so you can make your run as easy or as challenging as you want.",
+        paragraphs: [
+          "Speed helps, but it’s not only about speed.",
+          "Navigation and route choice matter too. Run it hard or take your time.",
+        ],
+      },
+      {
+        question: "How long does it take?",
+        paragraphs: [
+          "Anywhere from 30 minutes to 2 hours.",
+          "Navigate well and run fast, and you’ll be back quickly. Make a few mistakes and the forest keeps you longer.",
+        ],
       },
       {
         question: "What if I get lost or mess it up?",
-        answer:
-          "You probably will. That is part of it. That is exactly how you learn. This event is set up for beginners, so you can make mistakes, improve fast, and still have a great run.",
+        paragraphs: ["You probably will.", "That’s part of it. Make a mistake, reset, learn fast, keep moving."],
       },
       {
         question: "What if I use GPS?",
-        answer:
-          "You can wear your GPS watch or bring your phone, but it will not tell you where to go. You get the map at the start and plan your route as you run. GPS is useful afterwards if you want to look back at your route.",
+        paragraphs: [
+          "Bring your watch. Bring your phone.",
+          "It won’t make you much faster. You get the map at the start and choose your route as you run.",
+          "GPS is useful afterwards if you want to replay where you went.",
+        ],
       },
       {
-        question: "What if I just follow someone else?",
-        answer:
-          "You start one by one, and not everyone runs the same course. Following someone else will not get you the best time. Feeling less confident on your own? Let us know. You can also run in pairs, with the same map and the same course.",
+        question: "What if I just follow someone?",
+        paragraphs: [
+          "Not everyone runs the same course. Following someone else might take you completely the wrong way.",
+          "Feeling less confident on your own? Run in pairs with the same map and the same course.",
+        ],
       },
       {
         question: "Do I need to understand the map first?",
-        answer:
-          "No. We explain the essentials before you start. If you want a quick preview, you can read the map and compass basics first.",
+        paragraphs: ["No. We’ll cover what matters before the start.", "Want a head start?"],
         link: {
-          label: "Read the basics",
+          label: "Read the basics →",
           href: "/start",
         },
       },
       {
+        question: "What should I bring?",
+        paragraphs: [
+          "Forest-proof running gear.",
+          "Shoes with grip and long socks or tights help when the best line goes through the bushes. If it’s wet, bring dry clothes and a towel. If it’s hot, bring enough to drink.",
+        ],
+      },
+      {
         question: "Will there be a bag drop?",
-        answer:
-          "Yes, you can safely leave your extra layers or bag while you head out for the run.",
+        paragraphs: ["Yes.", "You can safely leave your bag and extra layers while you’re out running."],
+      },
+      {
+        question: "Why does registration close one week before?",
+        paragraphs: [
+          "We build the course, set out the controls and print a map for every runner.",
+          "To make that happen, we need to know who’s coming one week before.",
+        ],
       },
     ],
-    contactIntro: "Still have a question before signing up?",
+    contactIntro: "Still got a question?",
     contactEmail: "start@offtrailrun.com",
   },
 
