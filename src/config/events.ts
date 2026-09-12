@@ -5,6 +5,7 @@ export interface RunEvent {
   location: string;
   startTime: string;
   lumaUrl: string;
+  lumaEventId: string;
 }
 
 export const events: readonly RunEvent[] = [
@@ -14,7 +15,8 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-09-12T23:59:59+02:00",
     location: "Oirschotse Heide Zuidoost",
     startTime: "13:30",
-    lumaUrl: "https://luma.com/event/evt-xA1E8ZiZ54SpPN2",
+    lumaUrl: "https://luma.com/c22abj6v",
+    lumaEventId: "evt-xA1E8ZiZ54SpPN2",
   },
   {
     id: "aarlesche-heide-west-2026-10-17",
@@ -22,7 +24,8 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-10-10T23:59:59+02:00",
     location: "Aarlesche Heide West",
     startTime: "13:30",
-    lumaUrl: "https://luma.com/event/evt-r30gvykpF5FT3gO",
+    lumaUrl: "https://luma.com/3or9dqzl",
+    lumaEventId: "evt-r30gvykpF5FT3gO",
   },
   {
     id: "oirschotse-heide-noordwest-2026-11-14",
@@ -30,14 +33,7 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-11-07T23:59:59+01:00",
     location: "Oirschotse Heide Noordwest",
     startTime: "13:30",
-    lumaUrl: "https://luma.com/event/evt-9FVF2nReO42qfSo",
-  },
-  {
-    id: "oostelbeersche-heide-midden-2026-12-12",
-    date: "2026-12-12T13:30:00+01:00",
-    registrationClose: "2026-12-05T23:59:59+01:00",
-    location: "Oostelbeersche Heide Midden",
-    startTime: "13:30",
-    lumaUrl: "https://luma.com/event/evt-WmToRi1HEik2qrQ",
+    lumaUrl: "https://luma.com/jqudeaf4",
+    lumaEventId: "evt-CjeWp5Ds8BWAEWx",
   },
 ] as const;

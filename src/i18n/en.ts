@@ -132,7 +132,6 @@ export const en = {
       "oirschotse-heide-zuidoost-2026-09-19": "Oirschotse Heide Zuidoost",
       "aarlesche-heide-west-2026-10-17": "Aarlesche Heide West",
       "oirschotse-heide-noordwest-2026-11-14": "Oirschotse Heide Noordwest",
-      "oostelbeersche-heide-midden-2026-12-12": "Oostelbeersche Heide Midden",
     },
   },
 

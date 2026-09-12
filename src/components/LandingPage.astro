@@ -12,7 +12,7 @@ interface Props { copy: Copy; }
 
 const { copy } = Astro.props;
 const pageStyle = `--color-black:${design.colors.black};--color-white:${design.colors.white};--color-grey:${design.colors.grey};--color-light-grey:${design.colors.lightGrey};--color-pink:${design.colors.pink};`;
-const shellClass = "mx-auto w-full max-w-[1920px] px-[16px] md:px-[32px]";
+const shellClass = "w-full px-[16px] md:px-[32px]";
 const desktopAlignmentClass = "md:max-w-[1500px]";
 const faqContentClass = "md:max-w-[570px]";
 const buttonStyle = `border-radius:${design.buttonRadius}px;min-height:${design.buttonHeight}px;`;
@@ -52,12 +52,12 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
         </div>
       </section>
 
-      <section id="discover" class={`${shellClass} mt-[35vh] md:mt-[45vh]`}>
+      <section id="discover" class={`${shellClass} landing-discover mt-[35vh] md:mt-[45vh]`}>
         <h2 class={design.typography.h2}>{copy.discover.title[0]}<br class="md:hidden" /> {copy.discover.title[1]}</h2>
         <p class={`${design.typography.discoverBody} mt-[25px] max-w-[535px] text-[var(--color-grey)] md:mt-[40px] md:max-w-[720px]`}>{copy.discover.body}</p>
       </section>
 
-      <section class={`${shellClass} mt-[220px] md:mt-[45vh]`}>
+      <section class={`${shellClass} landing-vibe mt-[220px] md:mt-[45vh]`}>
         <h2 class={design.typography.h2}>{copy.vibe.title[0]}<br />{copy.vibe.title[1]}</h2>
         <p class={`${design.typography.vibeBody} mt-[25px] text-[var(--color-grey)] md:mt-[32px]`}>{copy.vibe.body[0]}<br class="hidden md:block" /> {copy.vibe.body[1]}</p>
         <div class="mt-[40px] md:mt-[60px]">
@@ -76,7 +76,7 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
         </div>
       </section>
 
-      <section id="how-it-works" class={`${shellClass} mt-[220px] md:mt-[35vh]`}>
+      <section id="how-it-works" class={`${shellClass} landing-how-it-works mt-[220px] md:mt-[35vh]`}>
         <h2 class={design.typography.h2}>{copy.steps.title}</h2>
         <div class={`${desktopAlignmentClass} mt-[35px] border-y border-[var(--color-light-grey)] md:mt-[45px] md:grid md:grid-cols-[calc(40%_-_60px)_40%_calc(20%_+_60px)] md:border-y-0`}>
           {copy.steps.items.map((item) => (
@@ -88,7 +88,7 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
         </div>
       </section>
 
-      <section id="events" class={`${shellClass} mt-[220px] scroll-mt-[64px] md:mt-[35vh]`}>
+      <section id="events" class={`${shellClass} landing-events mt-[220px] scroll-mt-[64px] md:mt-[35vh]`}>
         <h2 class={design.typography.h2}>{copy.events.title}</h2>
         <div class="mt-[40px] border-t border-[var(--color-light-grey)] md:mt-[45px]">
           {events.map((event) => (
@@ -97,7 +97,7 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
                 <div><h3 class={design.typography.h3}>{eventLocation(event)}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(event.date))}<br />{copy.events.city}</p></div>
                 <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:block`}>{eventDateFormatter.format(new Date(event.date))}</p>
                 <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:translate-x-[32px] md:block`}>{copy.events.city}</p>
-                <a class={`${design.typography.button} inline-flex w-[105px] items-center justify-center gap-[5px] bg-[var(--color-black)] px-[12px] text-[var(--color-white)] md:w-[135px]`} style={buttonStyle} href={event.lumaUrl} target="_blank" rel="noreferrer">{copy.events.button}<ChevronRight size={16} aria-hidden="true" /></a>
+                <a class={`luma-checkout--button ${design.typography.button} inline-flex w-[105px] items-center justify-center gap-[5px] bg-[var(--color-black)] px-[12px] text-[var(--color-white)] md:w-[135px]`} style={buttonStyle} href={event.lumaUrl} data-luma-action="checkout" data-luma-event-id={event.lumaEventId}>{copy.events.button}<ChevronRight size={16} aria-hidden="true" /></a>
               </div>
             </article>
           ))}
@@ -127,6 +127,26 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
         </details>
       </section>
     </main>
+    <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
+    <style>
+      @media (min-width: 1921px) {
+        .landing-discover {
+          margin-top: 225px;
+        }
+
+        .landing-vibe {
+          margin-top: 300px;
+        }
+
+        .landing-how-it-works {
+          margin-top: 250px;
+        }
+
+        .landing-events {
+          margin-top: 225px;
+        }
+      }
+    </style>
     <script>
       const heroScroll = document.querySelector("[data-hero-scroll]");
       const eventsScroll = document.querySelector("[data-events-scroll]");
