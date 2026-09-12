@@ -1,17 +1,10 @@
 export const design = {
-  layout: {
-    maxPageWidth: 1920,
-    articleWidth: 720,
-    mobilePadding: 16,
-    desktopPadding: 32,
-  },
   colors: {
     black: "#2d2d2d",
     white: "#ffffff",
     grey: "#999999",
     lightGrey: "#e7e7e7",
     pink: "#ff00e5",
-    rule: "#6b6b6b",
   },
   buttonRadius: 999,
   buttonHeight: 50,
@@ -19,7 +12,6 @@ export const design = {
     h1: "font-['Titillium_Web'] text-[54px] font-semibold leading-[120%] md:text-[100px]",
     h2: "font-['Titillium_Web'] text-[35px] font-semibold leading-[120%] md:text-[58px]",
     h3: "font-['Titillium_Web'] text-[22px] font-semibold leading-[150%] md:text-[26px]",
-    h3Light: "font-['Titillium_Web'] text-[22px] font-light leading-[150%] md:text-[26px]",
     discoverBody: "font-['Titillium_Web'] text-[24px] font-light leading-[150%] md:text-[38px]",
     p1: "font-['Titillium_Web'] text-[22px] font-light leading-[120%] md:text-[28px]",
     p2: "font-['Titillium_Web'] text-[16px] font-semibold leading-[135%] md:text-[20px]",
@@ -30,6 +22,5 @@ export const design = {
     eventMeta: "font-['Titillium_Web'] text-[16px] font-normal leading-[135%] md:text-[22px]",
     vibeBody: "font-['Titillium_Web'] text-[19px] font-normal leading-[135%] md:text-[22px]",
     button: "font-['Titillium_Web'] text-[16px] font-normal leading-[120%]",
-    fine: "font-['Titillium_Web'] text-[16px] font-normal leading-[135%]",
   },
 } as const;

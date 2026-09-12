@@ -15,7 +15,6 @@ export const en = {
   },
 
   nav: {
-    faq: "FAQ",
     languageSwitch: {
       en: "EN",
       nl: "NL",
@@ -40,108 +39,46 @@ export const en = {
     images: ["Runner with a map", "Runners in the forest", "Mud-covered running shoes", "Runner in motion", "Runners after a run"],
   },
 
-  features: {
-    title: "Outrun the obvious.",
-    subtitle: [
-      "The controls are fixed. The way there isn’t.",
-      "Read the map. Choose your line. Get there fast.",
-    ],
-    items: [
-      {
-        icon: "leaf",
-        text: "Forest over asphalt.",
-      },
-      {
-        icon: "route",
-        text: "Wrong turns happen.",
-      },
-      {
-        icon: "heart",
-        text: "Every run is different.",
-      },
-    ],
-  },
-
   steps: {
     title: "What you’re in for.",
-    howItWorks: {
-      title: "What you’re in for.",
-      subtitle: "",
-    },
     items: [
       {
         label: "01 /",
         imageAlt: "Map held during an off-trail run",
         title: "Claim your map.",
         body: "Pick a date. We’ll print your map.",
-        paragraphs: ["Pick a date. We’ll print your map."],
       },
       {
         label: "02 /",
         imageAlt: "Runner navigating through the forest",
         title: "Think. Run. Adapt.",
         body: "Map in hand. Legs on fire. Navigate from control to control at speed.",
-        paragraphs: ["Map in hand. Legs on fire. Navigate from control to control at speed."],
       },
       {
         label: "03 /",
         imageAlt: "Runner choosing a route through the forest",
         title: "Leave the trail behind.",
         body: "Trails, shortcuts, bushes, wrong turns. Fastest time wins. Catch your breath and see who found the best line.",
-        paragraphs: [
-          "Trails, shortcuts, bushes, wrong turns. Fastest time wins.",
-          "Catch your breath and see who found the best line.",
-        ],
-      },
-    ],
-  },
-
-  social: {
-    title: "No route. Better stories.",
-    lines: ["Wrong turns, bold shortcuts, near misses. Share the stories afterwards."],
-    body: "Wrong turns, bold shortcuts, near misses.",
-    emphasis: "Share the stories afterwards.",
-    link: "",
-    images: [
-      {
-        image: "/images/social1.webp",
-        imageAlt: "Two runners look at a map together in the forest",
-      },
-      {
-        image: "/images/social2.webp",
-        imageAlt: "Two runners run toward a control in the forest",
-      },
-      {
-        image: "/images/social3.webp",
-        imageAlt: "Three runners walk through the forest with a map",
       },
     ],
   },
 
   events: {
     title: "Events",
-    registrationClosed: "Registration closed",
-    mapsPrepared: "Maps are being prepared.",
-    startPrefix: "Start",
-    registrationClosesIn: "Registration closes in",
-    registrationClosesTomorrow: "Registration closes tomorrow",
-    registrationClosesToday: "Registration closes today",
     button: "Register",
     city: "Eindhoven",
-    locations: {
-      "oirschotse-heide-zuidoost-2026-09-19": "Oirschotse Heide Zuidoost",
-      "aarlesche-heide-west-2026-10-17": "Aarlesche Heide West",
-      "oirschotse-heide-noordwest-2026-11-14": "Oirschotse Heide Noordwest",
-    },
   },
 
   faq: {
     title: "Questions people ask",
-    subtitle: "",
     items: [
       {
         question: "Who is this for?",
         paragraphs: ["Runners who want something different. You don’t need experience or natural navigation talent. Curiosity and enthusiasm are enough."],
+      },
+      {
+        question: "What does it cost?",
+        paragraphs: ["Your first two runs are free. After that, it’s €20/year to cover maps, printing, course preparation, and forest access. We organise 12 runs a year."],
       },
       {
         question: "Do I need experience or understand the map first?",
@@ -180,8 +117,6 @@ export const en = {
         paragraphs: ["Yes. You can safely leave your bag and extra layers while you’re out running."],
       },
     ],
-    contactIntro: "Still got a question?",
-    contactEmail: "start@offtrailrun.com",
   },
 
   start: {
@@ -313,7 +248,7 @@ export const en = {
         "Brown lines show elevation. Imagine a mountain made of stacked pancakes. Each line is the shape of a pancake level.",
       ],
       mobileParagraphs: ["Brown lines show elevation. Imagine a mountain made of stacked pancakes. Each line is the shape of a pancake level."],
-      imageLabel: "IMAGE",
+      imageLabel: "Contour line illustration",
       closingParagraphs: [],
     },
     compass: {
@@ -341,13 +276,6 @@ export const en = {
       ],
       closingParagraphs: [],
     },
-    routeChoice: {
-      title: "Route choice",
-      paragraphs: [
-        "Between controls, choose your own route. The shortest route isn’t always the fastest. Paths may be quicker than thick forest, hills, or unclear terrain. Choose a route that is fast, clear, and easy to execute. The best way to learn is to try it with a map in your hand.",
-      ],
-      imageLabel: "Example of route choice between two controls",
-    },
     tryIt: {
       body: "A map changes everything when you’re in the forest. Reserve your map and try it on your next run.",
       mobileBody: "Ready to try it?",
@@ -357,9 +285,14 @@ export const en = {
     },
   },
 
-  footer: {
-    line1Prefix: "Built by",
-    line1Name: "Coen",
-    line2: "part running, part figuring it out.",
-  },
 } as const;
+
+type LocalizedValue<T> = T extends string
+  ? string
+  : T extends readonly unknown[]
+    ? { readonly [K in keyof T]: LocalizedValue<T[K]> }
+    : T extends object
+      ? { readonly [K in keyof T]: LocalizedValue<T[K]> }
+      : T;
+
+export type Translation = LocalizedValue<typeof en>;

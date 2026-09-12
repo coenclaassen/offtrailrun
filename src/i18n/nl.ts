@@ -15,7 +15,6 @@
   },
 
   nav: {
-    faq: "FAQ",
     languageSwitch: {
       en: "EN",
       nl: "NL",
@@ -30,7 +29,7 @@
   },
 
   discover: {
-    title: ["Een andere soort", "run begint hier."],
+    title: ["Een andere", "run begint hier."],
     body: "Een kaart, een bos en eindeloos veel routes er doorheen. Kies je lijn, neem de kortste weg, stap in de modder, maak fouten en doe dingen die je tijdens een gewone run nooit zou doen.",
   },
 
@@ -40,34 +39,8 @@
     images: ["Hardloper met een kaart", "Hardlopers in het bos", "Modderige hardloopschoenen", "Hardloper in beweging", "Hardlopers na een run"],
   },
 
-  features: {
-    title: "Loop hard. Denk snel.",
-    subtitle: [
-      "Benen in brand. Brein aan.",
-      "Snel zijn helpt, maar snel denken telt ook.",
-    ],
-    items: [
-      {
-        icon: "leaf",
-        text: "Natuur in plaats van asfalt.",
-      },
-      {
-        icon: "route",
-        text: "Een verkeerde afslag verandert je run.",
-      },
-      {
-        icon: "heart",
-        text: "Geen enkele run voelt hetzelfde.",
-      },
-    ],
-  },
-
   steps: {
     title: "Wat je kunt verwachten.",
-    howItWorks: {
-      title: "Hoe het werkt",
-      subtitle: "Krijg je kaart. Vind de controles. Kies je route.",
-    },
     items: [
       {
         label: "01",
@@ -90,45 +63,22 @@
     ],
   },
 
-  social: {
-    title: "Sluit aan bij de volgende run.",
-    lines: ["We helpen je op weg."],
-    link: "Zie volgende runs.",
-    images: [
-      {
-        image: "/images/social1.webp",
-        imageAlt: "Twee hardlopers bekijken samen een kaart in het bos",
-      },
-      {
-        image: "/images/social2.webp",
-        imageAlt: "Twee hardlopers rennen naar een controle in het bos",
-      },
-      {
-        image: "/images/social3.webp",
-        imageAlt: "Drie hardlopers lopen door het bos met een kaart",
-      },
-    ],
-  },
-
   events: {
     title: "Events",
-    subtitle: "Start in het park. Daarna het bos in.",
-    locations: {
-      "oirschotse-heide-zuidoost-2026-09-19": "Oirschotse Heide Zuidoost",
-      "aarlesche-heide-west-2026-10-17": "Aarlesche Heide West",
-      "oirschotse-heide-noordwest-2026-11-14": "Oirschotse Heide Noordwest",
-    },
     city: "Eindhoven",
     button: "Aanmelden",
   },
 
   faq: {
     title: "Veelgestelde vragen",
-    subtitle: "Begin hier.",
     items: [
       {
         question: "Voor wie is dit?",
         paragraphs: ["Hardlopers die iets anders willen. Je hebt geen ervaring of natuurlijk navigatietalent nodig. Nieuwsgierigheid en enthousiasme zijn genoeg."],
+      },
+      {
+        question: "Wat kost het?",
+        paragraphs: ["Je eerste twee runs zijn gratis. Daarna rekenen we €20/jaar voor kaarten, printen, parcours voorbereiding en toegang tot het bos. We organiseren 12 runs per jaar."],
       },
       {
         question: "Heb ik ervaring nodig of moet ik kaart kunnen lezen?",
@@ -167,8 +117,6 @@
         paragraphs: ["Ja. Je kunt je tas en extra lagen veilig achterlaten terwijl je aan het hardlopen bent."],
       },
     ],
-    contactIntro: "Nog een vraag voordat je je aanmeldt?",
-    contactEmail: "start@offtrailrun.com",
   },
 
   start: {
@@ -402,7 +350,7 @@
         "Bruine lijnen tonen hoogte. Stel je een berg voor die gemaakt is van gestapelde pannenkoeken. Elke lijn is de vorm van een pannenkoeklaag.",
       ],
       mobileParagraphs: ["Bruine lijnen tonen hoogte. Stel je een berg voor die gemaakt is van gestapelde pannenkoeken. Elke lijn is de vorm van een pannenkoeklaag."],
-      imageLabel: "IMAGE",
+      imageLabel: "Illustratie van hoogtelijnen",
       closingParagraphs: [],
     },
     compass: {
@@ -430,13 +378,6 @@
       ],
       closingParagraphs: [],
     },
-    routeChoice: {
-      title: "Routekeuze",
-      paragraphs: [
-        "Tussen controles kies je je eigen route. De kortste route is niet altijd de snelste. Paden kunnen sneller zijn dan dicht bos, heuvels of onduidelijk terrein. Kies een route die snel, duidelijk en makkelijk uit te voeren is. De beste manier om het te leren is door het te proberen met een kaart in je hand.",
-      ],
-      imageLabel: "Voorbeeld van routekeuze tussen twee controles",
-    },
     tryIt: {
       body: "Met een kaart in het bos wordt alles duidelijker. Probeer het uit. Reserveer je kaart en doe mee.",
       mobileBody: "Klaar om het te proberen?",
@@ -446,9 +387,4 @@
     },
   },
 
-  footer: {
-    line1Prefix: "Built by",
-    line1Name: "Coen",
-    line2: "part running, part figuring it out.",
-  },
-} as const;
+} as const satisfies import("./en").Translation;

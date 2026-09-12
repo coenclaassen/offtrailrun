@@ -17,8 +17,6 @@ const desktopAlignmentClass = "md:max-w-[1500px]";
 const faqContentClass = "md:max-w-[570px]";
 const buttonStyle = `border-radius:${design.buttonRadius}px;min-height:${design.buttonHeight}px;`;
 const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL" : "en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Europe/Amsterdam" });
-const eventLocation = (event: (typeof events)[number]) => (copy.events.locations as Record<string, string>)[event.id] ?? event.location;
-const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraphs" in item ? item.paragraphs : [item.answer] }));
 ---
 
 <html lang={copy.locale}>
@@ -94,7 +92,7 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
           {events.map((event) => (
             <article class="border-b border-[var(--color-light-grey)] py-[25px]">
               <div class={`${desktopAlignmentClass} grid grid-cols-[minmax(0,1fr)_105px] items-center gap-[16px] md:grid-cols-[calc(40%_+_28px)_18.666667%_21.333333%_calc(20%_-_28px)] md:gap-0`}>
-                <div><h3 class={design.typography.h3}>{eventLocation(event)}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(event.date))}<br />{copy.events.city}</p></div>
+                <div><h3 class={design.typography.h3}>{copy.locale === "en" ? event.locationEn : event.location}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(event.date))}<br />{copy.events.city}</p></div>
                 <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:block`}>{eventDateFormatter.format(new Date(event.date))}</p>
                 <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:translate-x-[32px] md:block`}>{copy.events.city}</p>
                 <a class={`luma-checkout--button ${design.typography.button} inline-flex w-[105px] items-center justify-center gap-[5px] bg-[var(--color-black)] px-[12px] text-[var(--color-white)] md:w-[135px]`} style={buttonStyle} href={event.lumaUrl} data-luma-action="checkout" data-luma-event-id={event.lumaEventId}>{copy.events.button}<ChevronRight size={16} aria-hidden="true" /></a>
@@ -114,7 +112,7 @@ const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraph
             </div>
           </summary>
           <div class="mt-[25px] border-t border-[var(--color-light-grey)]">
-            {faqItems.map((item) => (
+            {copy.faq.items.map((item) => (
               <article class="border-b border-[var(--color-light-grey)] py-[25px]">
                 <div class={faqContentClass}>
                   <h3 class={design.typography.p2}>{item.question}</h3>

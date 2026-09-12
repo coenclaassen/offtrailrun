@@ -21,14 +21,12 @@ const pageStyle = `
   --color-black: ${design.colors.black};
   --color-light-grey: ${design.colors.lightGrey};
   --color-dark-grey: ${design.colors.lightGrey};
-  --color-light-accent: ${design.colors.white};
   --color-dark-accent: ${design.colors.black};
 `;
 
 const shellClass = "w-full px-[16px] md:px-[32px]";
 const articleClass = "w-full";
-const h2Class = design.typography.h2;
-const h3Class = design.typography.h2;
+const sectionTitleClass = design.typography.h2;
 const pClass = design.typography.p;
 const sectionSubtextClass = `${design.typography.vibeBody} text-[var(--color-grey)]`;
 const desktopColumnsClass = "grid md:max-w-[1280px] md:grid-cols-2 md:gap-x-[100px]";
@@ -218,7 +216,7 @@ const mapSymbolImageAssets = {
     <main>
       <section class={`${shellClass} pb-[60px] pt-[120px] md:pb-[120px] md:pt-[200px]`}>
         <article class={`${articleClass} md:max-w-[780px]`}>
-          <h1 class={h2Class}>{start.intro.title}</h1>
+          <h1 class={sectionTitleClass}>{start.intro.title}</h1>
           <div class="mt-[40px] max-w-[980px] space-y-[24px]">
             <div class="md:hidden">
               {start.intro.mobileParagraphs.map((paragraph) => <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{paragraph}</p>)}
@@ -233,7 +231,7 @@ const mapSymbolImageAssets = {
       <section>
         <picture>
     <source media="(min-width: 1921px)" srcset="/images/start_desktop_wide.webp?v=3" />
-          <source media="(min-width: 768px)" srcset="/images/start_destkop.webp?v=3" />
+          <source media="(min-width: 768px)" srcset="/images/start_desktop.webp?v=3" />
           <img
             class="block h-auto w-screen max-w-none md:h-[600px] md:w-full md:max-w-full md:object-cover"
             src="/images/start_mobile.webp?v=3"
@@ -247,7 +245,7 @@ const mapSymbolImageAssets = {
         <div class={shellClass}>
           <div class="md:max-w-[800px]">
             <div class={articleClass}>
-              <h2 class={h2Class}>{start.mapBasics.title}</h2>
+              <h2 class={sectionTitleClass}>{start.mapBasics.title}</h2>
               <div class="mt-[25px] space-y-[16px] md:mt-[32px]">
                 <div class="md:hidden">
                   {start.mapBasics.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
@@ -312,7 +310,7 @@ const mapSymbolImageAssets = {
           <div class={`${articleClass} space-y-[120px] md:space-y-0`}>
             <div class={`${mapLegendGridClass} md:hidden`}>
             <section>
-              <h3 class={h3Class}>{start.mapColors.title}</h3>
+              <h3 class={sectionTitleClass}>{start.mapColors.title}</h3>
               <div class="mt-[25px] space-y-[16px] md:mt-[32px] md:min-h-[60px]">
                 {start.mapColors.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
               </div>
@@ -356,7 +354,7 @@ const mapSymbolImageAssets = {
 
             <section class="md:col-span-2 md:grid md:grid-cols-2 md:gap-x-[100px]">
               <div class="md:col-start-1">
-                <h3 class={h3Class}>{start.mapSymbols.title}</h3>
+                <h3 class={sectionTitleClass}>{start.mapSymbols.title}</h3>
                 <div class="mt-[25px] space-y-[16px] md:mt-[32px] md:min-h-[60px]">
                   {start.mapSymbols.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
                 </div>
@@ -465,13 +463,13 @@ const mapSymbolImageAssets = {
             <div class="hidden md:block">
               <div class="grid grid-cols-3 gap-x-[100px]">
                 <div>
-                  <h3 class={h3Class}>{start.mapColors.title}</h3>
+                  <h3 class={sectionTitleClass}>{start.mapColors.title}</h3>
                   <div class="mt-[32px] min-h-[60px] space-y-[16px]">
                     {start.mapColors.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
                   </div>
                 </div>
                 <div>
-                  <h3 class={h3Class}>{start.mapSymbols.title}</h3>
+                  <h3 class={sectionTitleClass}>{start.mapSymbols.title}</h3>
                   <div class="mt-[32px] min-h-[60px] space-y-[16px]">
                     {start.mapSymbols.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
                   </div>
@@ -621,7 +619,7 @@ const mapSymbolImageAssets = {
 
             <div class="grid md:mt-[300px] md:grid-cols-3 md:items-center md:gap-x-[100px]">
               <section class="md:relative md:-top-[10%]">
-                <h2 class={h2Class}>{start.contour.title}</h2>
+                <h2 class={sectionTitleClass}>{start.contour.title}</h2>
                 <div class="mt-[25px] space-y-[16px] md:mt-[32px]">
                   <div class="md:hidden">
                     {start.contour.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
@@ -651,7 +649,7 @@ const mapSymbolImageAssets = {
             <div class="md:mt-[200px]">
               <div class={desktopColumnsClass}>
                 <section>
-                  <h2 class={h2Class}>{start.compass.title}</h2>
+                  <h2 class={sectionTitleClass}>{start.compass.title}</h2>
                   {start.compass.paragraphs.length > 0 && (
                     <div class="hidden md:mt-[32px] md:block md:space-y-[16px]">
                       {start.compass.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
@@ -714,15 +712,15 @@ const mapSymbolImageAssets = {
       <section class="pt-[120px] pb-[60px] md:pt-[300px] md:pb-[40vh]">
         <div class="w-full max-w-[1400px] px-[16px] md:px-[32px]">
           <div class="md:hidden">
-            <p class={h2Class}>{start.tryIt.mobileBody}</p>
+            <p class={sectionTitleClass}>{start.tryIt.mobileBody}</p>
             <p class={`${design.typography.discoverBody} mt-[12px] text-[var(--color-grey)]`}>{start.tryIt.mobileSubtitle}</p>
             <a class={`${design.typography.button} mt-[30px] inline-flex w-2/3 items-center justify-between bg-[var(--color-black)] px-[18px] text-[var(--color-white)]`} style={buttonStyle} href={`${homeHref}#events`}>
               {start.tryIt.mobileLink}<ChevronRight size={18} aria-hidden="true" />
             </a>
           </div>
           <div class="hidden md:block">
-            <p class={h2Class}>{start.tryIt.body}</p>
-            <a class={`${h2Class} mt-[12px] inline-block underline decoration-[1px] underline-offset-4`} href={`${homeHref}#events`}>{start.tryIt.link}</a>
+            <p class={sectionTitleClass}>{start.tryIt.body}</p>
+            <a class={`${sectionTitleClass} mt-[12px] inline-block underline decoration-[1px] underline-offset-4`} href={`${homeHref}#events`}>{start.tryIt.link}</a>
           </div>
         </div>
       </section>
