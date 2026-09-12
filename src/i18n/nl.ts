@@ -15,7 +15,6 @@
   },
 
   nav: {
-    faq: "FAQ",
     languageSwitch: {
       en: "EN",
       nl: "NL",
@@ -23,43 +22,25 @@
   },
 
   hero: {
-    title: "Een andere run begint hier.",
-    subtitle: [
-      "Nadenken terwijl je hardloopt.",
-      "Navigeer naar controles met een kaart terwijl je rent.",
-    ],
-    body: "Doe mee aan een off-trail run in Eindhoven.",
-    button: "Meld je aan",
-    buttonSecondary: "Hoe het werkt",
+    title: ["Loop hard.", "Denk snel."],
+    subtitle: ["Waar het pad stopt, ", "kies jij de weg."],
+    button: "Ontdek de events",
+    scrollLabel: "Ontdek Off Trail Run",
   },
 
-  features: {
-    title: "Loop hard. Denk snel.",
-    subtitle: [
-      "Benen in brand. Brein aan.",
-      "Snel zijn helpt, maar snel denken telt ook.",
-    ],
-    items: [
-      {
-        icon: "leaf",
-        text: "Natuur in plaats van asfalt.",
-      },
-      {
-        icon: "route",
-        text: "Een verkeerde afslag verandert je run.",
-      },
-      {
-        icon: "heart",
-        text: "Geen enkele run voelt hetzelfde.",
-      },
-    ],
+  discover: {
+    title: ["Een andere", "run begint hier."],
+    body: "Een kaart, een bos en eindeloos veel routes er doorheen. Kies je lijn, neem de kortste weg, stap in de modder, maak fouten en doe dingen die je tijdens een gewone run nooit zou doen.",
+  },
+
+  vibe: {
+    title: ["Geen route.", "Betere verhalen."],
+    body: ["Verkeerde afslagen, gedurfde shortcuts, en missers.", "Deel je route en verhalen achteraf."],
+    images: ["Hardloper met een kaart", "Hardlopers in het bos", "Modderige hardloopschoenen", "Hardloper in beweging", "Hardlopers na een run"],
   },
 
   steps: {
-    howItWorks: {
-      title: "Hoe het werkt",
-      subtitle: "Krijg je kaart. Vind de controles. Kies je route.",
-    },
+    title: "Wat je kunt verwachten.",
     items: [
       {
         label: "01",
@@ -71,205 +52,121 @@
         label: "02",
         imageAlt: "Hardloper navigeert door het bos",
         title: "Navigeer terwijl je loopt",
-        body: "Vind zo snel mogelijk je weg van controle naar controle. Je plant je route terwijl je beweegt.",
+        body: "Vind zo snel mogelijk je weg van controlepunt naar controlepunt. Je plant je route terwijl je beweegt.",
       },
       {
         label: "03",
         imageAlt: "Hardloper kiest een route door het bos",
         title: "Kies de snelste route",
-        body: "Neem het pad of ga dwars door het bos. Jij beslist. De snelste totaaltijd wint.",
-      },
-    ],
-  },
-
-  social: {
-    title: "Sluit aan bij de volgende run.",
-    lines: ["We helpen je op weg."],
-    link: "Zie volgende runs.",
-    images: [
-      {
-        image: "/images/social1.webp",
-        imageAlt: "Twee hardlopers bekijken samen een kaart in het bos",
-      },
-      {
-        image: "/images/social2.webp",
-        imageAlt: "Twee hardlopers rennen naar een controle in het bos",
-      },
-      {
-        image: "/images/social3.webp",
-        imageAlt: "Drie hardlopers lopen door het bos met een kaart",
+        body: "Neem het pad of ga dwars door het bos. Jij beslist. De snelste tijd wint.",
       },
     ],
   },
 
   events: {
-    title: "Klaar om het te proberen?",
-    subtitle: "Start in het park. Daarna het bos in.",
-    items: [
-      {
-        title: "Philips de Jongh, Eindhoven",
-        date: {
-          weekday: "Zaterdag",
-          day: "Volgt",
-          month: "binnenkort",
-          year: "2026",
-        },
-        bullets: [
-          "Krijg gevoel voor kaart en kompas",
-          "Loop je eerste off-trail parcours",
-          "Werk toe naar de bosrun",
-        ],
-        warmup: "13:00 Warming-up",
-        start: "13:30 Start",
-        note: "Bag drop beschikbaar.",
-      },
-      {
-        title: "Aarlese Heide, Eindhoven",
-        date: {
-          weekday: "Zaterdag",
-          day: "Volgt",
-          month: "binnenkort",
-          year: "2026",
-        },
-        bullets: [
-          "Meer routekeuzes",
-          "Meer uitdaging, meer plezier",
-          "Ga hard, vind je weg, raak verslaafd",
-        ],
-        warmup: "13:00 Warming-up",
-        start: "13:30 Start",
-        note: "Bag drop beschikbaar.",
-      },
-    ],
-    button: "Meld je aan",
+    title: "Events",
+    city: "Eindhoven",
+    button: "Aanmelden",
   },
 
   faq: {
-    title: "Nog niet zeker?",
-    subtitle: "Begin hier.",
+    title: "Veelgestelde vragen",
     items: [
       {
         question: "Voor wie is dit?",
-        answer:
-          "Voor hardlopers van beginner tot expert die iets nieuws willen proberen. Je hebt geen ervaring met oriëntatielopen of natuurlijk richtingsgevoel nodig. Nieuwsgierigheid is genoeg.",
+        paragraphs: ["Hardlopers die iets anders willen. Je hebt geen ervaring of natuurlijk navigatietalent nodig. Nieuwsgierigheid en enthousiasme zijn genoeg."],
       },
       {
-        question: "Wat als ik nog nooit zoiets heb gedaan?",
-        answer:
-          "Perfect. Precies daarvoor is dit bedoeld. We houden de eerste run toegankelijk en leggen de basis uit voordat je start.",
+        question: "Wat kost het?",
+        paragraphs: ["Je eerste twee runs zijn gratis. Daarna rekenen we €20/jaar voor kaarten, printen, parcours voorbereiding en toegang tot het bos. We organiseren 12 runs per jaar."],
       },
       {
-        question: "Moet ik snel zijn of superfit?",
-        answer:
-          "Nee. Snelheid helpt, maar het draait niet alleen om snelheid. Navigatie en routekeuze tellen ook mee. Beide events hebben verschillende routeopties en shortcuts, zodat je je run zo makkelijk of zo uitdagend kunt maken als je zelf wilt.",
-      },
-      {
-        question: "Wat als ik verdwaal of een verkeerde keuze maak?",
-        answer:
-          "Dat gebeurt waarschijnlijk. Dat hoort erbij. Juist zo leer je het snelst. Dit event is opgezet voor beginners, zodat je fouten kunt maken, snel beter wordt en toch een geweldige run hebt.",
-      },
-      {
-        question: "Wat als ik GPS gebruik?",
-        answer:
-          "Je kunt je GPS-horloge dragen of je telefoon meenemen, maar die vertelt je niet waar je heen moet. Je krijgt de kaart bij de start en bepaalt je route terwijl je loopt. GPS is achteraf vooral handig als je je route wilt terugkijken.",
-      },
-      {
-        question: "Wat als ik gewoon iemand anders volg?",
-        answer:
-          "Je start een voor een en niet iedereen loopt hetzelfde parcours. Iemand volgen levert je dus niet de beste tijd op. Voel je je minder zeker alleen? Laat het ons weten. Je kunt ook in tweetallen lopen, met dezelfde kaart en hetzelfde parcours.",
-      },
-      {
-        question: "Moet ik de kaart eerst begrijpen?",
-        answer:
-          "Nee. We leggen de basis uit voordat je start. Als je alvast een korte preview wilt, kun je eerst de kaart- en kompasbasis lezen.",
+        question: "Heb ik ervaring nodig of moet ik kaart kunnen lezen?",
+        paragraphs: ["Nee. We leggen de basis uit voor de start. Daarna ga je met een kaart het bos in en ontdek je het al doende. Wil je een voorsprong?"],
         link: {
-          label: "Bekijk de basis",
+          label: "Bekijk de basis →",
           href: "/nl/start",
         },
       },
       {
-        question: "Is er een bag drop?",
-        answer:
-          "Ja, je kunt je extra lagen of tas veilig achterlaten terwijl je op pad gaat voor de run.",
+        question: "Moet ik snel zijn of superfit?",
+        paragraphs: ["Snelheid helpt, maar het draait niet alleen om snelheid. Navigatie en routekeuze tellen ook mee. Ga hard of neem je tijd."],
       },
-    ],
-    contactIntro: "Nog een vraag voordat je je aanmeldt?",
-    contactEmail: "start@offtrailrun.com",
-  },
-
-  signup: {
-    title: "Een andere run begint hier.",
-    titleMobileLines: ["Een andere run", "begint hier."],
-    subtitle: "Laat je voornaam en e-mailadres achter en we sturen je de details.",
-    note: "Plekken zijn beperkt. We bevestigen je plek na aanmelding.",
-    firstNameLabel: "Voornaam",
-    firstNamePlaceholder: "Je voornaam",
-    emailLabel: "E-mail",
-    emailPlaceholder: "jij@voorbeeld.com",
-    consentLabel:
-      "Stuur me de details van de run en toekomstige updates. Uitschrijven kan altijd.",
-    button: "Gratis aanmelden",
-    loading: "Aanmelden...",
-    success: "Bedankt, je staat op de lijst.",
-    error: "Er ging iets mis. Probeer het zo nog eens.",
-    finePrint: [
-      "Als de run vol is, kom je op de wachtlijst.",
-      "We mailen je over deze run en vergelijkbare off-trail runs.",
+      {
+        question: "Hoe lang duurt het?",
+        paragraphs: ["Ergens tussen 30 en 90 minuten. Navigeer goed en loop vlot, dan ben je snel terug. Maak je een paar fouten, dan duurt het langer."],
+      },
+      {
+        question: "Wat als ik verdwaal of een verkeerde routekeuze maak?",
+        paragraphs: ["Een fout maken gebeurt. Herpak je, leer snel en blijf bewegen. Als je vastloopt of er is een noodgeval, bel dan het nummer op je kaart."],
+      },
+      {
+        question: "Wat als ik GPS gebruik of iemand volg?",
+        paragraphs: ["Gebruik GPS om je run op te nemen, niet om te navigeren. Volg de kaart, niet iemand anders: niet iedereen loopt hetzelfde parcours. Wil je samen met iemand lopen? Laat het ons weten, dan geven we je hetzelfde parcours."],
+      },
+      {
+        question: "Waarom sluit de inschrijving een week van tevoren?",
+        paragraphs: ["Wij bouwen het parcours, zetten de controles uit en drukken voor elke loper een kaart af. Daarom moeten we een week van tevoren weten wie er komt."],
+      },
+      {
+        question: "Wat moet ik meenemen?",
+        paragraphs: ["Hardloopkleding die tegen een stootje kan. Schoenen met grip en lange sokken of een lange broek helpen wanneer de beste route door de struiken loopt. Is het nat, neem dan droge kleding en een handdoek mee. Is het warm, neem dan genoeg te drinken mee."],
+      },
+      {
+        question: "Is er een bag drop?",
+        paragraphs: ["Ja. Je kunt je tas en extra lagen veilig achterlaten terwijl je aan het hardlopen bent."],
+      },
     ],
   },
 
   start: {
     intro: {
-      title: "Begin hier",
-      subtitle: "",
+      title: "De weg vinden begint hier.",
       paragraphs: [
-        "Oriëntatielopen klinkt technisch en wordt al snel verwarrend om uit te leggen.",
-        "Deze pagina lost dat op. Je leert de basis: hoe de kaart werkt, hoe je een kompas gebruikt en hoe je door het terrein beweegt zonder het ingewikkelder te maken dan nodig.",
-        "Je hoeft dit niet allemaal te weten voordat je begint. De beste manier om te starten is door mee te doen en het te proberen met een kaart in je hand.",
+        "Hardlopen met een kaart is makkelijker dan je denkt. Leer de basis en probeer het uit.",
       ],
-      primaryButton: "Doe mee",
-      secondaryButton: "Laat me de basis zien",
+      mobileParagraphs: ["Hardlopen met een kaart is makkelijker dan je denkt. Leer de basis en probeer het uit."],
+    },
+    mapStrip: {
+      imageLabel: "Detail van een oriëntatiekaart",
     },
     mapBasics: {
       title: "Kaartbasis",
       paragraphs: [
-        "Een oriëntatiekaart is gemaakt om door terrein te rennen.",
-        "De kaart laat zien wat je helpt om keuzes te maken terwijl je beweegt: wegen, paden, water, bos, open terrein, gebouwen, hekken, rotsen, heuvels en kleine terreindetails.",
-        "Je hoeft niet elk symbool te begrijpen voor je eerste run.",
-        "Kijk erdoorheen als je nieuwsgierig bent. Het meeste wordt duidelijker zodra je het buiten probeert.",
+        "Je kaart laat paden, water, bos, heuvels en het parcours zien. Vind de controlepunten op volgorde. De route ertussen is jouw keuze.",
       ],
-    },
-    courseSymbols: {
-      title: "Parcourssymbolen",
-      paragraphs: [
-        "Parcourssymbolen laten zien waar het parcours start, waar de controles liggen en waar je finisht.",
-      ],
-      bullets: ["De controles liggen vast.", "Je route ertussen niet."],
-      rows: [
+      mobileParagraphs: ["Je kaart laat paden, water, bos, heuvels en het parcours zien. Vind de controlepunten op volgorde. De route ertussen is jouw keuze."],
+      courseRows: [
         {
           key: "startTriangle",
           visualLabel: "Startdriehoek",
           description: "Start",
+          mobileDescription: "Start",
           info: "Hier begint je parcours. Vanaf hier begin je met navigeren.",
+          mobileInfo: "Begin hier met navigeren.",
         },
         {
           key: "controlCircle",
           visualLabel: "Controlecirkel",
-          description: "Controle",
-          info: "Dit is een controle. Die staat in het terrein op het midden van de cirkel. Vind elke controle in volgorde: 1, 2, 3, etc. De lijnen laten zien wat de volgende controle is, maar je hoeft ze niet te volgen.",
+          description: "Controlepunt",
+          mobileDescription: "Controlepunt",
+          info: "Gemarkeerd in het terrein met een vlag. Vind elk controlepunt op volgorde: 1, 2, 3, enzovoort.",
+          mobileInfo: "Gemarkeerd in het terrein met een vlag. Vind elk controlepunt op volgorde.",
         },
         {
           key: "doubleCircle",
           visualLabel: "Dubbele cirkel",
           description: "Finish",
-          info: "Hier eindigt het parcours.",
+          mobileDescription: "Finish",
+          info: "Hier eindigt het parcours. Kom even op adem, vergelijk routes en kijk wie de beste lijn vond.",
+          mobileInfo: "De snelste tijd wint.",
         },
       ],
-      imageLabel: "IMAGE COURSE SYMBOLS",
     },
     mapColors: {
       title: "Kaartkleuren",
-      paragraphs: ["Kleuren laten het type terrein en de loopsnelheid zien."],
+      paragraphs: ["Kleuren laten het type terrein zien."],
+      mobileParagraphs: ["Kleuren laten het type terrein zien."],
       rows: [
         {
           key: "openLand",
@@ -319,200 +216,175 @@
     },
     mapSymbols: {
       title: "Kaartsymbolen",
-      paragraphs: [
-        "Er zijn veel symbolen, maar deze zijn al meer dan genoeg om te starten.",
-        "Je leert ze vanzelf herkennen in het terrein.",
-      ],
+      paragraphs: ["Symbolen tonen details op de kaart."],
+      mobileParagraphs: ["Symbolen tonen details op de kaart."],
       visibleRows: [
         {
           key: "road",
-          illustrationLabel: "Weg illustration",
-          symbolLabel: "Weg symbol",
+          illustrationLabel: "Weg illustratie",
+          symbolLabel: "Weg symbool",
           description: "Weg",
         },
         {
           key: "dirtRoad",
-          illustrationLabel: "Zandweg illustration",
-          symbolLabel: "Zandweg symbol",
+          illustrationLabel: "Zandweg illustratie",
+          symbolLabel: "Zandweg symbool",
           description: "Zandweg",
         },
         {
           key: "pavedArea",
-          illustrationLabel: "Verhard oppervlak illustration",
-          symbolLabel: "Verhard oppervlak symbol",
+          illustrationLabel: "Verhard oppervlak illustratie",
+          symbolLabel: "Verhard oppervlak symbool",
           description: "Verhard oppervlak",
         },
         {
           key: "path",
-          illustrationLabel: "Pad illustration",
-          symbolLabel: "Pad symbol",
+          illustrationLabel: "Pad illustratie",
+          symbolLabel: "Pad symbool",
           description: "Pad",
         },
         {
           key: "stream",
-          illustrationLabel: "Beek illustration",
-          symbolLabel: "Beek symbol",
+          illustrationLabel: "Beek illustratie",
+          symbolLabel: "Beek symbool",
           description: "Beek",
         },
         {
           key: "passableFence",
-          illustrationLabel: "Passeerbaar hek illustration",
-          symbolLabel: "Passeerbaar hek symbol",
-          description: "Passeerbaar hek",
+          illustrationLabel: "Passeerbare omheining illustratie",
+          symbolLabel: "Passeerbare omheining symbool",
+          description: "Passeerbare omheining",
         },
         {
           key: "building",
-          illustrationLabel: "Gebouw illustration",
-          symbolLabel: "Gebouw symbol",
+          illustrationLabel: "Gebouw illustratie",
+          symbolLabel: "Gebouw symbool",
           description: "Gebouw",
-        },
-        {
-          key: "uncrossableWater",
-          illustrationLabel: "Niet oversteekbaar water illustration",
-          symbolLabel: "Niet oversteekbaar water symbol",
-          description: "Niet oversteekbaar water",
-        },
-        {
-          key: "knoll",
-          illustrationLabel: "Topje illustration",
-          symbolLabel: "Topje symbol",
-          description: "Topje",
-        },
-        {
-          key: "pitDepression",
-          illustrationLabel: "Put, kleine inzinking illustration",
-          symbolLabel: "Put, kleine inzinking symbol",
-          description: "Put, kleine inzinking",
-        },
-        {
-          key: "manMadeFeatures",
-          illustrationLabel: "Opvallend mensgemaakt object illustration",
-          symbolLabel: "Opvallend mensgemaakt object symbol",
-          description: "Opvallend mensgemaakt object",
-        },
-        {
-          key: "contourLines",
-          illustrationLabel: "Hoogtelijnen illustration",
-          symbolLabel: "Hoogtelijnen symbol",
-          description: "Hoogtelijnen",
         },
       ],
       hiddenRows: [
         {
+          key: "uncrossableWater",
+          illustrationLabel: "Niet oversteekbaar water illustratie",
+          symbolLabel: "Niet oversteekbaar water symbool",
+          description: "Niet oversteekbaar water",
+        },
+        {
+          key: "knoll",
+          illustrationLabel: "Kleine heuvel illustratie",
+          symbolLabel: "Kleine heuvel symbool",
+          description: "Kleine heuvel",
+        },
+        {
+          key: "pitDepression",
+          illustrationLabel: "Put, kleine inzinking illustratie",
+          symbolLabel: "Put, kleine inzinking symbool",
+          description: "Put, kleine inzinking",
+        },
+        {
+          key: "manMadeFeatures",
+          illustrationLabel: "Opvallend kunstmatig object illustratie",
+          symbolLabel: "Opvallend kunstmatig object symbool",
+          description: "Opvallend kunstmatig object",
+        },
+        {
           key: "railway",
-          illustrationLabel: "Spoorweg illustration",
-          symbolLabel: "Spoorweg symbol",
+          illustrationLabel: "Spoorweg illustratie",
+          symbolLabel: "Spoorweg symbool",
           description: "Spoorweg",
         },
         {
           key: "wall",
-          illustrationLabel: "Muur illustration",
-          symbolLabel: "Muur symbol",
+          illustrationLabel: "Muur illustratie",
+          symbolLabel: "Muur symbool",
           description: "Muur",
         },
         {
           key: "powerline",
-          illustrationLabel: "Grote/kleine hoogspanningslijn illustration",
-          symbolLabel: "Grote/kleine hoogspanningslijn symbol",
-          description: "Grote/kleine hoogspanningslijn",
+          illustrationLabel: "Grote of kleine hoogspanningslijn illustratie",
+          symbolLabel: "Grote of kleine hoogspanningslijn symbool",
+          description: "Grote of kleine hoogspanningslijn",
         },
         {
           key: "smallTower",
-          illustrationLabel: "Kleine toren illustration",
-          symbolLabel: "Kleine toren symbol",
+          illustrationLabel: "Kleine toren illustratie",
+          symbolLabel: "Kleine toren symbool",
           description: "Kleine toren",
         },
         {
           key: "cliff",
-          illustrationLabel: "Rotswand illustration",
-          symbolLabel: "Rotswand symbol",
+          illustrationLabel: "Rotswand illustratie",
+          symbolLabel: "Rotswand symbool",
           description: "Rotswand",
         },
         {
           key: "ruin",
-          illustrationLabel: "Ruïne illustration",
-          symbolLabel: "Ruïne symbol",
+          illustrationLabel: "Ruïne illustratie",
+          symbolLabel: "Ruïne symbool",
           description: "Ruïne",
         },
         {
           key: "marsh",
-          illustrationLabel: "Klein/groot moeras illustration",
-          symbolLabel: "Klein/groot moeras symbol",
-          description: "Klein/groot moeras",
+          illustrationLabel: "Klein of groot moeras illustratie",
+          symbolLabel: "Klein of groot moeras symbool",
+          description: "Klein of groot moeras",
         },
         {
           key: "boulder",
-          illustrationLabel: "Rots illustration",
-          symbolLabel: "Rots symbol",
-          description: "Rots",
+          illustrationLabel: "Rotsblok illustratie",
+          symbolLabel: "Rotsblok symbool",
+          description: "Rotsblok",
         },
         {
           key: "boulderField",
-          illustrationLabel: "Rotsveld illustration",
-          symbolLabel: "Rotsveld symbol",
-          description: "Rotsveld",
+          illustrationLabel: "Rotsblokveld illustratie",
+          symbolLabel: "Rotsblokveld symbool",
+          description: "Rotsblokveld",
         },
       ],
-      toggleMoreLabel: "toon meer",
-      toggleLessLabel: "toon minder",
-      attribution:
-        "Er zijn veel oriëntatiesymbolen. Je hoeft ze niet allemaal te kennen om te starten. De basis hierboven bevat illustraties gebaseerd op materiaal van Svensk Orientering.",
+      toggleMoreLabel: "Toon meer symbolen",
     },
     contour: {
       title: "Hoogtelijnen",
       paragraphs: [
-        "Hoogtelijnen laten hoogteverschillen in het terrein zien. Ze laten zien waar het land hoog of laag is. Lijnen dicht bij elkaar betekenen steil. Lijnen verder uit elkaar betekenen geleidelijker. Ze kunnen in het begin lastig zijn, maar ze worden duidelijker zodra je in het terrein bent.",
-        "Stel je een berg voor die gemaakt is van gestapelde pannenkoeken. Elke lijn is de vorm van één pannenkoeklaag.",
+        "Bruine lijnen tonen hoogte. Stel je een berg voor die gemaakt is van gestapelde pannenkoeken. Elke lijn is de vorm van een pannenkoeklaag.",
       ],
-      imageLabel: "IMAGE",
+      mobileParagraphs: ["Bruine lijnen tonen hoogte. Stel je een berg voor die gemaakt is van gestapelde pannenkoeken. Elke lijn is de vorm van een pannenkoeklaag."],
+      imageLabel: "Illustratie van hoogtelijnen",
       closingParagraphs: [],
     },
     compass: {
-      title: "Hoe gebruik je het kompas?",
-      paragraphs: [
-        "Een kompas klinkt ingewikkelder dan het is.",
-        "Je gebruikt het om de kaart goed te leggen en in de juiste richting te bewegen wanneer je een pad verlaat, open terrein oversteekt of door het bos rent.",
-        "Het basisidee is simpel: kies waar je naartoe wilt, leg het kompas goed, en beweeg in die richting.",
-      ],
+      title: "Gebruik een kompas",
+      paragraphs: [],
       rows: [
         {
           imageSrc: "/images/start/compass_setDirection.svg",
-          title: "1. Bepaal je richting",
-          body: "Leg de rand van het kompas van waar je bent naar waar je naartoe wilt.",
+          title: "Leg de rand van het kompas in de richting van A naar B.",
+          body: "",
+          mobileBody: "Leg de rand van het kompas in de richting van A naar B.",
         },
         {
           imageSrc: "/images/start/compass_alginNorth.svg",
-          title: "2. Draai kaart en lichaam",
-          body: "Draai de kaart en je lichaam totdat de kompasnaald parallel loopt met de noordlijnen.",
+          title: "Draai je lichaam totdat de naald parallel loopt aan de noordlijnen.",
+          body: "",
+          mobileBody: "Draai je lichaam totdat de naald parallel loopt aan de noordlijnen.",
         },
         {
           imageSrc: "/images/start/compass_move.svg",
-          title: "3. Beweeg die kant op",
-          body: "Ren in de richting van de kompasrand. Controleer tussendoor of de naald parallel blijft.",
+          title: "Loop die kant op. Houd de naald parallel aan de noordlijnen.",
+          body: "",
+          mobileBody: "Loop die kant op. Houd de naald parallel aan de noordlijnen.",
         },
       ],
       closingParagraphs: [],
     },
-    routeChoice: {
-      title: "Routekeuze",
-      paragraphs: [
-        "Tussen controles kies je je eigen route.",
-        "Soms is rechtdoor het snelst. Soms is een langere route over een pad beter. Een route kan kort lijken op de kaart, maar toch langzaam zijn als hij door dicht bos, over een heuvel of door onduidelijk terrein gaat.",
-        "Dat is het idee. Kies een route die snel, duidelijk en makkelijk uit te voeren is.",
-        "De beste manier om het te begrijpen is door het te proberen met een kaart in je hand.",
-      ],
-      imageLabel: "Voorbeeld van routekeuze tussen twee controles",
-    },
     tryIt: {
-      title: "Wil je het proberen?",
-      paragraphs: ["Als je het echt wilt ervaren, doe mee met de volgende run."],
-      button: "Doe mee",
+      body: "Met een kaart in het bos wordt alles duidelijker. Probeer het uit. Reserveer je kaart en doe mee.",
+      mobileBody: "Klaar om het te proberen?",
+      mobileSubtitle: "Reserveer een kaart en doe mee met een van de komende runs.",
+      mobileLink: "Bekijk events",
+      link: "Bekijk events",
     },
   },
 
-  footer: {
-    line1Prefix: "Built by",
-    line1Name: "Coen",
-    line2: "part running, part figuring it out.",
-  },
-} as const;
+} as const satisfies import("./en").Translation;

@@ -1,5 +1,6 @@
 ---
 import SeoHead from "./SeoHead.astro";
+import { ChevronDown, ChevronRight } from "@lucide/astro";
 import type { en } from "../i18n/en";
 import type { nl } from "../i18n/nl";
 import { design } from "../config/design";
@@ -19,54 +20,61 @@ const pageStyle = `
   --color-white: ${design.colors.white};
   --color-black: ${design.colors.black};
   --color-light-grey: ${design.colors.lightGrey};
-  --color-dark-grey: ${design.colors.darkGrey};
-  --color-light-accent: ${design.colors.lightAccent};
-  --color-dark-accent: ${design.colors.darkAccent};
+  --color-dark-grey: ${design.colors.lightGrey};
+  --color-dark-accent: ${design.colors.black};
 `;
 
-const shellStyle = "max-width: 720px;";
-const buttonStyle = `border-radius: ${design.buttonRadius}px; min-height: ${design.buttonHeight}px;`;
-
-const shellClass = "mx-auto w-full px-[30px] md:px-[55px]";
-const articleClass = "mx-auto max-w-[720px]";
-const h1Class = design.typography.h1;
-const h2Class = design.typography.h2;
-const h3Class = design.typography.h3;
-const h5Class = design.typography.h5;
-const h6Class = design.typography.h6;
+const shellClass = "w-full px-[16px] md:px-[32px]";
+const articleClass = "w-full";
+const sectionTitleClass = design.typography.h2;
 const pClass = design.typography.p;
-const fClass = design.typography.f;
+const sectionSubtextClass = `${design.typography.vibeBody} text-[var(--color-grey)]`;
+const desktopColumnsClass = "grid md:max-w-[1280px] md:grid-cols-2 md:gap-x-[100px]";
+const mapLegendGridClass = "grid gap-[120px] md:grid-cols-3 md:gap-x-[100px] md:gap-y-0";
 
-const primaryButtonClass = `${h6Class} inline-flex items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`;
-const secondaryButtonClass = `${h6Class} inline-flex items-center justify-center bg-[var(--color-light-grey)] px-[30px] text-center text-[var(--color-dark-accent)]`;
 const tableWrapClass = "mt-[20px] border-y border-[var(--color-dark-grey)]";
-const visualRowClass = "grid gap-[14px] border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0 md:grid-cols-[90px_minmax(0,1fr)] md:items-center md:gap-x-[30px]";
-const mapSymbolRowClass = "grid grid-cols-[90px_90px_minmax(0,1fr)] gap-[14px] border-b border-[var(--color-dark-grey)] py-[20px] md:items-center";
+const mapSymbolsTableClass = "mt-[20px] border-t border-[var(--color-dark-grey)]";
+const visualRowClass = "grid grid-cols-[90px_minmax(0,1fr)] items-center gap-x-[20px] border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0 md:gap-x-[30px]";
+const mapSymbolRowClass = "grid grid-cols-[90px_90px_minmax(0,1fr)] items-center gap-x-[14px] border-b border-[var(--color-dark-grey)] py-[20px]";
 const symbolSlotClass = "flex aspect-square w-full max-w-[90px] items-center justify-center text-center text-[13px] leading-[150%]";
-const compassRowClass = "grid gap-[14px] border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0 md:grid-cols-[minmax(0,200px)_minmax(0,1fr)] md:items-center md:gap-x-[30px]";
+const compassRowClass = "grid grid-cols-[150px_minmax(0,1fr)] items-center gap-x-[20px] border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0 md:grid-cols-[minmax(0,200px)_minmax(0,1fr)] md:gap-x-[30px]";
 const compassImageClass = "flex w-full max-w-[200px] items-center justify-center text-center text-[13px] leading-[150%]";
-const mapSymbolsToggleRowClass = "flex justify-center border-b border-[var(--color-dark-grey)] py-[20px] last:border-b-0";
-const mapSymbolsToggleClass = `${pClass} inline-flex cursor-pointer flex-col items-center gap-[8px] bg-transparent text-center text-[var(--color-dark-accent)]`;
-const mapSymbolsToggleIconClass = "h-0 w-0 border-x-[7px] border-t-[8px] border-x-transparent border-t-[var(--color-dark-accent)] transition-transform";
+const mapSymbolsToggleRowClass = "py-[20px] md:col-start-1 md:row-start-3";
+const desktopMapSymbolsToggleRowClass = "py-[20px] md:col-start-2";
+const mapSymbolsToggleClass = `${pClass} inline-flex cursor-pointer items-center gap-[8px] bg-transparent text-left text-[var(--color-dark-accent)]`;
+const mapSymbolsToggleIconClass = "h-[20px] w-[20px]";
+const mapLegendDesktopRowClass = "grid grid-cols-3 gap-x-[100px] border-b border-[var(--color-dark-grey)]";
+const mapLegendColorCellClass = "grid gap-[14px] py-[20px] grid-cols-[90px_minmax(0,1fr)] items-center gap-x-[30px]";
+const mapLegendSymbolCellClass = "grid grid-cols-[90px_90px_minmax(0,1fr)] gap-[14px] py-[20px] items-center";
+const buttonStyle = `border-radius:${design.buttonRadius}px;min-height:${design.buttonHeight}px;`;
 
 const homeHref = copy.locale === "nl" ? "/nl/" : "/";
 const alternateHref = copy.locale === "nl" ? "/start" : "/nl/start";
-const basicsHref = copy.locale === "nl" ? "#kaartbasis" : "#map-basics";
 const basicsId = copy.locale === "nl" ? "kaartbasis" : "map-basics";
-const mapSymbolsExtraId = `map-symbols-extra-${copy.locale}`;
-
-const paragraphParts = (paragraph: string) => paragraph.split("\n");
-const inlineStrongParts = (text: string) => text.split("##");
+const mapSymbolsMobileExtraId = `map-symbols-mobile-extra-${copy.locale}`;
+const mapSymbolsDesktopFirstExtraId = `map-symbols-desktop-first-extra-${copy.locale}`;
+const mapSymbolsDesktopSecondExtraId = `map-symbols-desktop-second-extra-${copy.locale}`;
+const mapSymbolsDesktopExpandedRowsId = `map-symbols-desktop-expanded-rows-${copy.locale}`;
+const mapSymbolsPanelIds = [mapSymbolsMobileExtraId, mapSymbolsDesktopFirstExtraId, mapSymbolsDesktopSecondExtraId].join(" ");
+const mapSymbolPriorityKeys = ["dirtRoad", "path", "pavedArea", "building", "manMadeFeatures", "pitDepression", "knoll"];
+const allMapSymbolRows = [...start.mapSymbols.visibleRows, ...start.mapSymbols.hiddenRows];
+const mapSymbolPriorityRows = mapSymbolPriorityKeys.flatMap((key) => allMapSymbolRows.filter((row) => row.key === key));
+const mapSymbolRemainingRows = allMapSymbolRows.filter((row) => !mapSymbolPriorityKeys.includes(row.key));
+const mapSymbolPrimaryGroups = [
+  { rows: mapSymbolPriorityRows, className: "", id: undefined, isHidden: false },
+  { rows: mapSymbolRemainingRows, className: "md:hidden", id: mapSymbolsMobileExtraId, isHidden: true },
+  { rows: mapSymbolRemainingRows.slice(0, 3), className: "hidden md:block", id: mapSymbolsDesktopFirstExtraId, isHidden: true },
+];
+const mapSymbolDesktopSecondRows = mapSymbolRemainingRows.slice(3);
+const desktopMapSymbolInitialRows = mapSymbolPriorityRows;
+const desktopMapSymbolExpandedRows = [...mapSymbolPriorityRows, ...mapSymbolRemainingRows.slice(0, 3)];
 
 const courseSymbolAssets = {
   startTriangle: "/images/start/course_start.svg",
   controlCircle: "/images/start/course_control.svg",
   doubleCircle: "/images/start/course_finish.svg",
 } as const;
-const courseSymbolsImage = "/images/start/course.svg";
 const contourLinesImage = "/images/start/contourLines.svg";
-const routeExampleMobileImage = "/images/start/route_exampleMobile.svg";
-const routeExampleDesktopImage = "/images/start/route_exampleDesktop.svg";
 
 const mapColorValues = {
   openLand: "#f9d84a",
@@ -169,10 +177,6 @@ const mapSymbolImageAssets = {
     illustration: "/images/start/illustration_manMadeFeatures.svg",
     symbol: "/images/start/symbol_manMadeFeatures.svg",
   },
-  contourLines: {
-    illustration: "/images/start/illustration_contourLines.svg",
-    symbol: "/images/start/symbol_contourLines.svg",
-  },
 } as const;
 ---
 
@@ -185,110 +189,74 @@ const mapSymbolImageAssets = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Manrope:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
   </head>
   <body class="bg-[var(--color-white)] text-[var(--color-black)]" style={pageStyle}>
-    <header class="absolute left-0 top-0 z-10 w-full py-[16px]">
-      <nav class="flex items-center justify-end gap-[20px] px-[30px] md:px-[55px]" aria-label="Primary">
-        <div class="flex items-center gap-[6px]" aria-label="Language">
+    <header class="py-[16px] md:py-[24px]">
+      <nav class={`${shellClass} flex justify-end gap-[12px]`} aria-label="Primary">
           <a
-            class={`${pClass} rounded-full px-[12px] py-[6px] ${
-              copy.locale === "en"
-                ? "bg-[var(--color-dark-accent)] text-[var(--color-white)]"
-                : "bg-[var(--color-light-grey)]"
-            }`}
+            class={`${design.typography.button} underline-offset-4 hover:underline`}
             href={copy.locale === "en" ? "/start" : alternateHref}
             aria-current={copy.locale === "en" ? "page" : undefined}
           >
             {copy.nav.languageSwitch.en}
           </a>
           <a
-            class={`${pClass} rounded-full px-[12px] py-[6px] ${
-              copy.locale === "nl"
-                ? "bg-[var(--color-dark-accent)] text-[var(--color-white)]"
-                : "bg-[var(--color-light-grey)]"
-            }`}
+            class={`${design.typography.button} underline-offset-4 hover:underline`}
             href={copy.locale === "nl" ? "/nl/start" : alternateHref}
             aria-current={copy.locale === "nl" ? "page" : undefined}
           >
             {copy.nav.languageSwitch.nl}
           </a>
-        </div>
       </nav>
     </header>
 
     <main>
-      <section class="py-[60px]">
-        <div class={shellClass} style={shellStyle}>
-          <article class={articleClass}>
-            <h1 class={h1Class}>{start.intro.title}</h1>
-            {
-              start.intro.subtitle && (
-                <p class={`${h5Class} mt-[12px]`}>
-                  {inlineStrongParts(start.intro.subtitle).map((part, index) =>
-                    index % 2 === 1 ? <strong>{part}</strong> : part,
-                  )}
-                </p>
-              )
-            }
-            <div class="mt-[30px] space-y-[16px]">
-              {
-                start.intro.paragraphs.map((paragraph) => (
-                  <p class={pClass}>
-                    {paragraphParts(paragraph).map((line, index) => (
-                      <>
-                        {index > 0 && <br />}
-                        {line}
-                      </>
-                    ))}
-                  </p>
-                ))
-              }
+      <section class={`${shellClass} pb-[60px] pt-[120px] md:pb-[120px] md:pt-[200px]`}>
+        <article class={`${articleClass} md:max-w-[780px]`}>
+          <h1 class={sectionTitleClass}>{start.intro.title}</h1>
+          <div class="mt-[40px] max-w-[980px] space-y-[24px]">
+            <div class="md:hidden">
+              {start.intro.mobileParagraphs.map((paragraph) => <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{paragraph}</p>)}
             </div>
-            <div class="mt-[30px] flex flex-col gap-[12px] sm:flex-row">
-              <a class={primaryButtonClass} style={buttonStyle} href={homeHref}>
-                {start.intro.primaryButton}
-              </a>
-              <a class={secondaryButtonClass} style={buttonStyle} href={basicsHref}>
-                {start.intro.secondaryButton}
-              </a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id={basicsId} class="bg-[var(--color-light-grey)] py-[60px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class={articleClass}>
-            <h2 class={h2Class}>{start.mapBasics.title}</h2>
-            <div class="mt-[20px] space-y-[16px]">
-              {start.mapBasics.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+            <div class="hidden md:block">
+              {start.intro.paragraphs.map((paragraph) => <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{paragraph}</p>)}
             </div>
           </div>
-        </div>
+        </article>
       </section>
 
-      <section class="py-[60px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class={`${articleClass} space-y-[60px]`}>
-            <section>
-              <h3 class={h3Class}>{start.courseSymbols.title}</h3>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.courseSymbols.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
-                <ul class="space-y-[6px]">
-                  {start.courseSymbols.bullets.map((bullet) => (
-                    <li class={`${pClass} flex gap-[14px]`}>
-                      <span class="mt-[10px] h-[6px] w-[6px] shrink-0 rounded-full bg-[var(--color-dark-accent)]"></span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+      <section>
+        <picture>
+    <source media="(min-width: 1921px)" srcset="/images/start_desktop_wide.webp?v=3" />
+          <source media="(min-width: 768px)" srcset="/images/start_desktop.webp?v=3" />
+          <img
+            class="block h-auto w-screen max-w-none md:h-[600px] md:w-full md:max-w-full md:object-cover"
+            src="/images/start_mobile.webp?v=3"
+            alt={start.mapStrip.imageLabel}
+            loading="eager"
+          />
+        </picture>
+      </section>
+
+      <section id={basicsId} class="py-[60px] md:pt-[200px] md:pb-[240px]">
+        <div class={shellClass}>
+          <div class="md:max-w-[800px]">
+            <div class={articleClass}>
+              <h2 class={sectionTitleClass}>{start.mapBasics.title}</h2>
+              <div class="mt-[25px] space-y-[16px] md:mt-[32px]">
+                <div class="md:hidden">
+                  {start.mapBasics.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                </div>
+                <div class="hidden md:block">
+                  {start.mapBasics.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                </div>
               </div>
-              <div class={tableWrapClass}>
+              <div class="mt-[45px] md:hidden">
                 {
-                  start.courseSymbols.rows.map((row) => (
+                  start.mapBasics.courseRows.map((row) => (
                     <div class={visualRowClass}>
                       <div>
                         <div class={symbolSlotClass}>
@@ -301,25 +269,50 @@ const mapSymbolImageAssets = {
                         </div>
                       </div>
                       <div class="space-y-[6px]">
-                        <p class={pClass}><strong>{row.description}</strong></p>
-                        <p class={pClass}>{row.info}</p>
+                        <p class={pClass}><strong>{row.mobileDescription}</strong></p>
+                        <p class={pClass}>{row.mobileInfo}</p>
                       </div>
                     </div>
                   ))
                 }
               </div>
-              <img
-                class="mt-[30px] w-full"
-                src={courseSymbolsImage}
-                alt={start.courseSymbols.imageLabel}
-                loading="lazy"
-              />
-            </section>
+            </div>
+          </div>
+          <div class="mt-[45px] hidden grid-cols-3 gap-x-[100px] md:grid md:max-w-[1480px]">
+            {
+              start.mapBasics.courseRows.map((row, index) => (
+                <article
+                  class={`relative ${index > 0 ? "md:before:absolute md:before:-left-[50px] md:before:inset-y-0 md:before:w-px md:before:bg-[var(--color-dark-grey)]" : ""}`}
+                >
+                  <div class="flex items-start gap-[30px]">
+                    <div class={`${symbolSlotClass} shrink-0`}>
+                      <img
+                        class="h-full w-full object-contain"
+                        src={courseSymbolAssets[row.key]}
+                        alt={row.visualLabel}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="space-y-[6px]">
+                      <p class={pClass}><strong>{row.description}</strong></p>
+                      <p class={pClass}>{row.info}</p>
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </section>
 
+      <section class="overflow-x-clip py-[60px]">
+        <div class={shellClass}>
+          <div class={`${articleClass} space-y-[120px] md:space-y-0`}>
+            <div class={`${mapLegendGridClass} md:hidden`}>
             <section>
-              <h3 class={h3Class}>{start.mapColors.title}</h3>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.mapColors.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              <h3 class={sectionTitleClass}>{start.mapColors.title}</h3>
+              <div class="mt-[25px] space-y-[16px] md:mt-[32px] md:min-h-[60px]">
+                {start.mapColors.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
               </div>
               <div class={tableWrapClass}>
                 {
@@ -359,133 +352,315 @@ const mapSymbolImageAssets = {
               </div>
             </section>
 
-            <section>
-              <h3 class={h3Class}>{start.mapSymbols.title}</h3>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.mapSymbols.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+            <section class="md:col-span-2 md:grid md:grid-cols-2 md:gap-x-[100px]">
+              <div class="md:col-start-1">
+                <h3 class={sectionTitleClass}>{start.mapSymbols.title}</h3>
+                <div class="mt-[25px] space-y-[16px] md:mt-[32px] md:min-h-[60px]">
+                  {start.mapSymbols.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                </div>
               </div>
-              <div class={tableWrapClass}>
+              <div class="md:col-start-1 md:row-start-2">
+                <div class={mapSymbolsTableClass}>
+                  {
+                    mapSymbolPrimaryGroups.map((group) => (
+                      <div id={group.id} class={group.className} hidden={group.isHidden}>
+                        {
+                          group.rows.map((row) => {
+                            const imageAsset = mapSymbolImageAssets[row.key as keyof typeof mapSymbolImageAssets];
+                            const symbolAsset = imageAsset && "symbol" in imageAsset ? imageAsset.symbol : undefined;
+
+                            return (
+                              <div class={mapSymbolRowClass}>
+                                <div class={symbolSlotClass}>
+                                  {imageAsset?.illustration ? (
+                                    <img
+                                      class="h-full w-full object-contain"
+                                      src={imageAsset.illustration}
+                                      alt={row.illustrationLabel}
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    row.illustrationLabel
+                                  )}
+                                </div>
+                                <div class={symbolSlotClass}>
+                                  {symbolAsset ? (
+                                    <img
+                                      class="h-full w-full object-contain"
+                                      src={symbolAsset}
+                                      alt={row.symbolLabel}
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    row.symbolLabel
+                                  )}
+                                </div>
+                                <p class={pClass}>{row.description}</p>
+                              </div>
+                            );
+                          })
+                        }
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+              <div class="hidden md:col-start-2 md:row-start-2 md:block">
+                <div id={mapSymbolsDesktopSecondExtraId} hidden>
+                  <div class={mapSymbolsTableClass}>
+                    {
+                      mapSymbolDesktopSecondRows.map((row) => {
+                        const imageAsset = mapSymbolImageAssets[row.key as keyof typeof mapSymbolImageAssets];
+                        const symbolAsset = imageAsset && "symbol" in imageAsset ? imageAsset.symbol : undefined;
+
+                        return (
+                          <div class={mapSymbolRowClass}>
+                            <div class={symbolSlotClass}>
+                              {imageAsset?.illustration ? (
+                                <img
+                                  class="h-full w-full object-contain"
+                                  src={imageAsset.illustration}
+                                  alt={row.illustrationLabel}
+                                  loading="lazy"
+                                />
+                              ) : (
+                                row.illustrationLabel
+                              )}
+                            </div>
+                            <div class={symbolSlotClass}>
+                              {symbolAsset ? (
+                                <img
+                                  class="h-full w-full object-contain"
+                                  src={symbolAsset}
+                                  alt={row.symbolLabel}
+                                  loading="lazy"
+                                />
+                              ) : (
+                                row.symbolLabel
+                              )}
+                            </div>
+                            <p class={pClass}>{row.description}</p>
+                          </div>
+                        );
+                      })
+                    }
+                  </div>
+                </div>
+              </div>
+              <button
+                class={`${mapSymbolsToggleClass} ${mapSymbolsToggleRowClass}`}
+                type="button"
+                aria-expanded="false"
+                aria-controls={mapSymbolsPanelIds}
+                data-map-symbols-toggle
+              >
+                <span data-map-symbols-toggle-label>{start.mapSymbols.toggleMoreLabel}</span>
+                <ChevronDown class={mapSymbolsToggleIconClass} aria-hidden="true" />
+              </button>
+            </section>
+            </div>
+
+            <div class="hidden md:block">
+              <div class="grid grid-cols-3 gap-x-[100px]">
+                <div>
+                  <h3 class={sectionTitleClass}>{start.mapColors.title}</h3>
+                  <div class="mt-[32px] min-h-[60px] space-y-[16px]">
+                    {start.mapColors.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                  </div>
+                </div>
+                <div>
+                  <h3 class={sectionTitleClass}>{start.mapSymbols.title}</h3>
+                  <div class="mt-[32px] min-h-[60px] space-y-[16px]">
+                    {start.mapSymbols.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-[20px] border-t border-[var(--color-dark-grey)]">
                 {
-                  start.mapSymbols.visibleRows.map((row) => {
-                    const imageAsset = mapSymbolImageAssets[row.key as keyof typeof mapSymbolImageAssets];
-                    const symbolAsset = imageAsset && "symbol" in imageAsset ? imageAsset.symbol : undefined;
+                  desktopMapSymbolInitialRows.map((symbolRow, index) => {
+                    const colorRow = start.mapColors.rows[index];
+                    const secondSymbolRow = mapSymbolDesktopSecondRows[index];
+                    const colorAsset = colorRow && mapColorImageAssets[colorRow.key as keyof typeof mapColorImageAssets];
+                    const symbolImageAsset = mapSymbolImageAssets[symbolRow.key as keyof typeof mapSymbolImageAssets];
+                    const symbolAsset = symbolImageAsset && "symbol" in symbolImageAsset ? symbolImageAsset.symbol : undefined;
+                    const secondSymbolImageAsset = secondSymbolRow && mapSymbolImageAssets[secondSymbolRow.key as keyof typeof mapSymbolImageAssets];
+                    const secondSymbolAsset = secondSymbolImageAsset && "symbol" in secondSymbolImageAsset ? secondSymbolImageAsset.symbol : undefined;
 
                     return (
-                      <div class={mapSymbolRowClass}>
-                        <div class={symbolSlotClass}>
-                          {imageAsset?.illustration ? (
-                            <img
-                              class="h-full w-full object-contain"
-                              src={imageAsset.illustration}
-                              alt={row.illustrationLabel}
-                              loading="lazy"
-                            />
-                          ) : (
-                            row.illustrationLabel
-                          )}
+                      <div class={mapLegendDesktopRowClass}>
+                        <div class={mapLegendColorCellClass}>
+                          <div>
+                            <div
+                              class={symbolSlotClass}
+                              style={colorAsset ? undefined : `background-color: ${mapColorValues[colorRow.key]};`}
+                              aria-label={colorRow.visualLabel}
+                            >
+                              {colorAsset ? (
+                                <img class="h-full w-full object-contain" src={colorAsset} alt={colorRow.visualLabel} loading="lazy" />
+                              ) : (
+                                colorRow.key === "scatteredTrees" && (
+                                  <span class="block h-full w-full bg-[radial-gradient(circle_at_25%_35%,#57b14c_0_7%,transparent_8%),radial-gradient(circle_at_72%_62%,#57b14c_0_7%,transparent_8%)]" />
+                                )
+                              )}
+                            </div>
+                          </div>
+                          <div class="space-y-[6px]">
+                            <p class={pClass}><strong>{colorRow.description}</strong></p>
+                            <p class={pClass}>{colorRow.explanation}</p>
+                          </div>
                         </div>
-                        <div class={symbolSlotClass}>
-                          {symbolAsset ? (
-                            <img
-                              class="h-full w-full object-contain"
-                              src={symbolAsset}
-                              alt={row.symbolLabel}
-                              loading="lazy"
-                            />
-                          ) : (
-                            row.symbolLabel
-                          )}
-                        </div>
-                        <p class={`${pClass} col-span-3 md:col-span-1`}>{row.description}</p>
-                      </div>
-                    );
-                  })
-                }
-                <div id={mapSymbolsExtraId} hidden>
-                  {
-                    start.mapSymbols.hiddenRows.map((row) => {
-                      const imageAsset = mapSymbolImageAssets[row.key as keyof typeof mapSymbolImageAssets];
-                      const symbolAsset = imageAsset && "symbol" in imageAsset ? imageAsset.symbol : undefined;
-
-                      return (
-                        <div class={mapSymbolRowClass}>
+                        <div class={mapLegendSymbolCellClass}>
                           <div class={symbolSlotClass}>
-                            {imageAsset?.illustration ? (
-                              <img
-                                class="h-full w-full object-contain"
-                                src={imageAsset.illustration}
-                                alt={row.illustrationLabel}
-                                loading="lazy"
-                              />
+                            {symbolImageAsset?.illustration ? (
+                              <img class="h-full w-full object-contain" src={symbolImageAsset.illustration} alt={symbolRow.illustrationLabel} loading="lazy" />
                             ) : (
-                              row.illustrationLabel
+                              symbolRow.illustrationLabel
                             )}
                           </div>
                           <div class={symbolSlotClass}>
                             {symbolAsset ? (
-                              <img
-                                class="h-full w-full object-contain"
-                                src={symbolAsset}
-                                alt={row.symbolLabel}
-                                loading="lazy"
-                              />
+                              <img class="h-full w-full object-contain" src={symbolAsset} alt={symbolRow.symbolLabel} loading="lazy" />
                             ) : (
-                              row.symbolLabel
+                              symbolRow.symbolLabel
                             )}
                           </div>
-                          <p class={`${pClass} col-span-3 md:col-span-1`}>{row.description}</p>
+                          <p class={pClass}>{symbolRow.description}</p>
+                        </div>
+                        <div data-map-symbols-desktop-extra-cell hidden>
+                          <div class={mapLegendSymbolCellClass}>
+                            <div class={symbolSlotClass}>
+                              {secondSymbolImageAsset?.illustration ? (
+                                <img class="h-full w-full object-contain" src={secondSymbolImageAsset.illustration} alt={secondSymbolRow.illustrationLabel} loading="lazy" />
+                              ) : (
+                                secondSymbolRow.illustrationLabel
+                              )}
+                            </div>
+                            <div class={symbolSlotClass}>
+                              {secondSymbolAsset ? (
+                                <img class="h-full w-full object-contain" src={secondSymbolAsset} alt={secondSymbolRow.symbolLabel} loading="lazy" />
+                              ) : (
+                                secondSymbolRow.symbolLabel
+                              )}
+                            </div>
+                            <p class={pClass}>{secondSymbolRow.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                }
+                <div id={mapSymbolsDesktopExpandedRowsId} class="contents" hidden>
+                  {
+                    desktopMapSymbolExpandedRows.slice(7).map((symbolRow, index) => {
+                      const secondSymbolRow = mapSymbolDesktopSecondRows[index + 7];
+                      const symbolImageAsset = mapSymbolImageAssets[symbolRow.key as keyof typeof mapSymbolImageAssets];
+                      const symbolAsset = symbolImageAsset && "symbol" in symbolImageAsset ? symbolImageAsset.symbol : undefined;
+                      const secondSymbolImageAsset = mapSymbolImageAssets[secondSymbolRow.key as keyof typeof mapSymbolImageAssets];
+                      const secondSymbolAsset = secondSymbolImageAsset && "symbol" in secondSymbolImageAsset ? secondSymbolImageAsset.symbol : undefined;
+
+                      return (
+                        <div class={mapLegendDesktopRowClass}>
+                          <div></div>
+                          <div class={mapLegendSymbolCellClass}>
+                            <div class={symbolSlotClass}>
+                              {symbolImageAsset?.illustration ? (
+                                <img class="h-full w-full object-contain" src={symbolImageAsset.illustration} alt={symbolRow.illustrationLabel} loading="lazy" />
+                              ) : (
+                                symbolRow.illustrationLabel
+                              )}
+                            </div>
+                            <div class={symbolSlotClass}>
+                              {symbolAsset ? (
+                                <img class="h-full w-full object-contain" src={symbolAsset} alt={symbolRow.symbolLabel} loading="lazy" />
+                              ) : (
+                                symbolRow.symbolLabel
+                              )}
+                            </div>
+                            <p class={pClass}>{symbolRow.description}</p>
+                          </div>
+                          <div class={mapLegendSymbolCellClass}>
+                            <div class={symbolSlotClass}>
+                              {secondSymbolImageAsset?.illustration ? (
+                                <img class="h-full w-full object-contain" src={secondSymbolImageAsset.illustration} alt={secondSymbolRow.illustrationLabel} loading="lazy" />
+                              ) : (
+                                secondSymbolRow.illustrationLabel
+                              )}
+                            </div>
+                            <div class={symbolSlotClass}>
+                              {secondSymbolAsset ? (
+                                <img class="h-full w-full object-contain" src={secondSymbolAsset} alt={secondSymbolRow.symbolLabel} loading="lazy" />
+                              ) : (
+                                secondSymbolRow.symbolLabel
+                              )}
+                            </div>
+                            <p class={pClass}>{secondSymbolRow.description}</p>
+                          </div>
                         </div>
                       );
                     })
                   }
                 </div>
-                <div class={mapSymbolsToggleRowClass}>
-                  <button
-                    class={mapSymbolsToggleClass}
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls={mapSymbolsExtraId}
-                    data-map-symbols-toggle
-                    data-more-label={start.mapSymbols.toggleMoreLabel}
-                    data-less-label={start.mapSymbols.toggleLessLabel}
-                  >
-                    <span data-map-symbols-toggle-label>{start.mapSymbols.toggleMoreLabel}</span>
-                    <span class={mapSymbolsToggleIconClass} aria-hidden="true" data-map-symbols-toggle-icon></span>
-                  </button>
-                </div>
               </div>
-              <p class={`${fClass} mt-[12px] text-[var(--color-black)] opacity-60`}>
-                {start.mapSymbols.attribution}
-              </p>
-            </section>
 
-            <section>
-              <h2 class={h2Class}>{start.contour.title}</h2>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.contour.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              <div class="grid grid-cols-3 gap-x-[100px]">
+                <button
+                  class={`${mapSymbolsToggleClass} ${desktopMapSymbolsToggleRowClass}`}
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={mapSymbolsDesktopExpandedRowsId}
+                  data-map-symbols-desktop-toggle
+                >
+                  <span data-map-symbols-toggle-label>{start.mapSymbols.toggleMoreLabel}</span>
+                  <ChevronDown class={mapSymbolsToggleIconClass} aria-hidden="true" />
+                </button>
               </div>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.contour.closingParagraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
-              </div>
+            </div>
+
+            <div class="grid md:mt-[300px] md:grid-cols-3 md:items-center md:gap-x-[100px]">
+              <section class="md:relative md:-top-[10%]">
+                <h2 class={sectionTitleClass}>{start.contour.title}</h2>
+                <div class="mt-[25px] space-y-[16px] md:mt-[32px]">
+                  <div class="md:hidden">
+                    {start.contour.mobileParagraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                  </div>
+                  <div class="hidden md:block">
+                    {start.contour.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                  </div>
+                </div>
+                <div class="mt-[20px] space-y-[16px]">
+                  {start.contour.closingParagraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+                </div>
+                <img
+                  class="-ml-[128px] mt-[30px] w-[calc(100%+128px)] max-w-none md:hidden"
+                  src={contourLinesImage}
+                  alt={start.contour.imageLabel}
+                  loading="lazy"
+                />
+              </section>
               <img
-                class="mt-[30px] w-full"
+                class="hidden w-full md:col-span-2 md:w-4/5 md:block"
                 src={contourLinesImage}
                 alt={start.contour.imageLabel}
                 loading="lazy"
               />
-            </section>
+            </div>
 
-            <section>
-              <h2 class={h2Class}>{start.compass.title}</h2>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.compass.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
-              </div>
-              <div class={tableWrapClass}>
+            <div class="md:mt-[200px]">
+              <div class={desktopColumnsClass}>
+                <section>
+                  <h2 class={sectionTitleClass}>{start.compass.title}</h2>
+                  {start.compass.paragraphs.length > 0 && (
+                    <div class="hidden md:mt-[32px] md:block md:space-y-[16px]">
+                      {start.compass.paragraphs.map((paragraph) => <p class={sectionSubtextClass}>{paragraph}</p>)}
+                    </div>
+                  )}
+                  <div class="mt-[25px] md:hidden">
                 {
                   start.compass.rows.map((row) => (
                     <div class={compassRowClass}>
                       <div>
-                        <div class={`${compassImageClass} bg-[var(--color-light-grey)]`}>
+                        <div class={compassImageClass}>
                           <img
                             class="w-full object-contain"
                             src={row.imageSrc}
@@ -494,94 +669,88 @@ const mapSymbolImageAssets = {
                           />
                         </div>
                       </div>
-                      <div class="space-y-[6px]">
-                        <p class={pClass}><strong>{row.title}</strong></p>
-                        <p class={pClass}>{row.body}</p>
-                      </div>
+                      <p class={pClass}>{row.mobileBody}</p>
                     </div>
                   ))
                 }
+                  </div>
+                  <div class="mt-[20px] space-y-[16px]">
+                    {start.compass.closingParagraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+                  </div>
+                </section>
               </div>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.compass.closingParagraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
+              <div class="mt-[20px] hidden grid-cols-3 gap-x-[100px] md:grid md:max-w-[1480px]">
+              {
+                start.compass.rows.map((row, index) => (
+                  <article
+                    class={`relative ${index > 0 ? "md:before:absolute md:before:-left-[50px] md:before:inset-y-0 md:before:w-px md:before:bg-[var(--color-dark-grey)]" : ""}`}
+                  >
+                    <div class="flex items-center gap-[30px]">
+                      <div class="flex h-[258px] w-[200px] shrink-0 items-center justify-center">
+                        <img
+                          class="w-full object-contain"
+                          src={row.imageSrc}
+                          alt={row.title}
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="space-y-[6px]">
+                        <p class={sectionSubtextClass}>{row.title}</p>
+                        {row.body && <p class={pClass}>{row.body}</p>}
+                      </div>
+                    </div>
+                  </article>
+                ))
+              }
               </div>
-            </section>
-
-            <section>
-              <h2 class={h2Class}>{start.routeChoice.title}</h2>
-              <div class="mt-[20px] space-y-[16px]">
-                {start.routeChoice.paragraphs.map((paragraph) => <p class={pClass}>{paragraph}</p>)}
-              </div>
-              <img
-                class="mt-[30px] w-full md:hidden"
-                src={routeExampleMobileImage}
-                alt={start.routeChoice.imageLabel}
-                loading="lazy"
-              />
-              <img
-                class="mt-[30px] hidden w-full md:block"
-                src={routeExampleDesktopImage}
-                alt={start.routeChoice.imageLabel}
-                loading="lazy"
-              />
-            </section>
+            </div>
 
           </div>
         </div>
       </section>
 
-      <section class="bg-[var(--color-light-accent)] py-[60px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class={`${articleClass} text-center`}>
-            <h2 class={h2Class}>{start.tryIt.title}</h2>
-            <div class="mt-[20px] space-y-[16px]">
-              {start.tryIt.paragraphs.map((paragraph) => <p class={h5Class}>{paragraph}</p>)}
-            </div>
-            <a class={`${primaryButtonClass} mt-[30px]`} style={buttonStyle} href={homeHref}>
-              {start.tryIt.button}
+      <section class="pt-[120px] pb-[60px] md:pt-[300px] md:pb-[40vh]">
+        <div class="w-full max-w-[1400px] px-[16px] md:px-[32px]">
+          <div class="md:hidden">
+            <p class={sectionTitleClass}>{start.tryIt.mobileBody}</p>
+            <p class={`${design.typography.discoverBody} mt-[12px] text-[var(--color-grey)]`}>{start.tryIt.mobileSubtitle}</p>
+            <a class={`${design.typography.button} mt-[30px] inline-flex w-2/3 items-center justify-between bg-[var(--color-black)] px-[18px] text-[var(--color-white)]`} style={buttonStyle} href={`${homeHref}#events`}>
+              {start.tryIt.mobileLink}<ChevronRight size={18} aria-hidden="true" />
             </a>
+          </div>
+          <div class="hidden md:block">
+            <p class={sectionTitleClass}>{start.tryIt.body}</p>
+            <a class={`${sectionTitleClass} mt-[12px] inline-block underline decoration-[1px] underline-offset-4`} href={`${homeHref}#events`}>{start.tryIt.link}</a>
           </div>
         </div>
       </section>
     </main>
-    <footer class="bg-[var(--color-light-accent)] py-[30px]">
-      <p class={`${fClass} px-[30px] text-center md:px-[55px]`}>
-        <span>
-          {copy.footer.line1Prefix}{" "}
-          <a class="text-[var(--color-dark-accent)] no-underline" href="https://www.coenclaassen.com">
-            {copy.footer.line1Name}
-          </a>
-        </span>
-        <br />
-        <span>{copy.footer.line2}</span>
-      </p>
-    </footer>
     <script>
       document.querySelectorAll("[data-map-symbols-toggle]").forEach((button) => {
-        const panelId = button.getAttribute("aria-controls");
-        const panel = panelId ? document.getElementById(panelId) : null;
-        const label = button.querySelector("[data-map-symbols-toggle-label]");
-        const moreLabel = button.getAttribute("data-more-label") || "";
-        const lessLabel = button.getAttribute("data-less-label") || "";
+        const panelIds = (button.getAttribute("aria-controls") || "").split(" ").filter(Boolean);
+        const panels = panelIds.map((panelId) => document.getElementById(panelId));
 
         button.addEventListener("click", () => {
-          const expanded = button.getAttribute("aria-expanded") === "true";
-          const nextExpanded = !expanded;
+          button.setAttribute("aria-expanded", "true");
+          panels.forEach((panel) => {
+            if (panel) panel.hidden = false;
+          });
+          button.hidden = true;
+        });
+      });
 
-          button.setAttribute("aria-expanded", String(nextExpanded));
-          if (panel) {
-            panel.hidden = !nextExpanded;
-          }
-          if (label) {
-            label.textContent = nextExpanded ? lessLabel : moreLabel;
-          }
+      document.querySelectorAll("[data-map-symbols-desktop-toggle]").forEach((button) => {
+        const panelId = button.getAttribute("aria-controls");
+        const panel = panelId ? document.getElementById(panelId) : null;
+        const extraCells = document.querySelectorAll("[data-map-symbols-desktop-extra-cell]");
+
+        button.addEventListener("click", () => {
+          button.setAttribute("aria-expanded", "true");
+          if (panel) panel.hidden = false;
+          extraCells.forEach((cell) => cell.removeAttribute("hidden"));
+          button.hidden = true;
         });
       });
     </script>
-    <style>
-      [data-map-symbols-toggle][aria-expanded="true"] [data-map-symbols-toggle-icon] {
-        transform: rotate(180deg);
-      }
-    </style>
   </body>
 </html>
