@@ -4,8 +4,7 @@ export interface RunEvent {
   registrationClose: string;
   location: string;
   startTime: string;
-  lumaEventId?: string;
-  lumaUrl?: string;
+  lumaUrl: string;
 }
 
 export const events: readonly RunEvent[] = [
@@ -15,7 +14,6 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-09-12T23:59:59+02:00",
     location: "Oirschotse Heide Zuidoost",
     startTime: "13:30",
-    lumaEventId: "evt-xA1E8ZiZ54SpPN2",
     lumaUrl: "https://luma.com/event/evt-xA1E8ZiZ54SpPN2",
   },
   {
@@ -24,7 +22,6 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-10-10T23:59:59+02:00",
     location: "Aarlesche Heide West",
     startTime: "13:30",
-    lumaEventId: "evt-r30gvykpF5FT3gO",
     lumaUrl: "https://luma.com/event/evt-r30gvykpF5FT3gO",
   },
   {
@@ -33,7 +30,6 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-11-07T23:59:59+01:00",
     location: "Oirschotse Heide Noordwest",
     startTime: "13:30",
-    lumaEventId: "evt-9FVF2nReO42qfSo",
     lumaUrl: "https://luma.com/event/evt-9FVF2nReO42qfSo",
   },
   {
@@ -42,7 +38,6 @@ export const events: readonly RunEvent[] = [
     registrationClose: "2026-12-05T23:59:59+01:00",
     location: "Oostelbeersche Heide Midden",
     startTime: "13:30",
-    lumaEventId: "evt-WmToRi1HEik2qrQ",
     lumaUrl: "https://luma.com/event/evt-WmToRi1HEik2qrQ",
   },
 ] as const;

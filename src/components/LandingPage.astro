@@ -1,5 +1,5 @@
 ---
-import { Heart, Leaf, Route, ShieldCheck } from "@lucide/astro";
+import { ChevronDown, ChevronRight, MoveDown } from "@lucide/astro";
 import SeoHead from "./SeoHead.astro";
 import type { en } from "../i18n/en";
 import type { nl } from "../i18n/nl";
@@ -8,742 +8,182 @@ import { events } from "../config/events";
 import "../styles/global.css";
 
 type Copy = typeof en | typeof nl;
-
-interface Props {
-  copy: Copy;
-}
+interface Props { copy: Copy; }
 
 const { copy } = Astro.props;
-const seo = copy.seo.home;
-const englishCopy = copy.locale === "en" ? copy : null;
-
-const eventDateFormatter = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "Europe/Amsterdam",
-});
-
-const formatEventDate = (date: Date) => eventDateFormatter.format(date).replace("Sept", "Sep");
-
-const renderingNow = new Date();
-
-const pageStyle = `
-  --color-white: ${design.colors.white};
-  --color-black: ${design.colors.black};
-  --color-light-grey: ${design.colors.lightGrey};
-  --color-dark-grey: ${design.colors.darkGrey};
-  --color-light-accent: ${design.colors.lightAccent};
-  --color-dark-accent: ${design.colors.darkAccent};
-`;
-const editorialStyle = `
-  --color-white: ${design.homepageV2.colors.white};
-  --color-black: ${design.homepageV2.colors.charcoal};
-  --color-light-grey: ${design.homepageV2.colors.paper};
-  --color-dark-grey: ${design.homepageV2.colors.rule};
-  --color-light-accent: ${design.homepageV2.colors.paper};
-  --color-dark-accent: ${design.homepageV2.colors.accent};
-`;
-
-const shellStyle = `max-width: ${design.layout.maxPageWidth}px;`;
-const radiusStyle = `border-radius: ${design.cornerRadius}px;`;
-const buttonStyle = `border-radius: ${design.buttonRadius}px; min-height: ${design.buttonHeight}px;`;
-const editorialButtonStyle = `border-radius: ${design.homepageV2.buttonRadius}px; min-height: ${design.homepageV2.buttonHeight}px;`;
-const featureStyle = `${radiusStyle} min-height: ${design.featureHeight}px;`;
-const stepStyle = `${radiusStyle} min-height: ${design.stepHeight}px;`;
-const eventStyle = radiusStyle;
-
-const shellClass = "mx-auto w-full px-[30px] md:px-[55px]";
-const h1Class = design.typography.h1;
-const h2Class = design.typography.h2;
-const h3Class = design.typography.h3;
-const h4Class = design.typography.h4;
-const h5Class = design.typography.h5;
-const h6Class = design.typography.h6;
-const pClass = design.typography.p;
-const fClass = design.typography.f;
-const editorialHeroClass = design.homepageV2.typography.hero;
-const editorialStatementClass = design.homepageV2.typography.statement;
-const editorialSectionClass = design.homepageV2.typography.section;
-const editorialBodyClass = design.homepageV2.typography.body;
-const editorialBodyLargeClass = design.homepageV2.typography.bodyLarge;
-const editorialButtonClass = design.homepageV2.typography.button;
-const editorialUtilityClass = design.homepageV2.typography.utility;
-const editorialStepNumberClass = design.homepageV2.typography.stepNumber;
-const downChevronClass = "h-0 w-0 border-x-[7px] border-t-[8px] border-x-transparent border-t-[var(--color-dark-accent)]";
-
-const featureIcons = {
-  leaf: Leaf,
-  route: Route,
-  heart: Heart,
-} as const;
-
-const stepImages = ["/images/step1.webp", "/images/step2.webp", "/images/step3.webp"] as const;
-
-const splitTimeLine = (line: string) => {
-  const [time, ...labelParts] = line.split(" ");
-  return {
-    time,
-    label: labelParts.join(" "),
-  };
-};
+const pageStyle = `--color-black:${design.colors.black};--color-white:${design.colors.white};--color-grey:${design.colors.grey};--color-light-grey:${design.colors.lightGrey};--color-pink:${design.colors.pink};`;
+const shellClass = "mx-auto w-full max-w-[1920px] px-[16px] md:px-[32px]";
+const desktopAlignmentClass = "md:max-w-[1500px]";
+const faqContentClass = "md:max-w-[570px]";
+const buttonStyle = `border-radius:${design.buttonRadius}px;min-height:${design.buttonHeight}px;`;
+const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL" : "en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Europe/Amsterdam" });
+const eventLocation = (event: (typeof events)[number]) => (copy.events.locations as Record<string, string>)[event.id] ?? event.location;
+const faqItems = copy.faq.items.map((item) => ({ ...item, paragraphs: "paragraphs" in item ? item.paragraphs : [item.answer] }));
 ---
 
 <html lang={copy.locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <SeoHead title={seo.title} description={seo.description} locale={copy.locale} page="home" />
+    <SeoHead title={copy.seo.home.title} description={copy.seo.home.description} locale={copy.locale} page="home" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    {englishCopy ? (
-      <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap"
-        rel="stylesheet"
-      />
-    ) : (
-      <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Manrope:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
-    )}
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-[var(--color-light-grey)] text-[var(--color-black)]" style={englishCopy ? editorialStyle : pageStyle}>
-    <header class="absolute left-0 top-0 z-10 w-full py-[16px]">
-      <nav class="flex items-center justify-end gap-[20px] px-[30px] md:px-[55px]" aria-label="Primary">
-          <div class="flex items-center gap-[6px]" aria-label="Language">
-            <a
-              class={englishCopy
-                ? `${editorialUtilityClass} border-b border-[var(--color-white)] px-[8px] py-[6px] text-[var(--color-white)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-white)]`
-                : `${pClass} rounded-full bg-[var(--color-light-grey)] px-[12px] py-[6px]`}
-              href="/"
-              aria-current={copy.locale === "en" ? "page" : undefined}
-            >
-              {copy.nav.languageSwitch.en}
-            </a>
-            <a
-              class={englishCopy
-                ? `${editorialUtilityClass} px-[8px] py-[6px] text-[var(--color-white)] outline-none hover:opacity-70 focus-visible:ring-2 focus-visible:ring-[var(--color-white)]`
-                : `${pClass} rounded-full bg-[var(--color-dark-accent)] px-[12px] py-[6px] text-[var(--color-white)]`}
-              href="/nl/"
-              aria-current={copy.locale === "nl" ? "page" : undefined}
-            >
-              {copy.nav.languageSwitch.nl}
-            </a>
-          </div>
-        </nav>
-    </header>
-
+  <body class="bg-[var(--color-white)] text-[var(--color-black)]" style={pageStyle}>
     <main>
-      {englishCopy ? (
-        <>
-          <section class="hero-background min-h-[720px] bg-cover py-[60px] md:min-h-[800px] md:py-[120px]">
-            <div class={shellClass} style={shellStyle}>
-              <div class="max-w-[880px] pt-[160px] text-left text-[var(--color-white)] md:pt-[190px]">
-                <h1 class={editorialHeroClass}>{englishCopy.hero.title}</h1>
-                <div class="mt-[30px] max-w-[650px] space-y-[6px]">
-                  {englishCopy.hero.subtitle.map((line) => <p class={editorialBodyLargeClass}>{line}</p>)}
-                </div>
-                <div class="mt-[36px] flex flex-col items-stretch gap-[10px] sm:flex-row sm:items-center">
-                  <a
-                    class={`${editorialButtonClass} inline-flex items-center justify-center bg-[var(--color-black)] px-[24px] text-center text-[var(--color-white)] outline-none hover:bg-[var(--color-white)] hover:text-[var(--color-black)] focus-visible:ring-2 focus-visible:ring-[var(--color-white)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-black)]`}
-                    style={editorialButtonStyle}
-                    href="#events"
-                  >
-                    {englishCopy.hero.button}
-                  </a>
-                  <a
-                    class={`${editorialButtonClass} inline-flex items-center justify-center border border-[var(--color-white)] bg-[var(--color-white)] px-[24px] text-center text-[var(--color-black)] outline-none hover:bg-transparent hover:text-[var(--color-white)] focus-visible:ring-2 focus-visible:ring-[var(--color-white)]`}
-                    style={editorialButtonStyle}
-                    href="#challenge"
-                  >
-                    {englishCopy.hero.buttonSecondary}
-                  </a>
-                </div>
+      <section class="landing-hero relative h-screen max-h-[1080px] min-h-[640px] bg-cover bg-center text-[var(--color-white)]">
+        <header class="absolute inset-x-0 top-0 z-10 py-[16px] md:py-[24px]">
+          <nav class={`${shellClass} flex justify-end gap-[12px]`} aria-label="Primary">
+            <a class={`${design.typography.button} underline-offset-4 hover:underline`} href="/" aria-current={copy.locale === "en" ? "page" : undefined}>EN</a>
+            <a class={`${design.typography.button} underline-offset-4 hover:underline`} href="/nl/" aria-current={copy.locale === "nl" ? "page" : undefined}>NL</a>
+          </nav>
+        </header>
+        <div class={`${shellClass} flex h-full flex-col pt-[35vh] md:pt-[30vh]`}>
+          <h1 class={design.typography.h1}>{copy.hero.title[0]}<br />{copy.hero.title[1]}</h1>
+          <p class={`${design.typography.p1} mt-[30px] md:mt-[30px]`}>{copy.hero.subtitle[0]}<br class="md:hidden" />{copy.hero.subtitle[1]}</p>
+          <a class={`${design.typography.button} mt-[40px] inline-flex w-fit items-center gap-[8px] bg-[var(--color-white)] px-[18px] text-[var(--color-black)] md:mt-[50px]`} style={buttonStyle} href="#events" data-events-scroll>
+            {copy.hero.button}<ChevronRight size={18} aria-hidden="true" />
+          </a>
+          <a class="-ml-[17px] mb-[32px] mt-auto inline-flex w-fit md:-ml-[22px]" href="#discover" aria-label={copy.hero.scrollLabel} data-hero-scroll>
+            <MoveDown class="h-[55px] w-[55px] md:h-[65px] md:w-[65px]" stroke-width={1.25} aria-hidden="true" />
+          </a>
+        </div>
+      </section>
+
+      <section id="discover" class={`${shellClass} mt-[35vh] md:mt-[45vh]`}>
+        <h2 class={design.typography.h2}>{copy.discover.title[0]}<br class="md:hidden" /> {copy.discover.title[1]}</h2>
+        <p class={`${design.typography.discoverBody} mt-[25px] max-w-[535px] text-[var(--color-grey)] md:mt-[40px] md:max-w-[720px]`}>{copy.discover.body}</p>
+      </section>
+
+      <section class={`${shellClass} mt-[220px] md:mt-[45vh]`}>
+        <h2 class={design.typography.h2}>{copy.vibe.title[0]}<br />{copy.vibe.title[1]}</h2>
+        <p class={`${design.typography.vibeBody} mt-[25px] text-[var(--color-grey)] md:mt-[32px]`}>{copy.vibe.body[0]}<br class="hidden md:block" /> {copy.vibe.body[1]}</p>
+        <div class="mt-[40px] md:mt-[60px]">
+          <div class="hidden gap-[8px] md:grid md:grid-cols-3 md:grid-rows-2">
+            <img class="row-span-2 h-full w-full object-cover" src="/images/vibe_desktop_1.webp" alt={copy.vibe.images[0]} loading="lazy" />
+            <img class="h-full w-full object-cover" src="/images/vibe_desktop_2.webp" alt={copy.vibe.images[1]} loading="lazy" />
+            <img class="h-full w-full object-cover" src="/images/vibe_desktop_3.webp" alt={copy.vibe.images[2]} loading="lazy" />
+            <img class="h-full w-full object-cover" src="/images/vibe_desktop_4.webp" alt={copy.vibe.images[3]} loading="lazy" />
+            <img class="h-full w-full object-cover" src="/images/vibe_desktop_5.webp" alt={copy.vibe.images[4]} loading="lazy" />
+          </div>
+          <div class="grid gap-[8px] md:hidden">
+            <img class="h-[185px] w-full object-cover" src="/images/vibe_mobile_1.webp" alt={copy.vibe.images[0]} loading="lazy" />
+            <img class="h-[412px] w-full object-cover" src="/images/vibe_mobile_2.webp" alt={copy.vibe.images[1]} loading="lazy" />
+            <img class="h-[185px] w-full object-cover" src="/images/vibe_mobile_3.webp" alt={copy.vibe.images[2]} loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class={`${shellClass} mt-[220px] md:mt-[35vh]`}>
+        <h2 class={design.typography.h2}>{copy.steps.title}</h2>
+        <div class={`${desktopAlignmentClass} mt-[35px] border-y border-[var(--color-light-grey)] md:mt-[45px] md:grid md:grid-cols-[calc(40%_-_60px)_40%_calc(20%_+_60px)] md:border-y-0`}>
+          {copy.steps.items.map((item) => (
+            <article class="grid grid-cols-[40px_1fr] gap-[16px] border-b border-[var(--color-light-grey)] py-[20px] last:border-b-0 md:grid-cols-[28px_1fr] md:gap-[32px] md:border-b-0 md:border-l md:border-[var(--color-light-grey)] md:py-0 md:pl-[28px] first:md:border-l-0 first:md:pl-0 last:md:w-[496px]">
+              <p class="text-[30px] font-light leading-[150%] text-[var(--color-pink)] md:text-[36px]">{item.label.replace(" /", "")}</p>
+              <div class="md:max-w-[420px]"><h3 class={design.typography.stepTitle}>{item.title}</h3><p class={`${design.typography.p3} mt-[4px] text-[var(--color-grey)]`}>{item.body}</p></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="events" class={`${shellClass} mt-[220px] scroll-mt-[64px] md:mt-[35vh]`}>
+        <h2 class={design.typography.h2}>{copy.events.title}</h2>
+        <div class="mt-[40px] border-t border-[var(--color-light-grey)] md:mt-[45px]">
+          {events.map((event) => (
+            <article class="border-b border-[var(--color-light-grey)] py-[25px]">
+              <div class={`${desktopAlignmentClass} grid grid-cols-[minmax(0,1fr)_105px] items-center gap-[16px] md:grid-cols-[calc(40%_+_28px)_18.666667%_21.333333%_calc(20%_-_28px)] md:gap-0`}>
+                <div><h3 class={design.typography.h3}>{eventLocation(event)}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(event.date))}<br />{copy.events.city}</p></div>
+                <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:block`}>{eventDateFormatter.format(new Date(event.date))}</p>
+                <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:translate-x-[32px] md:block`}>{copy.events.city}</p>
+                <a class={`${design.typography.button} inline-flex w-[105px] items-center justify-center gap-[5px] bg-[var(--color-black)] px-[12px] text-[var(--color-white)] md:w-[135px]`} style={buttonStyle} href={event.lumaUrl} target="_blank" rel="noreferrer">{copy.events.button}<ChevronRight size={16} aria-hidden="true" /></a>
               </div>
-            </div>
-          </section>
+            </article>
+          ))}
+        </div>
+      </section>
 
-          <section id="challenge" class="bg-[var(--color-white)] py-[60px]">
-            <div class={shellClass} style={shellStyle}>
-              <div>
-                <h2 class={`${editorialStatementClass} max-w-[980px]`}>{englishCopy.features.title}</h2>
-                <div class="mt-[24px] max-w-[720px] space-y-[6px]">
-                  {englishCopy.features.subtitle.map((line) => <p class={editorialBodyLargeClass}>{line}</p>)}
+      <section id="faq" class={`${shellClass} mt-[120px] mb-[45px] md:mt-[200px] md:mb-[64px]`}>
+        <details class="group/faq" data-faq-panel>
+          <summary class={`${design.typography.faqTitle} cursor-pointer list-none outline-none`}>
+            <div class={`${faqContentClass} flex items-center gap-[6px]`}>
+              <span>{copy.faq.title}</span>
+              <ChevronRight class="group-open/faq:hidden" size={20} aria-hidden="true" />
+              <ChevronDown class="hidden group-open/faq:block" size={20} aria-hidden="true" />
+            </div>
+          </summary>
+          <div class="mt-[25px] border-t border-[var(--color-light-grey)]">
+            {faqItems.map((item) => (
+              <article class="border-b border-[var(--color-light-grey)] py-[25px]">
+                <div class={faqContentClass}>
+                  <h3 class={design.typography.p2}>{item.question}</h3>
+                  <p class={`${design.typography.p} mt-[10px] text-[var(--color-grey)]`}>{item.paragraphs.join(" ")}</p>
+                  {"link" in item && item.link && <a class={`${design.typography.p2} mt-[12px] inline-block`} href={item.link.href}>{item.link.label}</a>}
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="overflow-hidden bg-[var(--color-light-grey)] py-[60px] md:py-[120px]">
-            <div class={shellClass} style={shellStyle}>
-              <div class="grid grid-cols-12 gap-x-[12px] gap-y-[30px] md:grid-rows-[minmax(260px,1fr)_minmax(220px,0.8fr)] md:gap-[20px]">
-                <div class="col-span-12 md:col-span-5 md:flex md:flex-col md:justify-end md:pb-[30px]">
-                  <h2 class={editorialSectionClass}>{englishCopy.social.title}</h2>
-                  <div class="mt-[24px] space-y-[8px]">
-                    <p class={editorialBodyLargeClass}>
-                      {englishCopy.social.body} <strong class="font-semibold">{englishCopy.social.emphasis}</strong>
-                    </p>
-                  </div>
-                </div>
-                <img
-                  class="col-span-12 -ml-[30px] aspect-[4/3] w-[calc(100%+60px)] object-cover md:col-span-7 md:col-start-6 md:row-span-2 md:ml-0 md:h-full md:w-full"
-                  src={englishCopy.social.images[0].image}
-                  alt={englishCopy.social.images[0].imageAlt}
-                  loading="lazy"
-                />
-                <img
-                  class="col-span-10 col-start-3 aspect-[4/5] w-full object-cover md:col-span-3 md:col-start-1 md:row-start-2 md:aspect-[4/3]"
-                  src={englishCopy.social.images[1].image}
-                  alt={englishCopy.social.images[1].imageAlt}
-                  loading="lazy"
-                />
-                <img
-                  class="col-span-7 col-start-1 aspect-square w-full object-cover md:col-span-2 md:col-start-4 md:row-start-2 md:aspect-[3/4]"
-                  src={englishCopy.social.images[2].image}
-                  alt={englishCopy.social.images[2].imageAlt}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </section>
-
-          <section id="steps" class="bg-[var(--color-white)] py-[60px]">
-            <div class={shellClass} style={shellStyle}>
-              <h2 class={editorialSectionClass}>{englishCopy.steps.howItWorks.title}</h2>
-              <div class="mt-[40px] grid md:grid-cols-3">
-                {englishCopy.steps.items.map((item) => (
-                  <article class="border-t border-[var(--color-dark-grey)] py-[24px] md:border-l md:border-t-0 md:px-[30px] md:py-0 first:md:border-l-0 first:md:pl-0">
-                    <p class={`${editorialStepNumberClass} text-black/60`}>{item.label}</p>
-                    <h3 class={`${editorialBodyClass} mt-[22px] font-semibold`}>{item.title}</h3>
-                    <div class="mt-[12px] max-w-[340px] space-y-[10px]">
-                      {item.paragraphs.map((paragraph) => <p class={editorialBodyClass}>{paragraph}</p>)}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section id="events" class="bg-[var(--color-white)] py-[60px]">
-            <div class={shellClass} style={shellStyle}>
-              <h2 class={editorialSectionClass}>{englishCopy.events.title}</h2>
-              <div class="mt-[40px] border-t border-[var(--color-dark-grey)]">
-                {events.map((event, index) => {
-                  const registrationClose = new Date(event.registrationClose);
-                  const isPast = renderingNow.getTime() >= new Date(event.date).getTime();
-                  const isClosed = !isPast && renderingNow.getTime() > registrationClose.getTime();
-                  const isRegistrationOpen = !isPast && !isClosed;
-                  const hasLuma = Boolean(event.lumaEventId && event.lumaUrl);
-                  const dateLabel = formatEventDate(new Date(event.date));
-
-                  return (
-                    <article
-                      class="grid gap-x-[30px] gap-y-[8px] border-b border-[var(--color-dark-grey)] py-[24px] md:grid-cols-[minmax(260px,1.4fr)_minmax(150px,0.7fr)_minmax(230px,1fr)_minmax(170px,0.7fr)] md:items-center md:py-[26px]"
-                      data-run-row
-                      data-event-date={event.date}
-                      data-registration-close={event.registrationClose}
-                      hidden={isPast}
-                    >
-                      <div>
-                        <h3 class={`${editorialBodyClass} font-semibold`}>{englishCopy.events.locations[index]}</h3>
-                      </div>
-                      <div>
-                        <p class={editorialUtilityClass}>{dateLabel}</p>
-                      </div>
-                      <div>
-                        <p class={`${editorialUtilityClass} text-black/65`}>{englishCopy.events.city}</p>
-                      </div>
-                      <div class="md:flex md:justify-end md:text-right">
-                        <div class={isClosed ? "" : "hidden"} data-registration-closed>
-                          <p class={editorialUtilityClass}>{englishCopy.events.registrationClosed}</p>
-                        </div>
-                        {hasLuma && (
-                          <a
-                            href={event.lumaUrl}
-                            class={`luma-checkout--button ${editorialUtilityClass} min-h-[44px] items-center gap-[8px] text-left outline-none hover:opacity-65 focus-visible:ring-2 focus-visible:ring-[var(--color-black)] ${isRegistrationOpen ? "inline-flex" : "hidden"}`}
-                            data-luma-action="checkout"
-                            data-luma-event-id={event.lumaEventId}
-                            data-event-luma
-                          >
-                            <span>{englishCopy.events.button}</span>
-                            <span aria-hidden="true">→</span>
-                          </a>
-                        )}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          <section id="faq" class="bg-[var(--color-white)] py-[16px]">
-            <div class={shellClass} style={shellStyle}>
-              <details class="group/faq">
-                <summary class={`${editorialBodyClass} flex cursor-pointer list-none items-center justify-between gap-[20px] border-y border-[var(--color-dark-grey)] py-[16px] font-semibold outline-none`}>
-                  <h2>{englishCopy.faq.title}</h2>
-                  <span class="text-[22px] leading-none transition-transform group-open/faq:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <div>
-                  {englishCopy.faq.items.map((item) => (
-                    <details class="group/item border-b border-[var(--color-dark-grey)] py-[18px]">
-                      <summary class={`${editorialBodyClass} flex cursor-pointer list-none items-center justify-between gap-[20px] font-semibold outline-none`}>
-                        <span>{item.question}</span>
-                        <span class="text-[22px] leading-none transition-transform group-open/item:rotate-45">+</span>
-                      </summary>
-                      <div class="mt-[16px] space-y-[10px] text-black/70">
-                        {item.paragraphs.map((paragraph) => <p class={editorialBodyClass}>{paragraph}</p>)}
-                      </div>
-                      {"link" in item && item.link && (
-                        <a class={`${editorialBodyClass} mt-[14px] inline-block font-semibold outline-none hover:text-[var(--color-dark-accent)] focus-visible:underline`} href={item.link.href}>
-                          {item.link.label}
-                        </a>
-                      )}
-                    </details>
-                  ))}
-                  <p class={`${editorialBodyClass} py-[24px]`}>
-                    <span class="block">{englishCopy.faq.contactIntro}</span>
-                    <a class="font-semibold" href={`mailto:${englishCopy.faq.contactEmail}`}>{englishCopy.faq.contactEmail}</a>
-                  </p>
-                </div>
-              </details>
-            </div>
-          </section>
-        </>
-      ) : (
-        <>
-      <section
-        class="hero-background bg-cover py-[60px] md:min-h-[800px] md:py-[120px]"
-      >
-        <div class={shellClass} style={shellStyle}>
-          <div class="text-center text-[var(--color-white)] md:pt-[200px] md:text-left">
-            <h1 class={h1Class}>{copy.hero.title}</h1>
-            <div class="mt-[20px] space-y-[6px]">
-              {copy.hero.subtitle.map((line) => <p class={h5Class}>{line}</p>)}
-            </div>
-            <p class={`${h5Class} mt-[30px]`}>{copy.hero.body}</p>
-            <div class="mt-[30px] flex flex-col justify-center gap-[12px] sm:flex-row md:justify-start">
-              <a
-                class={`${h6Class} inline-flex items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`}
-                style={buttonStyle}
-                href="#signup"
-              >
-                {copy.hero.button}
-              </a>
-              <a
-                class={`${h6Class} inline-flex items-center justify-center bg-[var(--color-light-grey)] px-[30px] text-center text-[var(--color-dark-accent)]`}
-                style={buttonStyle}
-                href="#features"
-              >
-                {copy.hero.buttonSecondary}
-              </a>
-            </div>
+              </article>
+            ))}
           </div>
-        </div>
+        </details>
       </section>
-
-      <section id="features" class="bg-[var(--color-light-grey)] py-[60px] md:py-[120px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class="text-center">
-            <h2 class={h2Class}>{copy.features.title}</h2>
-            <div class="mt-[20px] space-y-[6px]">
-              {copy.features.subtitle.map((line) => <p class={h5Class}>{line}</p>)}
-            </div>
-          </div>
-          <div class="mt-[30px] grid gap-[20px] md:grid-cols-3">
-            {
-              copy.features.items.map((item) => {
-                const Icon = featureIcons[item.icon];
-
-                return (
-                  <article
-                    class="flex items-center gap-[20px] bg-[var(--color-white)] p-[20px]"
-                    style={featureStyle}
-                  >
-                    <Icon
-                      class="h-[30px] w-[30px] shrink-0 text-[var(--color-dark-accent)]"
-                      size={30}
-                      stroke-width={2}
-                      aria-hidden="true"
-                    />
-                    <p class={h6Class}>{item.text}</p>
-                  </article>
-                );
-              })
-            }
-          </div>
-        </div>
-      </section>
-
-      <section id="steps" class="py-[60px] md:py-[120px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class="text-center">
-            <h2 class={h2Class}>{copy.steps.howItWorks.title}</h2>
-            <p class={`${h4Class} mt-[20px]`}>{copy.steps.howItWorks.subtitle}</p>
-          </div>
-          <div class="mt-[30px] grid gap-[20px] md:grid-cols-3">
-            {
-              copy.steps.items.map((item, index) => (
-                <article class="flex flex-col overflow-hidden bg-[var(--color-light-accent)]" style={stepStyle}>
-                  <img
-                    class="aspect-square w-full object-cover"
-                    src={stepImages[index]}
-                    alt={item.imageAlt}
-                    loading="lazy"
-                  />
-                  <div class="flex flex-col p-[30px]">
-                    <p class={`${h6Class} text-[var(--color-dark-accent)]`}>{item.label}</p>
-                    <h3 class={`${h3Class} mt-[20px]`}>{item.title}</h3>
-                    <p class={`${pClass} mt-[20px]`}>{item.body}</p>
-                  </div>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-      </section>
-
-      <section class="py-[60px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class="mb-[30px] grid gap-[20px] md:mb-[60px] md:grid-cols-2">
-            <div
-              class="order-1 flex flex-col justify-center text-center md:order-2"
-            >
-              <h2 class={h2Class}>{copy.social.title}</h2>
-              <div class="mt-[20px]">
-                <div class="space-y-[12px]">
-                  {copy.social.lines.map((line) => <p class={h5Class}>{line}</p>)}
-                </div>
-                <a
-                  class={`${pClass} mt-[20px] inline-flex flex-col items-center gap-[8px] font-bold text-[var(--color-dark-accent)]`}
-                  href="#events"
-                >
-                  <span>{copy.social.link}</span>
-                  <span class={downChevronClass} aria-hidden="true"></span>
-                </a>
-              </div>
-            </div>
-            <img
-              class="order-2 aspect-video w-full object-cover md:order-1"
-              style={radiusStyle}
-              src={copy.social.images[0].image}
-              alt={copy.social.images[0].imageAlt}
-              loading="lazy"
-            />
-            <img
-              class="order-3 aspect-video w-full object-cover"
-              style={radiusStyle}
-              src={copy.social.images[1].image}
-              alt={copy.social.images[1].imageAlt}
-              loading="lazy"
-            />
-            <img
-              class="order-4 aspect-video w-full object-cover"
-              style={radiusStyle}
-              src={copy.social.images[2].image}
-              alt={copy.social.images[2].imageAlt}
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section id="events" class="bg-[var(--color-light-grey)] py-[60px] md:py-[120px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class="text-center">
-            <h2 class={h2Class}>{copy.events.title}</h2>
-            <p class={`${h5Class} mt-[12px]`}>{copy.events.subtitle}</p>
-          </div>
-          <div class="mt-[30px] grid gap-[20px] md:grid-cols-2">
-            {
-              copy.events.items.map((item) => {
-                const warmup = splitTimeLine(item.warmup);
-                const start = splitTimeLine(item.start);
-
-                return (
-                <article
-                  class="flex flex-col bg-[var(--color-white)] p-[30px] md:p-[40px]"
-                  style={eventStyle}
-                >
-                  <div class="text-[var(--color-dark-accent)]">
-                    <p class={`${h2Class} font-normal`}>{item.date.weekday}</p>
-                    <p class={`${h2Class} font-normal`}>
-                      {item.date.day} {item.date.month}
-                    </p>
-                  </div>
-
-                  <h3 class={`${h2Class} mt-[50px]`}>{item.title}</h3>
-
-                  <div class="mt-[30px] grid gap-[30px] md:grid-cols-[minmax(0,1.5fr)_minmax(170px,0.8fr)]">
-                    <ul class="space-y-[16px]">
-                      {item.bullets.map((bullet) => (
-                        <li class={`${pClass} flex gap-[14px]`}>
-                          <span class="mt-[10px] h-[6px] w-[6px] shrink-0 rounded-full bg-[var(--color-dark-accent)]" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div>
-                      <p class={pClass}>
-                        <span class="font-bold">{warmup.time}</span> {warmup.label}
-                      </p>
-                      <p class={pClass}>
-                        <span class="font-bold">{start.time}</span> {start.label}
-                      </p>
-                      <p class={`${pClass} mt-[30px] flex items-center gap-[8px]`}>
-                        <ShieldCheck
-                          class="h-[18px] w-[18px] shrink-0"
-                          size={18}
-                          stroke-width={2}
-                          aria-hidden="true"
-                        />
-                        <span>{item.note}</span>
-                      </p>
-                    </div>
-                  </div>
-                </article>
-                );
-              })
-            }
-          </div>
-          <div class="mt-[40px] flex justify-center">
-            <a
-              class={`${h6Class} inline-flex items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`}
-              style={buttonStyle}
-              href="#signup"
-            >
-              {copy.events.button}
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" class="py-[60px] md:py-[120px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class="text-center">
-            <h2 class={h2Class}>{copy.faq.title}</h2>
-            <p class={`${h5Class} mt-[6px]`}>{copy.faq.subtitle}</p>
-          </div>
-          <div class="mx-auto mt-[30px] grid max-w-[650px] gap-[12px]">
-            {
-              copy.faq.items.map((item) => (
-                <details class="group bg-[var(--color-light-grey)] p-[20px]" style={radiusStyle}>
-                  <summary class={`${h6Class} flex cursor-pointer list-none items-center justify-between gap-[20px]`}>
-                    <span>{item.question}</span>
-                    <span class="text-[28px] leading-none text-[var(--color-dark-accent)] group-open:rotate-45">+</span>
-                  </summary>
-                  <p class={`${pClass} mt-[20px]`}>{item.answer}</p>
-                  {"link" in item && item.link && (
-                    <a class={`${pClass} mt-[12px] inline-block font-bold text-[var(--color-dark-accent)]`} href={item.link.href}>
-                      {item.link.label}
-                    </a>
-                  )}
-                </details>
-              ))
-            }
-          </div>
-          <p class={`${pClass} mt-[30px] text-center`}>
-            <span class="block">{copy.faq.contactIntro}</span>
-            <a class="text-[var(--color-dark-accent)]" href={`mailto:${copy.faq.contactEmail}`}>
-              {copy.faq.contactEmail}
-            </a>
-          </p>
-        </div>
-      </section>
-
-      <section id="signup" class="bg-[var(--color-light-accent)] py-[60px] md:py-[120px]">
-        <div class={shellClass} style={shellStyle}>
-          <div class="pt-[20px] text-center">
-            <h2 class={h2Class}>
-              <span class="md:hidden">
-                {copy.signup.titleMobileLines.map((line, index) => (
-                  <>
-                    {index > 0 && <br />}
-                    {line}
-                  </>
-                ))}
-              </span>
-              <span class="hidden md:inline">{copy.signup.title}</span>
-            </h2>
-            <p class={`${h5Class} mt-[20px]`}>{copy.signup.subtitle}</p>
-            <p class={`${h5Class}`}>{copy.signup.note}</p>
-          </div>
-          <form
-            class="mx-auto mt-[30px] max-w-[650px] bg-[var(--color-white)] p-[30px]"
-            style={radiusStyle}
-            id="signup-form"
-            name="signup"
-            method="post"
-            action="/.netlify/functions/signup"
-            data-success-message={copy.signup.success}
-            data-error-message={copy.signup.error}
-            data-loading-text={copy.signup.loading}
-          >
-            <label class={`${h6Class} block`} for="firstName">{copy.signup.firstNameLabel}</label>
-            <input
-              class={`${pClass} mt-[6px] h-[60px] w-full border border-[var(--color-dark-grey)] px-[20px]`}
-              style={radiusStyle}
-              id="firstName"
-              name="firstName"
-              type="text"
-              placeholder={copy.signup.firstNamePlaceholder}
-              required
-            />
-            <label class={`${h6Class} mt-[20px] block`} for="email">{copy.signup.emailLabel}</label>
-            <input
-              class={`${pClass} mt-[6px] h-[60px] w-full border border-[var(--color-dark-grey)] px-[20px]`}
-              style={radiusStyle}
-              id="email"
-              name="email"
-              type="email"
-              placeholder={copy.signup.emailPlaceholder}
-              required
-            />
-            <label class={`${pClass} mt-[36px] flex items-start gap-[12px]`} for="consent">
-              <input
-                class="mt-[4px] h-[18px] w-[18px] shrink-0 accent-[var(--color-dark-accent)]"
-                id="consent"
-                name="consent"
-                type="checkbox"
-                required
-              />
-              <span>{copy.signup.consentLabel}</span>
-            </label>
-            <button
-              class={`${h6Class} mt-[34px] inline-flex w-full items-center justify-center bg-[var(--color-dark-accent)] px-[30px] text-center text-[var(--color-white)]`}
-              style={buttonStyle}
-              type="submit"
-            >
-              {copy.signup.button}
-            </button>
-            <p class={`${pClass} mt-[20px] hidden text-center`} data-signup-status role="status" aria-live="polite"></p>
-            <p class={`${pClass} mt-[20px] text-center`}>
-              {copy.signup.finePrint.map((line, index) => (
-                <>
-                  {index > 0 && <br class="hidden md:block" />}
-                  {index > 0 && " "}
-                  {line}
-                </>
-              ))}
-            </p>
-          </form>
-        </div>
-      </section>
-        </>
-      )}
     </main>
-    {!englishCopy && (
-      <footer class="bg-[var(--color-light-accent)] py-[30px]">
-        <p class={`${fClass} px-[30px] text-center md:px-[55px]`}>
-          <span>
-            {copy.footer.line1Prefix}{" "}
-            <a class="text-[var(--color-dark-accent)] no-underline" href="https://www.coenclaassen.com">
-              {copy.footer.line1Name}
-            </a>
-          </span>
-          <br />
-          <span>{copy.footer.line2}</span>
-        </p>
-      </footer>
-    )}
     <script>
-      if (document.documentElement.lang === "en") {
-        const rows = Array.from(document.querySelectorAll("[data-run-row]"));
-        const now = Date.now();
+      const heroScroll = document.querySelector("[data-hero-scroll]");
+      const eventsScroll = document.querySelector("[data-events-scroll]");
+      const faqPanel = document.querySelector("[data-faq-panel]");
 
-        rows.forEach((row) => {
-          if (!(row instanceof HTMLElement)) return;
+      if (heroScroll instanceof HTMLAnchorElement) {
+        heroScroll.addEventListener("click", (event) => {
+          const target = document.querySelector(heroScroll.hash);
+          if (!(target instanceof HTMLElement)) return;
 
-          const eventDate = Date.parse(row.dataset.eventDate ?? "");
-          const registrationClose = Date.parse(row.dataset.registrationClose ?? "");
-          const isPast = now >= eventDate;
-          const isClosed = !isPast && now > registrationClose;
-          const isRegistrationOpen = !isPast && !isClosed;
-          const closed = row.querySelector("[data-registration-closed]");
-          const luma = row.querySelector("[data-event-luma]");
+          event.preventDefault();
+          const desktop = window.matchMedia("(min-width: 768px)").matches;
+          const offset = desktop ? window.innerHeight * 0.35 : 64;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
 
-          row.hidden = isPast;
-          closed?.classList.toggle("hidden", !isClosed);
-
-          if (luma instanceof HTMLElement) {
-            luma.classList.toggle("hidden", !isRegistrationOpen);
-            luma.classList.toggle("inline-flex", isRegistrationOpen);
-          }
+          window.scrollTo({ top, behavior: "smooth" });
         });
       }
-    </script>
-    {englishCopy && (
-      <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js" is:inline></script>
-    )}
-    <script>
-      const signupForm = document.querySelector("[data-success-message]");
 
-      if (document.documentElement.lang === "nl" && signupForm instanceof HTMLFormElement) {
-        const button = signupForm.querySelector("button[type='submit']");
-        const status = signupForm.querySelector("[data-signup-status]");
-        const defaultButtonText = button?.textContent?.trim() ?? "";
+      if (eventsScroll instanceof HTMLAnchorElement) {
+        eventsScroll.addEventListener("click", (event) => {
+          if (window.matchMedia("(min-width: 768px)").matches) return;
 
-        signupForm.addEventListener("submit", async (event) => {
+          const target = document.querySelector(eventsScroll.hash);
+          if (!(target instanceof HTMLElement)) return;
+
           event.preventDefault();
+          const top = target.getBoundingClientRect().top + window.scrollY - 64;
 
-          if (!signupForm.reportValidity() || button instanceof HTMLButtonElement && button.disabled) {
-            return;
-          }
+          window.scrollTo({ top, behavior: "smooth" });
+        });
+      }
 
-          const formData = new FormData(signupForm);
-          const payload = {
-            firstName: String(formData.get("firstName") ?? "").trim(),
-            email: String(formData.get("email") ?? "").trim(),
-            consent: formData.get("consent") === "on",
-            source: "offtrailrun-landing-page",
-          };
+      if (window.location.hash === "#events") {
+        window.addEventListener("load", () => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const target = document.querySelector("#events");
+              if (!(target instanceof HTMLElement)) return;
 
-          if (button instanceof HTMLButtonElement) {
-            button.disabled = true;
-            button.textContent = signupForm.dataset.loadingText ?? defaultButtonText;
-          }
-
-          if (status instanceof HTMLElement) {
-            status.classList.add("hidden");
-            status.textContent = "";
-          }
-
-          try {
-            const response = await fetch(signupForm.action, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify(payload),
+              const top = target.getBoundingClientRect().top + window.scrollY - 64;
+              window.scrollTo({ top, behavior: "auto" });
             });
+          });
+        }, { once: true });
+      }
 
-            if (!response.ok) {
-              throw new Error("Signup failed");
-            }
+      if (faqPanel instanceof HTMLDetailsElement) {
+        faqPanel.addEventListener("toggle", () => {
+          if (!faqPanel.open) return;
 
-            signupForm.reset();
+          requestAnimationFrame(() => {
+            const offset = 40;
+            const top = faqPanel.getBoundingClientRect().top + window.scrollY - offset;
 
-            if (status instanceof HTMLElement) {
-              status.textContent = signupForm.dataset.successMessage ?? "";
-              status.classList.remove("hidden", "text-red-700");
-              status.classList.add("text-[var(--color-dark-accent)]");
-            }
-          } catch {
-            if (status instanceof HTMLElement) {
-              status.textContent = signupForm.dataset.errorMessage ?? "";
-              status.classList.remove("hidden", "text-[var(--color-dark-accent)]");
-              status.classList.add("text-red-700");
-            }
-          } finally {
-            if (button instanceof HTMLButtonElement) {
-              button.disabled = false;
-              button.textContent = defaultButtonText;
-            }
-          }
+            window.scrollTo({ top, behavior: "smooth" });
+          });
         });
       }
     </script>

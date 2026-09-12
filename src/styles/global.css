@@ -8,6 +8,10 @@ body {
   margin: 0;
 }
 
+strong {
+  font-weight: 600;
+}
+
 summary::-webkit-details-marker {
   display: none;
 }
@@ -31,6 +35,12 @@ summary::-webkit-details-marker {
     ),
     var(--hero-image);
   background-position: 84.5% center;
+}
+
+.landing-hero {
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.18) 60%, rgba(0, 0, 0, 0) 100%),
+    url("/images/hero_mobile.webp");
 }
 
 @media (min-width: 1401px) {
@@ -58,4 +68,11 @@ summary::-webkit-details-marker {
       var(--hero-image);
     background-position: center;
   }
+
+  .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.18) 60%, rgba(0, 0, 0, 0) 100%),
+      url("/images/hero_desktop.webp");
+  }
+
 }

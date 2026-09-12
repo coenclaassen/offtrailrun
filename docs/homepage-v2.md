@@ -292,13 +292,13 @@ Do not add detailed KOVZ information to the homepage.
 
 ## Current implementation
 
-- `src/components/LandingPage.astro` contains the shared English and Dutch homepage markup, responsive section layouts, event rendering, FAQ, signup form, and client-side submission states.
+- `src/components/LandingPage.astro` contains the shared English and Dutch homepage markup, responsive section layouts, event rendering, and FAQ.
 - `src/i18n/en.ts` and `src/i18n/nl.ts` contain locale-specific homepage copy, SEO content, image alt text, event data, FAQ content, and form messages using the same object shape.
 - `src/config/design.ts` defines reusable colors, typography classes, layout width, radii, heights, and gutters.
 - `src/styles/global.css` imports Tailwind, defines base global behavior, and supplies the responsive hero imagery and overlays.
 - Event data is currently static in each translation file. `LandingPage.astro` maps two event records into cards; there is no CMS or event API.
-- The signup form posts JSON to `/.netlify/functions/signup`. `netlify/functions/signup.mjs` validates first name, email, and consent, then creates or updates a contact in the Brevo list configured by `BREVO_LIST_ID` using `BREVO_API_KEY`. The current flow is contact/newsletter-oriented and will need to represent event registration for this redesign.
+- Event registration links directly to the Luma URL held in `src/config/events.ts`.
 
 ## Implementation constraint
 
-Evolve the existing implementation. Reuse its shared locale routes, component architecture, SEO handling, design configuration, responsive assets, FAQ behavior, and Brevo integration where they support this brief. Do not rebuild the homepage architecture without a concrete implementation need.
+Evolve the existing implementation. Reuse its shared locale routes, component architecture, SEO handling, design configuration, responsive assets, FAQ behavior, and Luma event links where they support this brief. Do not rebuild the homepage architecture without a concrete implementation need.

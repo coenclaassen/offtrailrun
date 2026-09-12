@@ -23,11 +23,21 @@ export const en = {
   },
 
   hero: {
-    title: "Run hard. Think fast.",
-    subtitle: ["A map. A forest. Infinite ways through."],
-    body: "",
-    button: "See events",
-    buttonSecondary: "The challenge",
+    title: ["Run hard.", "Think fast."],
+    subtitle: ["When the trail runs out, ", "make your own way."],
+    button: "Discover the runs",
+    scrollLabel: "Discover Off Trail Run",
+  },
+
+  discover: {
+    title: ["Outrun", "the obvious."],
+    body: "A map, a forest and infinite ways through. Pick your line, take the shortcut, get muddy, make mistakes and do things you’d never do on a normal run.",
+  },
+
+  vibe: {
+    title: ["No route.", "Better stories."],
+    body: ["Wrong turns, bold shortcuts, near misses.", "Share the stories afterwards."],
+    images: ["Runner with a map", "Runners in the forest", "Mud-covered running shoes", "Runner in motion", "Runners after a run"],
   },
 
   features: {
@@ -53,6 +63,7 @@ export const en = {
   },
 
   steps: {
+    title: "What you’re in for.",
     howItWorks: {
       title: "What you’re in for.",
       subtitle: "",
@@ -61,7 +72,7 @@ export const en = {
       {
         label: "01 /",
         imageAlt: "Map held during an off-trail run",
-        title: "Claim your map",
+        title: "Claim your map.",
         body: "Pick a date. We’ll print your map.",
         paragraphs: ["Pick a date. We’ll print your map."],
       },
@@ -117,166 +128,111 @@ export const en = {
     registrationClosesToday: "Registration closes today",
     button: "Register",
     city: "Eindhoven",
-    locations: ["Oirschotse Heide", "Aarlesche Heide", "Oirschotse Heide", "Oostelbeersche Heide"],
+    locations: {
+      "oirschotse-heide-zuidoost-2026-09-19": "Oirschotse Heide Zuidoost",
+      "aarlesche-heide-west-2026-10-17": "Aarlesche Heide West",
+      "oirschotse-heide-noordwest-2026-11-14": "Oirschotse Heide Noordwest",
+      "oostelbeersche-heide-midden-2026-12-12": "Oostelbeersche Heide Midden",
+    },
   },
 
   faq: {
-    title: "FAQ",
+    title: "Questions people ask",
     subtitle: "",
     items: [
       {
         question: "Who is this for?",
-        paragraphs: [
-          "Runners who want something different.",
-          "You don’t need experience or natural navigation talent. Curiosity is enough.",
-        ],
+        paragraphs: ["Runners who want something different. You don’t need experience or natural navigation talent. Curiosity and enthusiasm are enough."],
       },
       {
-        question: "What if I’ve never done anything like this before?",
-        paragraphs: [
-          "Perfect.",
-          "We’ll cover the essentials before the start. Then you head into the forest with a map and figure things out.",
-        ],
-      },
-      {
-        question: "Do I need to be fast or super fit?",
-        paragraphs: [
-          "Speed helps, but it’s not only about speed.",
-          "Navigation and route choice matter too. Run it hard or take your time.",
-        ],
-      },
-      {
-        question: "How long does it take?",
-        paragraphs: [
-          "Anywhere from 30 minutes to 2 hours.",
-          "Navigate well and run fast, and you’ll be back quickly. Make a few mistakes and the forest keeps you longer.",
-        ],
-      },
-      {
-        question: "What if I get lost or mess it up?",
-        paragraphs: ["You probably will.", "That’s part of it. Make a mistake, reset, learn fast, keep moving."],
-      },
-      {
-        question: "What if I use GPS?",
-        paragraphs: [
-          "Bring your watch. Bring your phone.",
-          "It won’t make you much faster. You get the map at the start and choose your route as you run.",
-          "GPS is useful afterwards if you want to replay where you went.",
-        ],
-      },
-      {
-        question: "What if I just follow someone?",
-        paragraphs: [
-          "Not everyone runs the same course. Following someone else might take you completely the wrong way.",
-          "Feeling less confident on your own? Run in pairs with the same map and the same course.",
-        ],
-      },
-      {
-        question: "Do I need to understand the map first?",
-        paragraphs: ["No. We’ll cover what matters before the start.", "Want a head start?"],
+        question: "Do I need experience or understand the map first?",
+        paragraphs: ["No. We’ll cover the essentials before the start. Then you head into the forest with a map and figure things out. Want a head start?"],
         link: {
           label: "Read the basics →",
           href: "/start",
         },
       },
       {
+        question: "Do I need to be fast or super fit?",
+        paragraphs: ["Speed helps, but it’s not only about speed. Navigation and route choice matter too. Run it hard or take your time."],
+      },
+      {
+        question: "How long does it take?",
+        paragraphs: ["Anywhere from 30 minutes to 90 minutes. Navigate well and run fast, and you’ll be back quickly. Make a few mistakes and it takes longer."],
+      },
+      {
+        question: "What if I get lost or mess it up?",
+        paragraphs: ["Make a mistake? It happens. Reset, learn fast, keep moving. If you get stuck or there’s an emergency, call the number on your map."],
+      },
+      {
+        question: "What if I use GPS or follow someone?",
+        paragraphs: ["Use GPS to record your run, not to navigate. Follow the map, not another runner: not everyone runs the same course. Don’t want to run alone? Tell us and run as a pair with the same map and course."],
+      },
+      {
+        question: "Why does registration close?",
+        paragraphs: ["We build the course, set out the controls and print a map for every runner. To do that, we need to know who’s coming one week before."],
+      },
+      {
         question: "What should I bring?",
-        paragraphs: [
-          "Forest-proof running gear.",
-          "Shoes with grip and long socks or tights help when the best line goes through the bushes. If it’s wet, bring dry clothes and a towel. If it’s hot, bring enough to drink.",
-        ],
+        paragraphs: ["Forest-proof running gear. Shoes with grip and long socks or tights help when the best line goes through the bushes. If it’s wet, bring dry clothes and a towel. If it’s hot, bring enough to drink."],
       },
       {
         question: "Will there be a bag drop?",
-        paragraphs: ["Yes.", "You can safely leave your bag and extra layers while you’re out running."],
-      },
-      {
-        question: "Why does registration close one week before?",
-        paragraphs: [
-          "We build the course, set out the controls and print a map for every runner.",
-          "To make that happen, we need to know who’s coming one week before.",
-        ],
+        paragraphs: ["Yes. You can safely leave your bag and extra layers while you’re out running."],
       },
     ],
     contactIntro: "Still got a question?",
     contactEmail: "start@offtrailrun.com",
   },
 
-  signup: {
-    title: "A different run starts here.",
-    titleMobileLines: ["A different run", "starts here."],
-    subtitle: "Leave your first name and email and we'll send you the details.",
-    note: "Spots are limited. We'll confirm your place after signup.",
-    firstNameLabel: "First name",
-    firstNamePlaceholder: "Your first name",
-    emailLabel: "Email",
-    emailPlaceholder: "you@example.com",
-    consentLabel: "Send me the run details and future run updates. Unsubscribe anytime.",
-    button: "Sign up for free",
-    loading: "Signing up...",
-    success: "Thanks, you're on the list.",
-    error: "Something went wrong. Please try again in a moment.",
-    finePrint: [
-      "If the run is full, you'll go on the waitlist.",
-      "We'll email you about this run and similar off-trail runs.",
-    ],
-  },
-
   start: {
     intro: {
-      title: "Start here",
-      subtitle: "",
+      title: "Finding your way starts here.",
       paragraphs: [
-        "Orienteering sounds technical and quickly gets confusing to explain.",
-        "This page fixes that. It explains the basics: how the map works, how to use a compass, and how to move through the terrain without overthinking it.",
-        "You do not need to know all of this before starting. The best way to begin is to join a run and try it with a map in your hand.",
+        "Running with a map is simpler than it sounds. Learn the basics, then get out there.",
       ],
-      primaryButton: "Join a run",
-      secondaryButton: "Show me the basics",
+      mobileParagraphs: ["Running with a map is simpler than it sounds. Learn the basics, then get out there."],
+    },
+    mapStrip: {
+      imageLabel: "Orienteering map detail",
     },
     mapBasics: {
       title: "Map basics",
       paragraphs: [
-        "An orienteering map is made for running through terrain.",
-        "It shows the things that help you make decisions while moving: roads, paths, water, forest, open land, buildings, fences, rocks, hills, and small terrain features.",
-        "You do not need to understand every symbol before your first run.",
-        "Have a look if you’re curious. Most of it makes more sense once you try it outside.",
+        "Your map shows paths, water, forest, hills, and the course. Find the controls in order. How you move between them is your choice.",
       ],
-    },
-    courseSymbols: {
-      title: "Course symbols",
-      paragraphs: [
-        "Course symbols show where the course starts, where the controls are, and where you finish.",
-      ],
-      bullets: [
-        "The controls are fixed.",
-        "Your route between them is not.",
-      ],
-      rows: [
+      mobileParagraphs: ["Your map shows paths, water, forest, hills, and the course. Find the controls in order. How you move between them is your choice."],
+      courseRows: [
         {
           key: "startTriangle",
           visualLabel: "Start triangle",
           description: "Start",
+          mobileDescription: "Start",
           info: "This is where your course begins. From here, you start navigating.",
+          mobileInfo: "Begin navigation here.",
         },
         {
           key: "controlCircle",
           visualLabel: "Control circle",
-          description: "Control",
-          info: "This is a control. It is marked in the terrain at the center of the circle. Find each control in order: 1, 2, 3, etc. The lines show what comes next, but you do not need to follow them.",
+          description: "Control point",
+          mobileDescription: "Control point",
+          info: "Marked in the terrain with a flag. Find each control point in order: 1, 2, 3, etc.",
+          mobileInfo: "Marked in the terrain with a flag. Find each control point in order.",
         },
         {
           key: "doubleCircle",
           visualLabel: "Double circle",
           description: "Finish",
-          info: "This is where the course ends.",
+          mobileDescription: "Finish",
+          info: "This is where the course ends. Catch your breath, compare routes, and see who found the best line.",
+          mobileInfo: "Fastest time wins.",
         },
       ],
-      imageLabel: "IMAGE COURSE SYMBOLS",
     },
     mapColors: {
       title: "Map colors",
-      paragraphs: ["Colors tell you the type of terrain and running speed."],
+      paragraphs: ["Colors show the type of terrain."],
+      mobileParagraphs: ["Colors show the type of terrain."],
       rows: [
         {
           key: "openLand",
@@ -324,10 +280,8 @@ export const en = {
     },
     mapSymbols: {
       title: "Map symbols",
-      paragraphs: [
-        "There are many symbols, but these are already more than enough to get started.",
-        "You will learn to recognize these in the terrain.",
-      ],
+      paragraphs: ["Symbols show features on the map."],
+      mobileParagraphs: ["Symbols show features on the map."],
       visibleRows: [
         { key: "road", illustrationLabel: "Road illustration", symbolLabel: "Road symbol", description: "Road" },
         { key: "dirtRoad", illustrationLabel: "Dirt road illustration", symbolLabel: "Dirt road symbol", description: "Dirt road" },
@@ -336,13 +290,12 @@ export const en = {
         { key: "stream", illustrationLabel: "Stream illustration", symbolLabel: "Stream symbol", description: "Stream" },
         { key: "passableFence", illustrationLabel: "Passable fence illustration", symbolLabel: "Passable fence symbol", description: "Passable fence" },
         { key: "building", illustrationLabel: "Building illustration", symbolLabel: "Building symbol", description: "Building" },
+      ],
+      hiddenRows: [
         { key: "uncrossableWater", illustrationLabel: "Uncrossable water illustration", symbolLabel: "Uncrossable water symbol", description: "Uncrossable water" },
         { key: "knoll", illustrationLabel: "Knoll illustration", symbolLabel: "Knoll symbol", description: "Knoll" },
         { key: "pitDepression", illustrationLabel: "Pit, small depression illustration", symbolLabel: "Pit, small depression symbol", description: "Pit, small depression" },
         { key: "manMadeFeatures", illustrationLabel: "Prominent man-made features illustration", symbolLabel: "Prominent man-made features symbol", description: "Prominent man-made features" },
-        { key: "contourLines", illustrationLabel: "Contour lines illustration", symbolLabel: "Contour lines symbol", description: "Contour lines" },
-      ],
-      hiddenRows: [
         { key: "railway", illustrationLabel: "Railway illustration", symbolLabel: "Railway symbol", description: "Railway" },
         { key: "wall", illustrationLabel: "Wall illustration", symbolLabel: "Wall symbol", description: "Wall" },
         { key: "powerline", illustrationLabel: "Major/small powerline illustration", symbolLabel: "Major/small powerline symbol", description: "Major/small powerline" },
@@ -353,41 +306,38 @@ export const en = {
         { key: "boulder", illustrationLabel: "Boulder illustration", symbolLabel: "Boulder symbol", description: "Boulder" },
         { key: "boulderField", illustrationLabel: "Boulder field illustration", symbolLabel: "Boulder field symbol", description: "Boulder field" },
       ],
-      toggleMoreLabel: "show more",
-      toggleLessLabel: "show less",
-      attribution: "There are many orienteering symbols. You do not need to know them all to start. The basics above include illustrations based on material from Svensk Orientering.",
+      toggleMoreLabel: "Show more symbols",
     },
     contour: {
       title: "Contour lines",
       paragraphs: [
-        "Contour lines show height differences in the terrain. They show where the land is high or low. Close lines mean steep. Lines farther apart mean gentle. They can be tricky at first, but they become easier once you are in the terrain.",
-        "Imagine a mountain made of stacked pancakes. Each line is the shape of one pancake level.",
+        "Brown lines show elevation. Imagine a mountain made of stacked pancakes. Each line is the shape of a pancake level.",
       ],
+      mobileParagraphs: ["Brown lines show elevation. Imagine a mountain made of stacked pancakes. Each line is the shape of a pancake level."],
       imageLabel: "IMAGE",
       closingParagraphs: [],
     },
     compass: {
-      title: "How to use the compass",
-      paragraphs: [
-        "A compass sounds more complex than it is.",
-        "You use it to line up the map and move in the right direction when you leave a path, cross open land, or run through the forest.",
-        "The basic idea is simple: choose where you want to go, line up the compass, then move in that direction.",
-      ],
+      title: "Use a compass",
+      paragraphs: [],
       rows: [
         {
           imageSrc: "/images/start/compass_setDirection.svg",
-          title: "1. Set your direction",
-          body: "Place the compass edge from where you are to where you want to go.",
+          title: "Place the compass edge from A to B.",
+          body: "",
+          mobileBody: "Place the compass edge from A to B.",
         },
         {
           imageSrc: "/images/start/compass_alginNorth.svg",
-          title: "2. Rotate your body",
-          body: "Turn the map and your body until the compass needle is parallel with the north lines.",
+          title: "Turn your body until the needle matches the north lines.",
+          body: "",
+          mobileBody: "Turn your body until the needle matches the north lines.",
         },
         {
           imageSrc: "/images/start/compass_move.svg",
-          title: "3. Move that way",
-          body: "Run in the direction of the compass edge. Check now and then that the needle stays parallel.",
+          title: "Move that way. Keep the needle lined up.",
+          body: "",
+          mobileBody: "Move that way. Keep the needle lined up.",
         },
       ],
       closingParagraphs: [],
@@ -395,17 +345,16 @@ export const en = {
     routeChoice: {
       title: "Route choice",
       paragraphs: [
-        "Between controls, you choose your own route.",
-        "Sometimes straight is fastest. Sometimes a longer route on a path is better. A route can look short on the map but still be slow if it goes through thick forest, over a hill, or through unclear terrain.",
-        "That is the idea. Choose a route that is fast, clear, and easy to execute.",
-        "Now the best way to understand it is to try it with a map in your hand.",
+        "Between controls, choose your own route. The shortest route isn’t always the fastest. Paths may be quicker than thick forest, hills, or unclear terrain. Choose a route that is fast, clear, and easy to execute. The best way to learn is to try it with a map in your hand.",
       ],
       imageLabel: "Example of route choice between two controls",
     },
     tryIt: {
-      title: "Want to try it out?",
-      paragraphs: ["If you want to experience it for real, join the next run."],
-      button: "Join a run",
+      body: "A map changes everything when you’re in the forest. Reserve your map and try it on your next run.",
+      mobileBody: "Ready to try it?",
+      mobileSubtitle: "Reserve your map and join one of the upcoming runs.",
+      mobileLink: "See events",
+      link: "See events",
     },
   },
 
