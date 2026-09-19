@@ -109,6 +109,10 @@
         paragraphs: ["Wij bouwen het parcours, zetten de controles uit en drukken voor elke loper een kaart af. Daarom moeten we een week van tevoren weten wie er komt."],
       },
       {
+        question: "Wie maakt dit mogelijk?",
+        paragraphs: ["Je kunt niet zomaar in een bos off-trail gaan hardlopen. Toegang tot het bos, gedetailleerde kaarten, een parcours uitzetten en hardlopers naar het event krijgen vragen om samenwerking. Veel van dat werk gebeurt samen met KOVZ en andere clubs."],
+      },
+      {
         question: "Wat moet ik meenemen?",
         paragraphs: ["Hardloopkleding die tegen een stootje kan. Schoenen met grip en lange sokken of een lange broek helpen wanneer de beste route door de struiken loopt. Is het nat, neem dan droge kleding en een handdoek mee. Is het warm, neem dan genoeg te drinken mee."],
       },

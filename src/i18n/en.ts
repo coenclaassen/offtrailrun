@@ -109,6 +109,10 @@ export const en = {
         paragraphs: ["We build the course, set out the controls and print a map for every runner. To do that, we need to know who’s coming one week before."],
       },
       {
+        question: "Who makes this happen?",
+        paragraphs: ["You cannot just pick a forest and start running off trail. Forest access, map making, course setting and getting runners to show up take a group effort. Much of that work happens in collaboration with KOVZ and other clubs."],
+      },
+      {
         question: "What should I bring?",
         paragraphs: ["Forest-proof running gear. Shoes with grip and long socks or tights help when the best line goes through the bushes. If it’s wet, bring dry clothes and a towel. If it’s hot, bring enough to drink."],
       },

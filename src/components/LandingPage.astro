@@ -90,7 +90,7 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
         <h2 class={design.typography.h2}>{copy.events.title}</h2>
         <div class="mt-[40px] border-t border-[var(--color-light-grey)] md:mt-[45px]">
           {events.map((event) => (
-            <article class="border-b border-[var(--color-light-grey)] py-[25px]">
+            <article class="border-b border-[var(--color-light-grey)] py-[25px]" data-event-date={event.date} hidden aria-hidden="true">
               <div class={`${desktopAlignmentClass} grid grid-cols-[minmax(0,1fr)_105px] items-center gap-[16px] md:grid-cols-[calc(40%_+_28px)_18.666667%_21.333333%_calc(20%_-_28px)] md:gap-0`}>
                 <div><h3 class={design.typography.h3}>{copy.locale === "en" ? event.locationEn : event.location}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(event.date))}<br />{copy.events.city}</p></div>
                 <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:block`}>{eventDateFormatter.format(new Date(event.date))}</p>
@@ -149,6 +149,37 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
       const heroScroll = document.querySelector("[data-hero-scroll]");
       const eventsScroll = document.querySelector("[data-events-scroll]");
       const faqPanel = document.querySelector("[data-faq-panel]");
+      const eventItems = Array.from(document.querySelectorAll<HTMLElement>("[data-event-date]"));
+
+      const getAmsterdamDate = () => {
+        const parts = new Intl.DateTimeFormat("en", {
+          timeZone: "Europe/Amsterdam",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).formatToParts(new Date());
+        const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value;
+
+        return `${value("year")}-${value("month")}-${value("day")}`;
+      };
+
+      const updateVisibleEvents = () => {
+        const today = getAmsterdamDate();
+        let visibleEvents = 0;
+
+        for (const eventItem of eventItems) {
+          const eventDate = eventItem.dataset.eventDate?.slice(0, 10);
+          const showEvent = eventDate !== undefined && eventDate >= today && visibleEvents < 3;
+
+          eventItem.hidden = !showEvent;
+          eventItem.setAttribute("aria-hidden", String(!showEvent));
+
+          if (showEvent) visibleEvents += 1;
+        }
+      };
+
+      updateVisibleEvents();
+      window.setInterval(updateVisibleEvents, 60_000);
 
       if (heroScroll instanceof HTMLAnchorElement) {
         heroScroll.addEventListener("click", (event) => {
