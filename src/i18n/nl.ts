@@ -71,6 +71,10 @@
 
   faq: {
     title: "Veelgestelde vragen",
+    credit: {
+      prefix: "©2026 ",
+      name: "Coen Claassen",
+    },
     items: [
       {
         question: "Voor wie is dit?",

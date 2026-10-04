@@ -71,6 +71,10 @@ export const en = {
 
   faq: {
     title: "Questions people ask",
+    credit: {
+      prefix: "©2026 ",
+      name: "Coen Claassen",
+    },
     items: [
       {
         question: "Who is this for?",

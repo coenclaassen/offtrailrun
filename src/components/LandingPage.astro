@@ -102,7 +102,7 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
         </div>
       </section>
 
-      <section id="faq" class={`${shellClass} mt-[120px] mb-[45px] md:mt-[200px] md:mb-[64px]`}>
+      <section id="faq" class={`${shellClass} relative mt-[120px] mb-[45px] md:mt-[200px] md:mb-[64px]`}>
         <details class="group/faq" data-faq-panel>
           <summary class={`${design.typography.faqTitle} cursor-pointer list-none outline-none`}>
             <div class={`${faqContentClass} flex items-center gap-[6px]`}>
@@ -121,8 +121,12 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
                 </div>
               </article>
             ))}
+            <article class="py-[25px] md:hidden">
+              <span class={`${design.typography.p} text-[var(--color-grey)]`}>{copy.faq.credit.prefix}</span><a class={`${design.typography.p} text-[var(--color-grey)] underline decoration-[1px] underline-offset-2`} href="https://coenclaassen.com">{copy.faq.credit.name}</a>
+            </article>
           </div>
         </details>
+        <p class={`${design.typography.p} absolute right-[16px] top-[4px] hidden text-[var(--color-grey)] md:right-[32px] md:block`}><span>{copy.faq.credit.prefix}</span><a class="underline decoration-[1px] underline-offset-2" href="https://coenclaassen.com">{copy.faq.credit.name}</a></p>
       </section>
     </main>
     <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
