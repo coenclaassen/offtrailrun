@@ -27,8 +27,8 @@ export const events: readonly RunEvent[] = [
   {
     id: "eindhoven-area-2026-11-15",
     date: "2026-11-15T10:00:00+01:00",
-    location: "Omgeving Eindhoven",
-    locationEn: "Eindhoven area",
+    location: "Oirschot – Forest Cup race 2",
+    locationEn: "Oirschot – Forest Cup race 2",
     lumaUrl: "https://luma.com/jqudeaf4",
     lumaEventId: "evt-CjeWp5Ds8BWAEWx",
   },
