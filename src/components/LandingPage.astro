@@ -4,7 +4,7 @@ import SeoHead from "./SeoHead.astro";
 import type { en } from "../i18n/en";
 import type { nl } from "../i18n/nl";
 import { design } from "../config/design";
-import { events } from "../config/events";
+import { frontmatter as eventContent } from "../content/events.md";
 import "../styles/global.css";
 
 type Copy = typeof en | typeof nl;
@@ -16,7 +16,8 @@ const shellClass = "w-full px-[16px] md:px-[32px]";
 const desktopAlignmentClass = "md:max-w-[1500px]";
 const faqContentClass = "md:max-w-[570px]";
 const buttonStyle = `border-radius:${design.buttonRadius}px;min-height:${design.buttonHeight}px;`;
-const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL" : "en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: "Europe/Amsterdam" });
+const eventDateFormatter = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: "UTC" });
+const events = eventContent.events.filter((event) => event.show === true).sort((a, b) => a.date.localeCompare(b.date));
 ---
 
 <html lang={copy.locale}>
@@ -90,12 +91,12 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
         <h2 class={design.typography.h2}>{copy.events.title}</h2>
         <div class="mt-[40px] border-t border-[var(--color-light-grey)] md:mt-[45px]">
           {events.map((event) => (
-            <article class="border-b border-[var(--color-light-grey)] py-[25px]" data-event-date={event.date} hidden aria-hidden="true">
+            <article class="border-b border-[var(--color-light-grey)] py-[25px]" data-event-date={event.date} hidden>
               <div class={`${desktopAlignmentClass} grid grid-cols-[minmax(0,1fr)_105px] items-center gap-[16px] md:grid-cols-[calc(40%_+_28px)_18.666667%_21.333333%_calc(20%_-_28px)] md:gap-0`}>
-                <div><h3 class={design.typography.h3}>{copy.locale === "en" ? event.locationEn : event.location}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(event.date))}<br />{copy.events.city}</p></div>
-                <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:block`}>{eventDateFormatter.format(new Date(event.date))}</p>
-                <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:translate-x-[32px] md:block`}>{copy.events.city}</p>
-                <a class={`luma-checkout--button ${design.typography.button} inline-flex w-[105px] items-center justify-center gap-[5px] bg-[var(--color-black)] px-[12px] text-[var(--color-white)] md:w-[135px]`} style={buttonStyle} href={event.lumaUrl} data-luma-action="checkout" data-luma-event-id={event.lumaEventId}>{copy.events.button}<ChevronRight size={16} aria-hidden="true" /></a>
+                <div><h3 class={design.typography.h3}>{copy.locale === "en" && event.nameEn ? event.nameEn : event.name}</h3><p class={`${design.typography.eventMeta} mt-[4px] text-[var(--color-grey)] md:hidden`}>{eventDateFormatter.format(new Date(`${event.date}T${event.start}:00Z`))}<br />{eventContent.area[copy.locale]}</p></div>
+                <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:block`}>{eventDateFormatter.format(new Date(`${event.date}T${event.start}:00Z`))}</p>
+                <p class={`${design.typography.eventMeta} hidden text-[var(--color-grey)] md:translate-x-[32px] md:block`}>{eventContent.area[copy.locale]}</p>
+                {event.lumaUrl && <a class={`${design.typography.button} inline-flex w-[105px] items-center justify-center gap-[5px] bg-[var(--color-black)] px-[12px] text-[var(--color-white)] md:w-[135px]`} style={buttonStyle} href={event.lumaUrl}>{copy.events.button}<ChevronRight size={16} aria-hidden="true" /></a>}
               </div>
             </article>
           ))}
@@ -129,7 +130,6 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
         <p class={`${design.typography.p} absolute right-[16px] top-[4px] hidden text-[var(--color-grey)] md:right-[32px] md:block`}><span>{copy.faq.credit.prefix}</span><a class="underline decoration-[1px] underline-offset-2" href="https://coenclaassen.com">{copy.faq.credit.name}</a></p>
       </section>
     </main>
-    <script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
     <style>
       @media (min-width: 1921px) {
         .landing-discover {
@@ -153,38 +153,24 @@ const eventDateFormatter = new Intl.DateTimeFormat(copy.locale === "nl" ? "nl-NL
       const heroScroll = document.querySelector("[data-hero-scroll]");
       const eventsScroll = document.querySelector("[data-events-scroll]");
       const faqPanel = document.querySelector("[data-faq-panel]");
-      const eventItems = Array.from(document.querySelectorAll<HTMLElement>("[data-event-date]"));
-
-      const getAmsterdamDate = () => {
-        const parts = new Intl.DateTimeFormat("en", {
+      const eventItems = document.querySelectorAll<HTMLElement>("[data-event-date]");
+      const updateVisibleEvents = () => {
+        const parts = new Intl.DateTimeFormat("en-CA", {
           timeZone: "Europe/Amsterdam",
           year: "numeric",
           month: "2-digit",
           day: "2-digit",
         }).formatToParts(new Date());
         const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value;
+        const today = `${value("year")}-${value("month")}-${value("day")}`;
 
-        return `${value("year")}-${value("month")}-${value("day")}`;
-      };
-
-      const updateVisibleEvents = () => {
-        const today = getAmsterdamDate();
-        let visibleEvents = 0;
-
-        for (const eventItem of eventItems) {
-          const eventDate = eventItem.dataset.eventDate?.slice(0, 10);
-          const showEvent = eventDate !== undefined && eventDate >= today && visibleEvents < 3;
-
-          eventItem.hidden = !showEvent;
-          eventItem.setAttribute("aria-hidden", String(!showEvent));
-
-          if (showEvent) visibleEvents += 1;
-        }
+        eventItems.forEach((event) => {
+          event.hidden = !event.dataset.eventDate || event.dataset.eventDate < today;
+        });
       };
 
       updateVisibleEvents();
       window.setInterval(updateVisibleEvents, 60_000);
-
       if (heroScroll instanceof HTMLAnchorElement) {
         heroScroll.addEventListener("click", (event) => {
           const target = document.querySelector(heroScroll.hash);
