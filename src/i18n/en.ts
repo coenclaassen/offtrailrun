@@ -3,14 +3,14 @@ export const en = {
 
   seo: {
     home: {
-      title: "Off trail run in Eindhoven",
+      title: "Orienteering in Eindhoven | Off Trail Run",
       description:
-        "Join a social running event in Eindhoven where running, map navigation, and route choice come together.",
+        "A different kind of run. Explore the forest with a map, find the controls and choose your own route. Try orienteering near Eindhoven.",
     },
     start: {
-      title: "Orienteering basics for runners",
+      title: "Orienteering for Beginners | Off Trail Run",
       description:
-        "Learn how orienteering works: map symbols, compass use, route choice, and how to find controls while running.",
+        "New to running with a map? Discover the basics of orienteering, then try them at an Off Trail Run event near Eindhoven.",
     },
   },
 
@@ -86,7 +86,7 @@ export const en = {
       },
       {
         question: "Do I need experience or understand the map first?",
-        paragraphs: ["No. We’ll cover the essentials before the start. Then you head into the forest with a map and figure things out. Want a head start?"],
+        paragraphs: ["No. If you’ve never used a map or are new to orienteering, we’ll cover the essentials before the start. Then you head into the forest with a map and figure things out. Want a head start?"],
         link: {
           label: "Read the basics →",
           href: "/start",
@@ -130,10 +130,11 @@ export const en = {
   start: {
     intro: {
       title: "Finding your way starts here.",
-      paragraphs: [
-        "Running with a map is simpler than it sounds. Learn the basics, then get out there.",
-      ],
-      mobileParagraphs: ["Running with a map is simpler than it sounds. Learn the basics, then get out there."],
+      opening: "In orienteering, running is only half the challenge.",
+      openingContinued: "Read the map, find the controls and choose the route that works for you.",
+      introduction: "Find the basics here, then put them to the test at an ",
+      eventLink: "upcoming event",
+      eventLinkSuffix: ".",
     },
     mapStrip: {
       imageLabel: "Orienteering map detail",

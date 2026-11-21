@@ -215,15 +215,11 @@ const mapSymbolImageAssets = {
 
     <main>
       <section class={`${shellClass} pb-[60px] pt-[120px] md:pb-[120px] md:pt-[200px]`}>
-        <article class={`${articleClass} md:max-w-[780px]`}>
+        <article class={articleClass}>
           <h1 class={sectionTitleClass}>{start.intro.title}</h1>
-          <div class="mt-[40px] max-w-[980px] space-y-[24px]">
-            <div class="md:hidden">
-              {start.intro.mobileParagraphs.map((paragraph) => <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{paragraph}</p>)}
-            </div>
-            <div class="hidden md:block">
-              {start.intro.paragraphs.map((paragraph) => <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{paragraph}</p>)}
-            </div>
+          <div class="mt-[40px] space-y-[24px]">
+            <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{start.intro.opening}<br class="hidden md:block" />{" "}{start.intro.openingContinued}</p>
+            <p class={`${design.typography.discoverBody} text-[var(--color-grey)]`}>{start.intro.introduction}<a class="underline underline-offset-4" href={`${homeHref}#events`}>{start.intro.eventLink}</a>{start.intro.eventLinkSuffix}</p>
           </div>
         </article>
       </section>

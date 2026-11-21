@@ -3,14 +3,14 @@
 
   seo: {
     home: {
-      title: "Off trail run in Eindhoven",
+      title: "Oriëntatielopen in Eindhoven | Off Trail Run",
       description:
-        "Doe mee aan een sociale run in Eindhoven waar hardlopen, kaartlezen en routekeuze samenkomen.",
+        "Een andere manier van hardlopen. Ga met een kaart het bos in, vind de controlepunten en kies je eigen route. Probeer oriëntatielopen rond Eindhoven.",
     },
     start: {
-      title: "Oriëntatielopen voor hardlopers",
+      title: "Oriëntatielopen voor beginners | Off Trail Run",
       description:
-        "Leer hoe oriëntatielopen werkt: kaartsymbolen, kompasgebruik, routekeuze en controles vinden terwijl je rent.",
+        "Nieuw met hardlopen met een kaart? Ontdek de basis van oriëntatielopen en probeer het uit tijdens een Off Trail Run in de regio Eindhoven.",
     },
   },
 
@@ -86,7 +86,7 @@
       },
       {
         question: "Heb ik ervaring nodig of moet ik kaart kunnen lezen?",
-        paragraphs: ["Nee. We leggen de basis uit voor de start. Daarna ga je met een kaart het bos in en ontdek je het al doende. Wil je een voorsprong?"],
+        paragraphs: ["Nee. Als je nog nooit een kaart hebt gebruikt of nieuw bent met oriëntatielopen, leggen we de basis uit voor de start. Daarna ga je met een kaart het bos in en ontdek je het al doende. Wil je een voorsprong?"],
         link: {
           label: "Bekijk de basis →",
           href: "/nl/start",
@@ -130,10 +130,11 @@
   start: {
     intro: {
       title: "De weg vinden begint hier.",
-      paragraphs: [
-        "Hardlopen met een kaart is makkelijker dan je denkt. Leer de basis en probeer het uit.",
-      ],
-      mobileParagraphs: ["Hardlopen met een kaart is makkelijker dan je denkt. Leer de basis en probeer het uit."],
+      opening: "Bij oriëntatielopen is hardlopen maar de helft van de uitdaging.",
+      openingContinued: "Lees de kaart, vind de controlepunten en kies de route die voor jou werkt.",
+      introduction: "Ontdek hier de basis en breng die daarna in de praktijk tijdens een ",
+      eventLink: "komend event",
+      eventLinkSuffix: ".",
     },
     mapStrip: {
       imageLabel: "Detail van een oriëntatiekaart",
